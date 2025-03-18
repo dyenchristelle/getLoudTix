@@ -18,14 +18,15 @@
         <label for="email">Email: </label>
         <input type="email" id="email" name="email" placeholder="Email" required>
 
-        <span id="emailError" style="color: red; display: none;">Invalid email</span>
+        <small id="inputError" style="color: black; font-family: Arial, Helvetica, sans-serif; display: none;">Both name and email are required!</small>
+        <small id="emailError" style="color: black; font-family: Arial, Helvetica, sans-serif; display: none;">Invalid email!</small>
 
         <button id="startButton" type="button">Start Reservation</button>
 
         <button id="viewButton" type="button">View Reservation</button>
     </div>
 
-    <div id="rsrv" class="rsrv" style="display: none;">
+    <!-- <div id="rsrv" class="rsrv" style="display: none;">
         <h3>Start Reservation</h3>
         <form id="confirmation" method="POST" onsubmit="submitReservation(event)">
             <input type="checkbox" name="day" value="Day 1"> Day 1: NIKI, TWICE, Olivia Rodrigo<br>
@@ -41,7 +42,7 @@
             <button id="" type="button">Change Reservation</button>
             <button id="doneButton" type="button">Done</button>
         </label>
-    </div>
+    </div> -->
 </div>
         <script src="script.js"></script>
 </body>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View</title>
+    <link rel="stylesheet" href="styling.css">
+        
+</head>
+<body>
+    <div class="container">
+    <div id="rsrv" class="rsrv">
+        <h1 class="reserveh1">Start Reservation</h1>
+        <form id="confirmation" method="POST" onsubmit="/api/submitChoice">
+            <input type="checkbox" name="day" value="Day 1"> Day 1: NIKI, TWICE, Olivia Rodrigo<br>
+            <input type="checkbox" name="day" value="Day 2"> Day 2: BINI, Ben&Ben, December Avenue<br>
+            <input type="checkbox" name="day" value="Day 3"> Day 3: Ariana Grande, Sabrina Carpenter, The Weeknd<br>
+            <button id="submit" type="submit" value="submit">Submit Reservation</button>
+        </form>   
+     </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,17 +1,8 @@
-document.addEventListener("DOMContentLoaded", function() {
-    var view = document.getElementById("viewRsrv");
-    var signIn = document.getElementById("signIn");
-    var viewButton = document.getElementById("viewButton");
-
-    viewButton.addEventListener("click", function() {
-        signIn.style.display = "none";
-        view.style.display = "block";
-    });
-});
-document.addEventListener("DOMContentLoaded", function() {
-    var view = document.getElementById("viewRsrv");
-    var signIn = document.getElementById("signIn");
-    var doneButton = document.getElementById("doneButton");
+//start reservation button
+document.addEventListener("DOMContentLoaded", function () {
+    const startButton = document.getElementById("startButton");
+    let emailError = document.getElementById("emailError");
+    let inputError = document.getElementById("inputError");
 
     doneButton.addEventListener("click", function() {
         signIn.style.display = "block";
@@ -19,64 +10,62 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("startButton").addEventListener("click", async function(event) {
-    event.preventDefault();
+// document.getElementById("startButton").addEventListener("click", async function(event) {
+//     event.preventDefault();
 
-    var signIn = document.getElementById("signIn");
-    var startButton = document.getElementById("startButton");
-    var rsrv = document.getElementById("rsrv");
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const emailError = document.getElementById("emailError");
+//     var signIn = document.getElementById("signIn");
+//     var startButtonb = document.getElementById("startButton");
+//     var rsrv = document.getElementById("rsrv");
+//     const name = document.getElementById("name").value.trim();
+//     const email = document.getElementById("email").value.trim();
+//     const emailError = document.getElementById("emailError");
 
-    if (!name || !email) {
-        alert("Both Name and Email are required.");
-        return;
-    }
+//             if (!name || !email) {
+//                 alert("Both name and email are required!");
+//                 return;
+//             }
 
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailRegex.test(email)) {
-        alert("Please enter a valid email address.");
-        emailError.style.display = "block";
-        return;
-    } else {
-        emailError.style.display = "none";
-    }
+//     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+//     if (!emailRegex.test(email)) {
+//         alert("Please enter a valid email address.");
+//         emailError.style.display = "block";
+//         return;
+//     } else {
+//         emailError.style.display = "none";
+//     }
 
-    // try {
-    //     let isExists = await checkIfExists(name, email);
-    //     if (isExists) {
-    //         alert("You have already made a reservation.");
-    //         return;
-    //     } 
-            signIn.style.display = "none";
-            rsrv.style.display = "block";
+//     // try {
+//     //     let isExists = await checkIfExists(name, email);
+//     //     if (isExists) {
+//     //         alert("You have already made a reservation.");
+//     //         return;
+//     //     } 
+//             signIn.style.display = "none";
+//             rsrv.style.display = "block";
         
-//     } catch(error) {
-//         alert("An error occurred. Please try again later.");
-//     }
-});
+// //     } catch(error) {
+// //         alert("An error occurred. Please try again later.");
+// //     }
+// });
+
+//done button
+document.addEventListener("DOMContentLoaded", function () {
+    const doneButton = document.getElementById("doneButton");
+
+    if (doneButton){
+        doneButton.addEventListener("click", function() {
+            window.location.href = "index.html"
+        });
+    }
 });
 
-// async function checkIfExists(name, email) {
-//     try {
-//         const response = await fetch(`/api/checkReservation?name=${name}&email=${email}`);
-//         const data = await response.json();
-//         console.log("API Response: ", data)
-//         return data.exists;
-//     } catch (error) {
-//         console.error("Error checking reservation:", error);
-//         return false;
-//     }
-// }
 function getFormData() {
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
-    const selectedDays = Array.from(document.querySelectorAll('input[name="day"]:checked'))
+    const selectedDay = Array.from(document.querySelectorAll('input[name="day"]:checked'))
                               .map(checkbox => checkbox.value);
 
-    return { name, email, day: selectedDays };
+    return { name, email, day: selectedDay };
 }
 function saveFormData() {
     const formData = getFormData(); 
@@ -99,16 +88,19 @@ function submitReservation(event) {
         console.log("Response from backend:", data);
         if (data.success) {
             console.log("Response from backend:", data);
+            window.location.href = "index.html";
             alert("Reservation successful!");
         } else {
-            alert("Reservation failed. js f" + data.message);
+            alert("Reservation failed. " + data.message);
         }
     })
     .catch(error => {
-        console.error("Error submitting reservation:", error);
-        alert("An error occurred. Please try again." +error.message);
+        console.error("Error submitting reservation: ", error);
+        alert("An error occurred. Please try again. " +error.message);
     });
 }
+
+// submit reservation
 document.getElementById("confirmation").addEventListener("submit", function(event) {
     event.preventDefault();
 
@@ -125,3 +117,29 @@ document.getElementById("confirmation").addEventListener("submit", function(even
     saveFormData(); 
     submitReservation(event); 
 });
+
+   // try {
+    //     let isExists = await checkIfExists(name, email);
+    //     if (isExists) {
+    //         alert("You have already made a reservation.");
+    //         return;
+    //     } 
+            // signIn.style.display = "none";
+            // rsrv.style.display = "block";
+        
+//     } catch(error) {
+//         alert("An error occurred. Please try again later.");
+//     }
+// });
+
+// async function checkIfExists(name, email) {
+//     try {
+//         const response = await fetch(`/api/checkReservation?name=${name}&email=${email}`);
+//         const data = await response.json();
+//         console.log("API Response: ", data)
+//         return data.exists;
+//     } catch (error) {
+//         console.error("Error checking reservation:", error);
+//         return false;
+//     }
+// }

@@ -27,26 +27,17 @@ public class MessageController {
         this.messageRepository = messageRepository;
     }
     @PostMapping("/submitChoice")
-    public ResponseEntity<Map<String, Object>> submitChoice(@RequestBody Message request) {
+    public ResponseEntity<Map<String, Object>> submitChoice(@RequestBody RsrvDTO request) {
         try {
-        System.out.println("Received request: " + request);
-
-        if (request.getDay() == null || request.getDay().isEmpty()) {
-            return ResponseEntity.badRequest().body(Map.of("success", false, "message", "Please select at least one day."));
+            messageService.saveMessage(request);
+            return ResponseEntity.ok(Map.of("success", true, "message", "Reservation successful!"));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(Map.of("success", false, "message", e.getMessage()));
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the actual error
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("success", false, "message", "Internal Server Error"));
         }
-
-        String dayString = String.join(", ", request.getDay());
-      
-        System.out.println("Saving message: Name = " + request.getName() + ", Email = " + request.getEmail() + ", Days = " + dayString);
-
-        messageService.saveMessage(request.getName(), request.getEmail(), dayString);
-
-        return ResponseEntity.ok(Map.of("success", true, "message", "Reservation successful!"));
-    } catch (Exception e) {
-        e.printStackTrace(); // Log the actual error
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("success", false, "message", "Internal Server Error"));
     }
-
 // @GetMapping("/api/checkReservation")
 // public ResponseEntity<Map<String, Boolean>> checkReservation(
 //     @RequestParam String name, 
@@ -56,19 +47,4 @@ public class MessageController {
 //     response.put("exists", exists);
 //     return ResponseEntity.ok(response);
 // }
-    // @GetMapping("/home")
-    // public String showHomePage() {
-    //     return "index";
-    // }
-    // @PostMapping("/submitForm")
-    // public ResponseEntity<String> handleFormSubmission(@RequestBody String name, String email, String day) {
-    //     System.out.println("Received message: " ); 
-    //     return ResponseEntity.ok("Message received: ");  
-    // }
-
-    // // @GetMapping("/message")
-    // // public String getMessage() {
-    // //     return "Hello from Spring Boot!";
-    // // }
-}
 }

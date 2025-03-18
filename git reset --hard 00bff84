@@ -1,0 +1,34 @@
+[33m5602bb7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{0}: commit: Updated script
+[33m00bff84[m HEAD@{1}: commit: Updated application.properties
+[33m497ae41[m HEAD@{2}: commit: Updated port on application.properties
+[33me7041f9[m HEAD@{3}: commit: Updated MessageService, application.properties and script
+[33m2d92f62[m HEAD@{4}: commit: Updated MessageController, MessageRepository, MessageService and script
+[33md621517[m HEAD@{5}: commit: Fix case-sensitive filename issue
+[33m3c5bd25[m HEAD@{6}: commit: Updated MessaegController and MessageRepository and cleaned build
+[33m8bf98ed[m HEAD@{7}: commit: Updated pom.xml and deleted old main method
+[33mb5a9cb5[m HEAD@{8}: commit: Using email as primary key
+[33md40b339[m HEAD@{9}: commit: Updated MessageService
+[33m92221a7[m HEAD@{10}: commit: Updated MessageController and renamed Message
+[33me2ee488[m HEAD@{11}: commit: Updated ApiController
+[33mcf97e1b[m HEAD@{12}: commit: Updated application.properties
+[33mdfea7b1[m HEAD@{13}: commit: Updated application.properties
+[33mc8ffe0a[m HEAD@{14}: commit: Updated application.properties
+[33m9f71bff[m HEAD@{15}: commit: Updated index
+[33mf9eeda9[m HEAD@{16}: commit: Updated script
+[33m5600ff8[m HEAD@{17}: commit: Updated script
+[33m30cc646[m HEAD@{18}: commit: Updated script and MessageController
+[33m0c4b13a[m HEAD@{19}: commit: Updated index
+[33mc394dc9[m HEAD@{20}: commit: Updated script for debugging
+[33mb2a2358[m HEAD@{21}: commit: Updated MessageController, message and script
+[33m2f205ed[m HEAD@{22}: commit: Updated MessageController.java
+[33mc42b6ea[m HEAD@{23}: commit: Updated MessageRepository.java
+[33m8fc641e[m HEAD@{24}: commit: Updated frontend index.html and script.js
+[33m47c1065[m HEAD@{25}: commit: Updated message.java
+[33m5faf61c[m HEAD@{26}: commit: Updated MessageController
+[33mc8e82ac[m HEAD@{27}: commit: Updated message
+[33m42c41ac[m HEAD@{28}: commit: Updated MessageRepository
+[33mb284b96[m HEAD@{29}: commit: Updated database connection
+[33m3084781[m HEAD@{30}: pull --tags origin master: Merge made by the 'ort' strategy.
+[33m24cf408[m HEAD@{31}: commit: Updated MessageRepository and other files
+[33m8ed1970[m HEAD@{32}: commit: Use environment variables for database connection
+[33mc9cc45c[m HEAD@{33}: commit (initial): Initial commit with updated project
