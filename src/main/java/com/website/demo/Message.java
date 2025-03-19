@@ -18,10 +18,11 @@ import jakarta.persistence.Table;
 @Table(name = "getloudtix_db")
 public class Message {
     private String name;
+    @Id
     private String email;
 
-@ElementCollection
-private List<String> day;
+    @ElementCollection
+    private List<String> day;
 
     public Message() {}
 
