@@ -15,10 +15,9 @@ import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Table;
 
 @Entity 
-@Table(name = "user_getloudtix")
+@Table(name = "getloudtix_db")
 public class Message {
     private String name;
-    @Id
     private String email;
 
 @ElementCollection
