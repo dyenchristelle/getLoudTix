@@ -30,7 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const viewButton = document.getElementById("viewButton");
 
     if (viewButton){
-        viewButton.addEventListener("click", function() {
+        viewButton.addEventListener("click", function(event) {
+            event.preventDefault();
             const name = document.getElementById("name").value.trim();
             const email = document.getElementById("email").value.trim();
             
@@ -63,10 +64,8 @@ function saveFormData() {
     localStorage.setItem("reservationData", JSON.stringify(formData));
     console.log("Data saved:", formData);
 }
-function submitReservation(event) {
-    event.preventDefault(); 
+function submitReservation(formData) {
     saveFormData();
-    const formData = getFormData();
     console.log("Sending data:", formData); 
 
     fetch("https://getloudtix-production.up.railway.app/api/submitChoice", {
@@ -79,8 +78,8 @@ function submitReservation(event) {
         console.log("Response from backend:", data);
         if (data.success) {
             console.log("Response from backend:", data);
-            window.location.href = "index.html";
             alert("Reservation successful!");
+            window.location.href = "index.html";
         } else {
             alert("Reservation failed. " + data.message);
         }
@@ -92,21 +91,29 @@ function submitReservation(event) {
 }
 
 // submit reservation
-document.getElementById("confirmation").addEventListener("submit", function(event) {
-    event.preventDefault();
+document.addEventListener("DOMContentLoaded", function() {
+    const confirm = document.getElementById("confirmation");
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
 
-    const formData = getFormData();
-    
-    if (!formData.name || !formData.email || formData.day.length === 0) {
-        alert("Please fill in all fields and select at least one day.");
-        return;
-    }
+    console.log(nameInput); 
+    console.log(emailInput);
 
-    const userConfirmed = confirm("Are you sure you want to reserve tickets for " + formData.day.join(", ") + "?");
-    if (!userConfirmed) return;
+    confirm.addEventListener("submit", function(event) {
+        event.preventDefault();
 
-    saveFormData(); 
-    submitReservation(event); 
+        const formData = getFormData();
+        if (formData.day.length === 0){
+            alert("Select at least one day.");
+            return;
+        }
+
+        const userConfirmed = confirm("Are you sure you want to reserve tickets for " + formData.day.join(", ") + "?");
+        if (!userConfirmed) return;
+
+        saveFormData(formData); 
+        submitReservation(formData); 
+    });
 });
 
    // try {
