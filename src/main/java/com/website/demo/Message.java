@@ -4,24 +4,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Arrays;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import jakarta.persistence.AttributeConverter;
-import jakarta.persistence.Converter;
-
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity 
 @Table(name = "getloudtix_db")
 public class Message {
-    private String name;
     @Id
     private String email;
 
-    @ElementCollection
+    private String name;
+
+    @Convert(converter = StringListConverter.class)
     private List<String> day;
 
     public Message() {}

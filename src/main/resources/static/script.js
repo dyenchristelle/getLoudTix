@@ -1,3 +1,20 @@
+//click enter sa after mag-input sa name text field lilipat sa email text field sheesh
+document.addEventListener("DOMContentLoaded", function () {
+    const inputs = document.querySelectorAll("input");
+
+    inputs.forEach((input, index) => {
+        input.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); 
+                const nextInput = inputs[index + 1];
+                if (nextInput) {
+                    nextInput.focus();
+                }
+            }
+        });
+    });
+});
+
 //start reservation button
 document.addEventListener("DOMContentLoaded", function () {
     const startButton = document.getElementById("startButton");
@@ -25,31 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } 
 });
 
-// view button
-document.addEventListener("DOMContentLoaded", function () {
-    const viewButton = document.getElementById("viewButton");
 
-    if (viewButton){
-        viewButton.addEventListener("click", function(event) {
-            event.preventDefault();
-            const name = document.getElementById("name").value.trim();
-            const email = document.getElementById("email").value.trim();
-            
-            window.location.href = "view.html"
-        });
-    }
-});
-
-//done button
-document.addEventListener("DOMContentLoaded", function () {
-    const doneButton = document.getElementById("doneButton");
-
-    if (doneButton){
-        doneButton.addEventListener("click", function() {
-            window.location.href = "index.html"
-        });
-    }
-});
 
 function getFormData() {
     const name = document.getElementById("name").value.trim();
@@ -115,6 +108,102 @@ document.addEventListener("DOMContentLoaded", function() {
         submitReservation(formData); 
     });
 });
+
+//view reservation button
+document.addEventListener("DOMContentLoaded", function() {
+    const viewButton = document.getElementById("viewButton");
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+
+    if (viewButton) {
+        viewButton.addEventListener("click", function(event) {
+            // event.preventDefault();
+        //     fetch(`/check-input?value=${encodeURIComponent(emailInput)}`)
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             if (!data.exists) {
+        //                 window.location.href = "reserve.html";
+        //             } else {
+        //                 alert("Account does not exist. You haven't reserve any ticket yet.");
+        //             }
+        //         })
+        //         .catch(error => console.error("Error:", error));
+        window.location.href = "view.html";
+        });
+    }
+});
+
+//done button
+document.addEventListener("DOMContentLoaded", function () {
+    const doneButton = document.getElementById("doneButton");
+
+    if (doneButton){
+        doneButton.addEventListener("click", function() {
+            window.location.href = "index.html"
+        });
+    }
+});
+
+//change reservation button
+document.addEventListener("DOMContentLoaded", function() {
+    const changeButton = document.getElementById("changeButton");
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+
+    if (changeButton) { 
+        changeButton.addEventListener("click", function(event) {
+        window.location.href = "reserve.html";
+        });
+    }
+});
+
+// update button 
+
+
+// delete button WAIT LANG BUKAS ULIT GAGAMITIN NA LAPTOP HUHU d q pa naaayos HAHAHA
+document.addEventListener("DOMContentLoaded", function () {
+    let deleteButton = document.getElementById("deleteButton");
+
+    // Load name and email from localStorage
+    document.getElementById("name").value = localStorage.getItem("userName") || "";
+    document.getElementById("email").value = localStorage.getItem("userEmail") || "";
+
+    // Show delete button if change reservation was clicked
+    if (localStorage.getItem("showDeleteButton") === "true") {
+        deleteButton.classList.add("show");
+        localStorage.removeItem("showDeleteButton"); // Remove flag after showing
+    }
+
+    // Handle delete reservation
+    deleteButton.addEventListener("click", function () {
+        let name = document.getElementById("name").value.trim();
+        let email = document.getElementById("email").value.trim();
+
+        if (!name || !email) {
+            alert("Please enter name and email!");
+            return;
+        }
+        fetch("/delete-reservation", {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: name, email: email })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Reservation deleted.");
+                localStorage.removeItem("userName");
+                localStorage.removeItem("userEmail");
+                window.location.href = "view.html";
+            } else {
+                alert("Error deleting reservation.");
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    });
+});
+
+
 
    // try {
     //     let isExists = await checkIfExists(name, email);
