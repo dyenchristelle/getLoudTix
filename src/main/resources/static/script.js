@@ -147,34 +147,49 @@ document.addEventListener("DOMContentLoaded", function () {
 //change reservation button
 document.addEventListener("DOMContentLoaded", function() {
     const changeButton = document.getElementById("changeButton");
+    const submit = document.getElementById("submit");
+    const updButton = document.getElementById("updButton");
+    const deleteButton = document.getElementById("deleteButton");
     const nameInput = document.getElementById("name");
     const emailInput = document.getElementById("email");
 
     if (changeButton) { 
         changeButton.addEventListener("click", function(event) {
-        window.location.href = "reserve.html";
+            localStorage.setItem("hideSubmit", "true");
+            localStorage.setItem("showOtherButtons", "true");
+            window.location.href = "reserve.html";
         });
+    }
+    if (submit && localStorage.getItem("hideSubmit") === "true") {
+        submit.style.display = "none"; 
+        localStorage.removeItem("hideSubmit");
+    }
+    if (localStorage.getItem("showOtherButtons") === "true") {
+        updButton.style.display = "block";
+        deleteButton.style.display = "block";
+    } else { 
+        updButton.style.display = "none";
+        deleteButton.style.display = "none";
     }
 });
 
 // update button 
+document.addEventListener("DOMContentLoaded", function() {
+    const confirm = document.getElementById("confirmation");
+    const updBUtton = document.getElementById("updButton");
 
+});
 
-// delete button WAIT LANG BUKAS ULIT GAGAMITIN NA LAPTOP HUHU d q pa naaayos HAHAHA
+// delete button
 document.addEventListener("DOMContentLoaded", function () {
+    const confirm = document.getElementById("confirmation");
     let deleteButton = document.getElementById("deleteButton");
 
-    // Load name and email from localStorage
-    document.getElementById("name").value = localStorage.getItem("userName") || "";
-    document.getElementById("email").value = localStorage.getItem("userEmail") || "";
-
-    // Show delete button if change reservation was clicked
     if (localStorage.getItem("showDeleteButton") === "true") {
         deleteButton.classList.add("show");
-        localStorage.removeItem("showDeleteButton"); // Remove flag after showing
+        localStorage.removeItem("showDeleteButton"); 
     }
 
-    // Handle delete reservation
     deleteButton.addEventListener("click", function () {
         let name = document.getElementById("name").value.trim();
         let email = document.getElementById("email").value.trim();
@@ -183,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Please enter name and email!");
             return;
         }
-        fetch("/delete-reservation", {
+        fetch("/api/delete-reservation", {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: name, email: email })
@@ -191,10 +206,8 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert("Reservation deleted.");
-                localStorage.removeItem("userName");
-                localStorage.removeItem("userEmail");
-                window.location.href = "view.html";
+                alert("Reservation deleted successfully.");
+                window.location.href = "index.html";
             } else {
                 alert("Error deleting reservation.");
             }
