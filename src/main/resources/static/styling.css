@@ -16,14 +16,14 @@ header{
     z-index: 1000; 
 }
 .logo img {
-    position: absolute;
+
     width: 130px;  /* Adjust width */
     height: auto; /* Maintain aspect ratio */
 }
 .logo{
         display: flex;  
         align-items: center;  
-        /* justify-content: space-between;   */
+        justify-content: flex-start;   
         gap: 10px;  /* Add spacing between image & text */
         text-align: center;  /* Center text inside the div */
         width: 100%;  /* Ensure it takes full width */
@@ -34,7 +34,7 @@ header{
 }
 .GetLoudTix {
     flex-grow: 1;  /* Allows text to take up available space */
-    text-align: center;  /* Centers the text */
+    text-align: left;  /* Centers the text */
 }
 
 /* h1{
@@ -108,11 +108,11 @@ header{
 .vrh1{
     text-align: center;
     width: 100%;
-    font-size: 50px;
+    font-size: 40px;
     font-weight: bold;
-    margin-top: 40px;
+    margin-top: 10px;
     position: relative;
-    top: -90px; 
+    top: -40x; 
 }
 /* .info p{
     text-align: center;
@@ -215,7 +215,6 @@ input{
 .viewRsrv{
     left: 0;
     width: 100%;
-    margin-top: 20px;
     opacity: 1; 
     z-index: 5;   
     display: flex; 
