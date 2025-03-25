@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* General styles */
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1a1131;
+    color: white;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2a1b59;
+    padding: 15px 40px;
+}
+
+.ticket-icon{
+    position: relative;
+    margin-left: 20px;
+    margin-left: auto;
+    color: #e0b3ff;
+}
+header .ticket-icon span{
+    display: flex;
+    width: 30px;
+    height: 30px;
+    background-color: #63368d;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    right: -20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    width: 60px;
+    margin-right: 10px;
+}
+svg{
+    width: 30px;
+}
+
+h1 {
+    font-size: 28px;
+    color: #e0b3ff;
+}
+
+nav{
+    display: flex;
+    align-items: center; /* Aligns items vertically */
+    justify-content: flex-start; /* Ensures left alignment for links */
+    gap: 20px; 
+}
+nav a {
+    color: #e0b3ff;
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.cart-icon {
+    font-size: 28px;
+    color: #e0b3ff;
+    margin-left: 20px;
+}
+
+.ticketTab{
+    width: 400px;
+    background-color: #7f40b2;
+    color: #d1c4e9;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    /* inset: 0 0 0 auto;  */
+    display: grid;
+    grid-template-rows: 70px 1fr 70px;
+    
+}
+
+.ticketTab h1 {
+    padding: 20px;
+    margin: 0;
+    font-weight: 300;
+}
+
+.ticketTab .btn {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.ticketTab .btn button {
+    background-color: #63368d;
+    border: none;
+    font-family: Poppins;
+    font-weight: 500;
+    cursor: pointer;
+}
+.ticketTab .btn .close {
+    background-color: white;
+    color: #63368d;
+}
+
+/* Scrollable concert container */
+.concerts-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px 40px;
+    /* max-height: 80vh;
+    overflow-y: auto; */
+}
+
+/* Concert ticket card styles */
+.concert-card {
+    display: flex;
+    background-color: #2b1a4b;
+    border: 3px solid #63368d;
+    border-radius: 20px;
+    width: 100%;
+    height: 430px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ticket border shape */
+.concert-card::before,
+.concert-card::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 40px;
+    background-color: #1a1131;
+    border: 3px solid #63368d;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.concert-card::before {
+    left: -11px;
+    border-radius: 10px 0 0 10px;
+}
+
+.concert-card::after {
+    right: -11px;
+    border-radius: 0 10px 10px 0;
+}
+
+/* Concert image */
+.concert-img {
+    width: 180px;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+/* Concert info section */
+.concert-info {
+    padding: 20px;
+    text-align: left;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h2 {
+    font-size: 20px;
+    margin: 0;
+    color: #e0b3ff;
+}
+
+.sub-title {
+    font-size: 14px;
+    color: #d1c4e9;
+}
+
+p {
+    font-size: 14px;
+    color: #d1c4e9;
+    margin: 10px 0 15px;
+}
+
+/* Reserve button styles */
+.reserve-btn {
+    background-color: #7c3aed;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    font-size: 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+.reserve-btn:hover {
+    background-color: #9d4edd;
+}
+
+/* Scrollbar styles */
+.concerts-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.concerts-container::-webkit-scrollbar-thumb {
+    background-color: #7c3aed;
+    border-radius: 10px;
+}
+
+.concerts-container::-webkit-scrollbar-track {
+    background-color: #2b1a4b;
+}

@@ -4,45 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View</title>
-    <link rel="stylesheet" href="styling.css">
-
-    <style>
-        #deleteButton {
-            display: none;
-        }
-        #updButton {
-            display: none;
-        }
-    </style>
-
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/c5dbb881bf.js" crossorigin="anonymous"></script>
 </head>
-
+<body>
 <header>
+    
     <div class="logo">
-        <img src="Logoo/LOGOoo.png" alt="Logo">
-        <h2 class="GetLoudTix">GetLoudTix</h2>
-
-        <a href="about.html"> About</a>
-        <a href="FAQs.html">FAQs</a>
-        <a href="terms&conditions.html">Terms and Condition</a>
+        <a href="index.html">
+        <img src="Logoo/LOGOoo.png" alt="Logo" class="concert-img">
+        </a>
+        <h2 class="GetLoudTix">GetLoudTix</h2>    
+    </div>
+        <nav>
+            <a href="about.html"> About</a>
+            <a href="FAQs.html">FAQs</a>
+            <a href="terms&conditions.html">Terms and Condition</a>
+            <div class="ticket-icon">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 12A2.5 2.5 0 0 1 21 9.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v2.5a2.5 2.5 0 0 1 0 5V17a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-2.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+                </svg>           
+                <span>0</span>
+            </div>
+        </nav>
     </div>
 </header>
-<body>
 
-<body>
-    <div class="container">
-    <div id="rsrv" class="rsrv">
-        <h1 class="reserveh1">Start Reservation</h1>
-        <form id="confirmation" method="POST" action="/api/submitChoice">
-            <input type="checkbox" name="day" value="Day 1" id="day1" title="Select Day 1"> Day 1: NIKI, TWICE, Olivia Rodrigo<br>
-            <input type="checkbox" name="day" value="Day 2" id="day2" title="Select Day 2"> Day 2: BINI, Ben&Ben, December Avenue<br>
-            <input type="checkbox" name="day" value="Day 3" id="day3" title="Select Day 3"> Day 3: Ariana Grande, Sabrina Carpenter, The Weeknd<br>
-            <button id="submit" type="submit" value="submit">Submit Reservation</button>
-            <button id="updButton">Update Reservation</button>
-            <button id="deleteButton">Delete Reservation</button>
-        </form>   
-     </div>
+<div class="concerts-container">
+    <div class="concert-card">
+        <img src="posters/taylor.jpg" alt="Taylor Swift" />
+        <div class="concert-info">
+            <h2>Taylor Swift<br>The Eras Tour</h2>
+            <p>May 25, 2025</p>
+            <button class="reserve-btn" data-concert-id="1">Reserve</button>
+        </div>
     </div>
-    <script src="script.js"></script>
+
+    <div class="concert-card">
+        <img src="posters/dhruvc.jpg" alt="Dhruv Concert" />
+        <div class="concert-info">
+            <h2>Dhruv<br>Concert</h2>
+            <p>May 09, 2025</p>
+            <button class="reserve-btn" data-concert-id="2">Reserve</button>
+        </div>
+    </div>
+
+    <div class="concert-card">
+        <img src="posters/ariana.jpg" alt="Ariana Grande" />
+        <div class="concert-info">
+            <h2>Ariana Grande<br>Concert</h2>
+            <p>June 15, 2025</p>
+            <button class="reserve-btn" data-concert-id="3">Reserve</button>
+        </div>
+    </div>
+
+    <div class="concert-card">
+        <img src="posters/brunomars.jpg" alt="Bruno Mars" />
+        <div class="concert-info">
+            <h2>Bruno Mars<br>Concert</h2>
+            <p>July 20, 2025</p>
+            <button class="reserve-btn" data-concert-id="4">Reserve</button>
+        </div>
+    </div>
+
+    <div class="concert-card">
+        <img src="posters/bea.jpg" alt="Beabadoobee" />
+        <div class="concert-info">
+            <h2>Beabadoobee<br>B</h2>
+            <p>July 20, 2025</p>
+            <button class="reserve-btn" data-concert-id="4">Reserve</button>
+        </div>
+    </div>
+
+    <div class="concert-card">
+        <img src="posters/clairo.jpg" alt="Clairo" />
+        <div class="concert-info">
+            <h2>Clairo<br>C</h2>
+            <p>July 21, 2025</p>
+            <button class="reserve-btn" data-concert-id="5">Reserve</button>
+        </div>
+    </div>
+</div>
+<div class="ticketTab">
+    <h1>Tickets</h1>
+<div class="listTicket">
+       
+</div>
+        <div class="btn">
+            <button class="close">Close</button>
+            <button class="checkout">Check Out</button>
+        </div>
+</div>
+<script src="script.js"></script>
 </body>
 </html>
