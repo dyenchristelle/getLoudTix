@@ -1,4 +1,4 @@
-//click enter sa after mag-input sa name text field lilipat sa email text field sheesh
+// enter
 document.addEventListener("DOMContentLoaded", function () {
     const inputs = document.querySelectorAll("input");
 
@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Invalid email!");
                 return;
             }
-
             window.location.href = "reserve.html";
         });
     } 
@@ -60,27 +59,6 @@ function saveFormData() {
 function submitReservation(formData) {
     saveFormData();
     console.log("Sending data:", formData); 
-
-    fetch("https://getloudtix-production.up.railway.app/api/submitChoice", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log("Response from backend:", data);
-        if (data.success) {
-            console.log("Response from backend:", data);
-            alert("Reservation successful!");
-            window.location.href = "index.html";
-        } else {
-            alert("Reservation failed. " + data.message);
-        }
-    })
-    .catch(error => {
-        console.error("Error submitting reservation: ", error);
-        alert("An error occurred. Please try again. " +error.message);
-    });
 }
 
 // submit reservation
@@ -112,23 +90,17 @@ document.addEventListener("DOMContentLoaded", function() {
 //view reservation button
 document.addEventListener("DOMContentLoaded", function() {
     const viewButton = document.getElementById("viewButton");
-    const nameInput = document.getElementById("name");
-    const emailInput = document.getElementById("email");
 
     if (viewButton) {
         viewButton.addEventListener("click", function(event) {
-            // event.preventDefault();
-        //     fetch(`/check-input?value=${encodeURIComponent(emailInput)}`)
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             if (!data.exists) {
-        //                 window.location.href = "reserve.html";
-        //             } else {
-        //                 alert("Account does not exist. You haven't reserve any ticket yet.");
-        //             }
-        //         })
-        //         .catch(error => console.error("Error:", error));
-        window.location.href = "view.html";
+            const name = document.getElementById("name");
+            const email = document.getElementById("email");
+
+            if (!name || !email) {
+                alert("Both name and email are required!");
+                return;
+            }
+            window.location.href = "view.html";
         });
     }
 });
@@ -218,28 +190,3 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-   // try {
-    //     let isExists = await checkIfExists(name, email);
-    //     if (isExists) {
-    //         alert("You have already made a reservation.");
-    //         return;
-    //     } 
-            // signIn.style.display = "none";
-            // rsrv.style.display = "block";
-        
-//     } catch(error) {
-//         alert("An error occurred. Please try again later.");
-//     }
-// });
-
-// async function checkIfExists(name, email) {
-//     try {
-//         const response = await fetch(`/api/checkReservation?name=${name}&email=${email}`);
-//         const data = await response.json();
-//         console.log("API Response: ", data)
-//         return data.exists;
-//     } catch (error) {
-//         console.error("Error checking reservation:", error);
-//         return false;
-//     }
-// 

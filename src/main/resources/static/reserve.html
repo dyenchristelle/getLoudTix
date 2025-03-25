@@ -5,23 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View</title>
     <link rel="stylesheet" href="styling.css">
-
-    <style>
-        #deleteButton {
-            display: none;
-        }
-        #updButton {
-            display: none;
-        }
     </style>
-
 </head>
-
 <header>
     <div class="logo">
-        <img src="Logoo/LOGOoo.png" alt="Logo">
+        <a href="index.html">
+        <img src="Logoo/LOGOoo.png" alt="Logo" class="imgticket">
+        </a>
         <h2 class="GetLoudTix">GetLoudTix</h2>
-
+        
         <a href="about.html"> About</a>
         <a href="FAQs.html">FAQs</a>
         <a href="terms&conditions.html">Terms and Condition</a>
@@ -38,9 +30,10 @@
             <input type="checkbox" name="day" value="Day 2" id="day2" title="Select Day 2"> Day 2: BINI, Ben&Ben, December Avenue<br>
             <input type="checkbox" name="day" value="Day 3" id="day3" title="Select Day 3"> Day 3: Ariana Grande, Sabrina Carpenter, The Weeknd<br>
             <button id="submit" type="submit" value="submit">Submit Reservation</button>
-            <button id="updButton">Update Reservation</button>
-            <button id="deleteButton">Delete Reservation</button>
+            <button id="updButton" type="button">Update Reservation</button>
+            <button id="deleteButton" type="button">Delete Reservation</button>
         </form>   
+        
      </div>
     </div>
     <script src="script.js"></script>
