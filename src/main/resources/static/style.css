@@ -19,11 +19,26 @@ header {
     padding: 15px 40px;
 }
 
+.container{
+    width: 1500px;
+    transition: transform .5s;
+}
+body.showTicket .ticketTab{
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* body.showTicket .container{
+    transform: translateX(-250px);
+} */
+
 .ticket-icon{
     position: relative;
     margin-left: 20px;
     margin-left: auto;
     color: #e0b3ff;
+    cursor: pointer;
 }
 header .ticket-icon span{
     display: flex;
@@ -85,12 +100,12 @@ nav a:hover {
     color: #d1c4e9;
     position: fixed;
     top: 0;
-    right: 0;
+    right: -400px;
     bottom: 0;
     /* inset: 0 0 0 auto;  */
     display: grid;
     grid-template-rows: 70px 1fr 70px;
-    
+    transition: transform .5s;
 }
 
 .ticketTab h1 {
@@ -116,6 +131,30 @@ nav a:hover {
     color: #63368d;
 }
 
+.ticketTab .listTicket .item img{
+    width: 100%;
+}
+
+.ticketTab .listTicket .item {
+    display: grid;
+    grid-template-columns: 130px 150px 50px 1fr;
+    gap: 10px;
+    text-align: center;
+    align-items: center;
+}
+.listTicket .removeTicket{
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    background-color: #4f3285;
+    color: white;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+.listTicket .item:nth-child(even){
+    background-color: gray;
+}
 /* Scrollable concert container */
 .concerts-container {
     display: grid;

@@ -1,3 +1,64 @@
+document.addEventListener("DOMContentLoaded", function () {
+        const inputs = document.querySelectorAll("input");
+    
+        inputs.forEach((input, index) => {
+            input.addEventListener("keydown", function (event) {
+                if (event.key === "Enter") {
+                    event.preventDefault(); 
+                    const nextInput = inputs[index + 1];
+                    if (nextInput) {
+                        nextInput.focus();
+                    }
+                }
+            });
+        });
+    });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const startButton = document.getElementById("startButton");
+    let emailError = document.getElementById("emailError");
+    let inputError = document.getElementById("inputError");
+
+    if (startButton) {
+        startButton.addEventListener("click", function () {
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+
+            if (!name || !email) {
+                alert("Both name and email are required!");
+                return;
+            }
+
+            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailRegex.test(email)) {
+                alert("Invalid email!");
+                return;
+            }
+
+            window.location.href = "reserve.html";
+        });
+    } 
+});
+
+// Wait for the DOM to fully load before executing
+document.addEventListener('DOMContentLoaded', () => {
+    // Select the element with the class 'ticket-icon'
+    let ticketIconElement = document.querySelector('.ticket-icon');
+    // Select the body element
+    let bodyElement = document.querySelector('body');
+    let closeTicket = document.querySelector('.close')
+
+    closeTicket.addEventListener('click', () => {
+        bodyElement.classList.toggle('showTicket');
+    });
+    // Add a click event listener to the ticket icon
+    ticketIconElement.addEventListener('click', () => {
+        // Toggle the 'showTicket' class on the body element when clicked
+        bodyElement.classList.toggle('showTicket');
+    });
+});
+
+
 document.addEventListener("DOMContentLoaded", () => {
     let reservedConcerts = new Set();
     let maxReservations = 6;
