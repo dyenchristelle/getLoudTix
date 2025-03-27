@@ -1,44 +1,72 @@
 [
     {
         "id" : 1,
-        "name" : "Taylor Swift",
+        "name" : "Adie",
         "image": "posters/taylor.jpg",
-        "date" : "June 20, 2025",
+        "date" : "June 10, 2025",
         "concert" : "The Eras Tour"
     },
     {
         "id": 2,
-        "name" : "Dhruv",
+        "name" : "Arthur Nery",
         "image": "posters/dhruvc.jpg",
-        "date" : "June 21, 2025",
+        "date" : "June 11, 2025",
         "concert" : "The Eras Tour"
     },
     {
         "id": 3,
-        "name": "Ariana Grande",
+        "name": "Maki",
         "image": "posters/ariana.jpg",
-        "date" : "June 22, 2025",
+        "date" : "June 12, 2025",
         "concert" : "The Eras Tour"
     },
     {
         "id": 4,
-        "name": "Bruno Mars",
+        "name": "Earl Agustin",
         "image": "posters/brunomars.jpg",
-        "date" : "June 23, 2025",
+        "date" : "June 13, 2025",
         "concert" : "The Eras Tour"
     },
     {
         "id": 5,
-        "name": "Beabadoobee",
+        "name": "Amiel Sol",
         "image": "posters/bea.jpg",
-        "date" : "June 24, 2025",
+        "date" : "June 14, 2025",
         "concert" : "The Eras Tour"
     },
     {
         "id": 6,
-        "name": "Clairo",
+        "name": "Toneejay",
         "image": "posters/clairo.jpg",
-        "date" : "June 25, 2025",
+        "date" : "June 17, 2025",
+        "concert" : "The Eras Tour"
+    },
+    {
+        "id": 7,
+        "name": "Juan Karlos",
+        "image": "posters/clairo.jpg",
+        "date" : "June 18, 2025",
+        "concert" : "The Eras Tour"
+    },
+    {
+        "id": 8,
+        "name": "Rob Daniel",
+        "image": "posters/clairo.jpg",
+        "date" : "June 19, 2025",
+        "concert" : "The Eras Tour"
+    },
+    {
+        "id": 9,
+        "name": "Arthur Miguel",
+        "image": "posters/clairo.jpg",
+        "date" : "June 20, 2025",
+        "concert" : "The Eras Tour"
+    },
+    {
+        "id": 10,
+        "name": "Cup of Joe",
+        "image": "posters/clairo.jpg",
+        "date" : "June 21, 2025",
         "concert" : "The Eras Tour"
     }
 ]

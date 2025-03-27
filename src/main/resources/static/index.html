@@ -8,7 +8,7 @@
 
 </head>
 
-<body>
+<body class="index">
 
     <header>
     
@@ -26,41 +26,20 @@
         </div>
     </header>
 
-    <div class="container">
-    <div id="signIn" class="center-box">
+    <div class="sign-in-container">
+    <div class="center-box">
         <h1>Ticket Reservation</h1>
 
         <label for="name">Name: </label>
-        <input type="text" id="name" name="name" autocomplete="name" placeholder="Full Name" required title="Please enter your full name">
+        <input type="text" class="name" id="name" name="name" autocomplete="name" placeholder="Full Name" required title="Please enter your full name">
 
         <label for="email">Email: </label>
-        <input type="email" id="email" name="email" autocomplete="email" placeholder="asdf@gmail.com" required title="Enter a valid email address">
+        <input type="email" id="email" class="name" name="email" autocomplete="email" placeholder="asdf@gmail.com" required title="Enter a valid email address">
 
-        <button id="startButton" type="button">Start Reservation</button>
+        <button id="startButton" class="startButton"  type="button">Start Reservation</button>
 
-        <button id="viewButton" type="button">View Reservation</button>
+        <button id="viewButton" class="viewButton" type="button">View Reservation</button>
     </div>
-
-    <!-- <div id="rsrv" class="rsrv" style="display: none;">
-        <h3>Start Reservation</h3>
-        <form id="confirmation" method="POST" onsubmit="submitReservation(event)">
-            <input type="checkbox" name="day" value="Day 1"> Day 1: NIKI, TWICE, Olivia Rodrigo<br>
-            <input type="checkbox" name="day" value="Day 2"> Day 2: BINI, Ben&Ben, December Avenue<br>
-            <input type="checkbox" name="day" value="Day 3"> Day 3: Ariana Grande, Sabrina Carpenter, The Weeknd<br>
-            <button id="submit" type="submit" value="submit">Submit Reservation</button>
-        </form>   
-    </div>
-
-    <div id="viewRsrv" class="viewRsrv" style="display: none;">
-        <h4>View Reservation</h4>
-        <p4>Reservation Information: </p4>
-            <button id="" type="button">Change Reservation</button>
-            <button id="doneButton" type="button">Done</button>
-        </label>
-    </div> -->
-    
-        <!-- <small id="inputError" display: none;>Both name and email are required!</small>
-        <small id="emailError" display: none;>Invalid email!</small> -->
     </div>
     <script src="script.js"></script>
 </body>
