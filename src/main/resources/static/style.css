@@ -17,10 +17,14 @@ header {
     align-items: center;
     background-color: #2a1b59;
     padding: 15px 40px;
+    z-index: 1000;
+    top: 0;
+    position: sticky;
 }
 
 .container{
-    width: 1500px;
+    width: 0 auto;
+
     transition: transform .5s;
 }
 body.showTicket .ticketTab{
@@ -51,6 +55,10 @@ header .ticket-icon span{
     position: absolute;
     top: 50%;
     right: -20px;
+}
+
+.ticket-icon span.visible {
+    display: flex;
 }
 
 .logo {
@@ -88,20 +96,21 @@ nav a:hover {
     text-decoration: underline;
 }
 
-.cart-icon {
+/* .ticket-icon {
     font-size: 28px;
     color: #e0b3ff;
     margin-left: 20px;
-}
+} */
 
 .ticketTab{
     width: 400px;
-    background-color: #7f40b2;
+    background-color: #6d2ea0;
     color: #d1c4e9;
     position: fixed;
     top: 0;
     right: -400px;
     bottom: 0;
+    z-index: 1000;
     /* inset: 0 0 0 auto;  */
     display: grid;
     grid-template-rows: 70px 1fr 70px;
@@ -153,7 +162,7 @@ nav a:hover {
 }
 
 .listTicket .item:nth-child(even){
-    background-color: gray;
+    background-color: #63368d;
 }
 /* Scrollable concert container */
 .concerts-container {
@@ -246,6 +255,13 @@ p {
     border-radius: 20px;
     cursor: pointer;
     align-self: flex-start;
+}
+
+.reserve-btn.reserved {
+    background-color: #686363; /* Light gray */
+    cursor: not-allowed;
+    pointer-events: none; /* Disable click events */
+    color: white;
 }
 
 .reserve-btn:hover {

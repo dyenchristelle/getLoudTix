@@ -1,0 +1,44 @@
+[
+    {
+        "id" : 1,
+        "name" : "Taylor Swift",
+        "image": "posters/taylor.jpg",
+        "date" : "June 20, 2025",
+        "concert" : "The Eras Tour"
+    },
+    {
+        "id": 2,
+        "name" : "Dhruv",
+        "image": "posters/dhruvc.jpg",
+        "date" : "June 21, 2025",
+        "concert" : "The Eras Tour"
+    },
+    {
+        "id": 3,
+        "name": "Ariana Grande",
+        "image": "posters/ariana.jpg",
+        "date" : "June 22, 2025",
+        "concert" : "The Eras Tour"
+    },
+    {
+        "id": 4,
+        "name": "Bruno Mars",
+        "image": "posters/brunomars.jpg",
+        "date" : "June 23, 2025",
+        "concert" : "The Eras Tour"
+    },
+    {
+        "id": 5,
+        "name": "Beabadoobee",
+        "image": "posters/bea.jpg",
+        "date" : "June 24, 2025",
+        "concert" : "The Eras Tour"
+    },
+    {
+        "id": 6,
+        "name": "Clairo",
+        "image": "posters/clairo.jpg",
+        "date" : "June 25, 2025",
+        "concert" : "The Eras Tour"
+    }
+]
