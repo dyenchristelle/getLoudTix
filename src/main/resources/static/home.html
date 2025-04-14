@@ -1,27 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GetLoudTix</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="home">
     <header>
-    
-        <div class="logo">
-            <a href="index.html">
-            <img src="Logoo/LOGOoo.png" alt="Logo" class="concert-img">
-            </a>
-            <h2 class="GetLoudTix">GetLoudTix</h2>    
-        </div>
-            <nav>
-                <a href="about.html"> About</a>
-                <a href="FAQs.html">FAQs</a>
-                <a href="terms&conditions.html">Terms and Condition</a>
-            </nav>
-        </div>
+      <div class="logo">
+        <a href="home.html">
+          <img src="Logoo/LOGOoo.png" alt="Logo" class="concert-img" />
+        </a>
+        <h2 class="GetLoudTix">GetLoudTix</h2>
+      </div>
+      <nav>
+        <a href="FAQs.html">FAQs</a>
+      </nav>
     </header>
-    <script src="script.js"></script>
-</body>
+
+    <div class="homee">
+      <div class="getLoudTixhome">
+        <h1>GetLoudTix</h1>
+        <p>
+          GetLoudTix offers a user-friendly, real-time and secured booking
+          experience.
+        </p>
+      </div>
+
+      <div class="mission">
+        <h2>Mission:</h2>
+        <p>
+          The ticket reservation platform is committed to offering a smooth,
+          efficient, and secure booking experience. It prioritizes real-time
+          ticket availability, a user-friendly interface, and dependable
+          customer support to make concert reservations easy and accessible.
+        </p>
+      </div>
+
+      <div class="vision">
+        <h2>Vision:</h2>
+        <p>
+          The platform envisions becoming the leading global ticket reservation
+          service, transforming the booking experience through cutting-edge
+          technology, personalized user interactions, and hassle-free access to
+          free live music events.
+        </p>
+      </div>
+
+      <div class="startButton-container">
+        <button id="startBtn" class="startButtonhome">Get Started</button>
+      </div>
+    </div>
+    <!-- Terms and Conditions Pop-Up -->
+    <div id="termsPopup" class="popup">
+      <div class="popup-content">
+        <h2>Terms and Conditions</h2>
+        <p>
+          1. By reserving a slot, you must provide your name and email. The
+          email address will be used to send a confirmation email regarding the
+          reservation information. You are only limited to one reservation per
+          event day.
+        </p>
+        <p>
+          2. Tickets are available on a first-come, first-served basis and
+          reservations exceeding the limit will not be accepted.
+        </p>
+        <p>
+          3. You must ensure the accuracy of your provided information, and
+          check the email for confirmation and updates.
+        </p>
+        <h3>Disclaimer:</h3>
+        <p>
+          GetLoudTix is for academic purposes only and does not facilitate real
+          ticket reservations. Personal data collected (Name & Email) will only
+          be used for reservation purposes and will not be shared beyond this
+          project’s intended use.
+        </p>
+        <p>
+          In compliance with the Data Privacy Act of 2012 (RA 10173), users have
+          the right to access, modify, or request the removal of their personal
+          data.
+        </p>
+        <p>
+          Lastly, this website does not imply any affiliation, contact, or
+          endorsement from the artists featured on this website.
+        </p>
+        <p>
+          <strong
+            >By using this website, you agree to the terms and conditions
+            above.</strong
+          >
+        </p>
+        <button id="acceptBtn">Accept</button>
+        <button id="cancelBtn">Cancel</button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const startBtn = document.getElementById("startBtn");
+        const termsPopup = document.getElementById("termsPopup");
+        const acceptBtn = document.getElementById("acceptBtn");
+        const cancelBtn = document.getElementById("cancelBtn");
+
+        // Show the Terms and Conditions popup when the "Start" button is clicked
+        startBtn.addEventListener("click", function () {
+          termsPopup.style.display = "flex";
+        });
+
+        // Redirect to index.html if the "Accept" button is clicked
+        acceptBtn.addEventListener("click", function () {
+          window.location.href = "index.html"; // Redirect to the index page
+        });
+
+        // Close the popup without accepting when the "Cancel" button is clicked
+        cancelBtn.addEventListener("click", function () {
+          termsPopup.style.display = "none"; // Close the popup
+        });
+      });
+    </script>
+  </body>
 </html>
