@@ -7,7 +7,7 @@ import java.util.Arrays;
 import jakarta.persistence.*;
 
 @Entity 
-@Table(name = "getloudtix_db")
+@Table(name = "glt_user")
 public class Message {
     @Id
     private String email;
@@ -15,14 +15,14 @@ public class Message {
     private String name;
 
     @Convert(converter = StringListConverter.class)
-    private List<String> day;
+    private List<String> concerts;
 
     public Message() {}
 
-    public Message(String name, String email, List<String> day){
+    public Message(String name, String email, List<String> concerts){
         this.name = name;
         this.email = email;
-        this.day = day;
+        this.concerts = concerts;
     }
         public String getName() {
             return name;
@@ -38,11 +38,11 @@ public class Message {
             this.email =  email;
         }
 
-        public List<String> getDay(){
-            return day;
+        public List<String> getConcerts(){
+            return concerts;
         }
-        public void setDay(List<String> day){
-            this.day = day;
+        public void setConcerts(List<String> concerts){
+            this.concerts = concerts;
         }
 
     @Converter

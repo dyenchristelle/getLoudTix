@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MessageRepository extends JpaRepository<Message, String> {
-    boolean existsByNameAndEmail(String name, String email);
+    // boolean existsByNameAndEmail(String name, String email);
 
     
     // public MessageRepository() {

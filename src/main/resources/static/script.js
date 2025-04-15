@@ -19,8 +19,16 @@ document.addEventListener("DOMContentLoaded", function () {
     let emailError = document.getElementById("emailError");
     let inputError = document.getElementById("inputError");
 
+    const form = document.getElementById("rsrvForm");
+    if (!form) {
+        console.error("Form not found!");
+        return;
+    }
+    console.log("Form loaded successfully!");
+
     if (startButton) {
-        startButton.addEventListener("click", function () {
+        startButton.addEventListener("click", function (event) {
+            event.preventDefault();
             const name = document.getElementById("name").value.trim();
             const email = document.getElementById("email").value.trim();
 
@@ -35,10 +43,18 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+            const requestData = { name, email };
+            console.log("Submitting data:", requestData); 
+
+            localStorage.setItem("reservationName", name);
+            localStorage.setItem("reservationEmail", email);
+
             window.location.href = "reserve.html";
         });
     } 
 });
+// define q lang here
+let reservedConcerts = new Set();
 
 document.addEventListener("DOMContentLoaded", function () {
     // ✅ Toggle Ticket Tab
@@ -57,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // ✅ Reservation System
-    let reservedConcerts = new Set();
+    
     // let maxReservations = 10;
     let listTicketHTML = document.querySelector(".concerts-container");
     let listCartHTML = document.querySelector(".listTicket"); // 🎟️ Ticket tab!
@@ -68,6 +84,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function reserveTicket(event) {
         const button = event.target;
         const concertId = parseInt(button.dataset.concertId);
+        // inadd q to
+        const concert = listTickets.find((ticket) => ticket.id === concertId);
 
         // Check if concert is already reserved
         if (reservedConcerts.has(concertId)) {
@@ -75,14 +93,20 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        
+
         // Check reservation limit
         // if (reservedConcerts.size >= maxReservations) {
         //     alert("You can only reserve a maximum of 6 concerts.");
         //     return;
         // }
 
-        // Add concert to reserved list
-        reservedConcerts.add(concertId);
+        // Add concert to reserved list eto pinaltan q
+        reservedConcerts.add({
+            id: concert.id,
+            name: concert.name,
+            date: concert.date
+        });
 
         // Update cart badge
         updateCartBadge();
@@ -188,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ✅ Initialize App (Fetch Data from JSON)
     const initApp = () => {
-        fetch("tickets.json")
+        fetch("http://localhost:9090/tickets.json")
             .then((response) => response.json())
             .then((data) => {
                 listTickets = data;
@@ -199,6 +223,77 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ✅ Start App
     initApp();
+});
+
+function getFormData() {
+    const name = localStorage.getItem("name") || "";
+    const email =  localStorage.getItem("email") || "";
+    console.log("Retrieved name:", name); 
+    console.log("Retrieved email:", email);
+    
+    const selectedConcerts = Array.from(reservedConcerts).map(concert => concert.name);
+
+    return { name, email, concerts: selectedConcerts };
+}
+
+function saveFormData(formData) {
+        localStorage.setItem("reservationData", JSON.stringify(formData));
+        console.log("Data saved:", formData);
+    }
+
+function submitReservation(formData) {
+    console.log("Sending data:", formData); 
+
+    fetch("http://localhost:9090/api/submitChoice", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Response from backend:", data);
+        if (data.success) {
+            alert("Reservation successful!");
+            localStorage.removeItem("name");
+            localStorage.removeItem("email");
+            window.location.href = "index.html";
+        } else {
+            alert("Reservation failed. " + data.message);
+        }
+    })
+    .catch(error => {
+        console.error("Error submitting reservation: ", error);
+        alert("An error occurred. Please try again. " + error.message);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const checkout = document.querySelector(".checkout");
+    let listCartHTML = document.querySelector(".listTicket");
+    let reservedConcerts = new Set();
+    let listTickets = [];
+    
+    if (checkout) {
+        checkout.addEventListener("click", function(event) {
+            event.preventDefault();
+
+            const storedName = localStorage.getItem("reservationName");
+            const storedEmail = localStorage.getItem("reservationEmail");
+
+            const formData = getFormData();
+            if (formData.concerts.length === 0) {
+                alert("No reservation to checkout.");
+                return;
+            }
+
+            const userConfirmed = confirm(`Are you sure you want to reserve tickets for ${formData.concerts.join(", ")}?`)
+            if (!userConfirmed) {
+                return;
+            }
+            saveFormData(formData);
+            submitReservation(formData);
+        });
+    }
 });
 
 
