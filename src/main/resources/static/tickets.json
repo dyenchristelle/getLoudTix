@@ -1,14 +1,14 @@
 [
     {
         "id" : 1,
-        "name" : "Adie",
+        "name" : "Syd Hartha",
         "image": "posters/taylor.jpg",
         "date" : "June 10, 2025",
         "concert" : "The Eras Tour"
     },
     {
         "id": 2,
-        "name" : "Arthur Nery",
+        "name" : "Hev Abi",
         "image": "posters/dhruvc.jpg",
         "date" : "June 11, 2025",
         "concert" : "The Eras Tour"
@@ -29,35 +29,35 @@
     },
     {
         "id": 5,
-        "name": "Amiel Sol",
+        "name": "Al James",
         "image": "posters/bea.jpg",
         "date" : "June 14, 2025",
         "concert" : "The Eras Tour"
     },
     {
         "id": 6,
-        "name": "Toneejay",
+        "name": "Kiyo",
         "image": "posters/clairo.jpg",
         "date" : "June 17, 2025",
         "concert" : "The Eras Tour"
     },
     {
         "id": 7,
-        "name": "Juan Karlos",
+        "name": "The Ridleys",
         "image": "posters/clairo.jpg",
         "date" : "June 18, 2025",
         "concert" : "The Eras Tour"
     },
     {
         "id": 8,
-        "name": "Rob Daniel",
+        "name": "Hey June",
         "image": "posters/clairo.jpg",
         "date" : "June 19, 2025",
         "concert" : "The Eras Tour"
     },
     {
         "id": 9,
-        "name": "Arthur Miguel",
+        "name": "Over October",
         "image": "posters/clairo.jpg",
         "date" : "June 20, 2025",
         "concert" : "The Eras Tour"

@@ -13,6 +13,14 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     });
+// view 
+    document.addEventListener("DOMContentLoaded", function () {
+        // Select the button with ID 'doneBtn'
+        document.getElementById("doneBtn").addEventListener("click", function () {
+            // Redirect to index.html when the button is clicked
+            window.location.href = "index.html";
+        });
+    });
 
 document.addEventListener("DOMContentLoaded", function () {
     const startButton = document.getElementById("startButton");
