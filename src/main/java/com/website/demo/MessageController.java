@@ -22,16 +22,23 @@ import java.util.List;
 public class MessageController {
     private final MessageService messageService;
     private final MessageRepository messageRepository;
+    private final EmailService emailService;
 
     @Autowired
-    public MessageController(MessageService messageService, MessageRepository messageRepository){
+    public MessageController(MessageService messageService, MessageRepository messageRepository, EmailService emailService){
         this.messageService = messageService;
         this.messageRepository = messageRepository;
+        this.emailService = emailService;
     }
     @PostMapping("/submitChoice")
     public ResponseEntity<Map<String, Object>> submitChoice(@RequestBody Message request) {
         try {
             messageService.saveMessage(request);
+            String email = request.getEmail();
+            emailService.sendConfirmationEmail(email);
+            System.out.println("Received name: " + request.getName());
+            System.out.println("Received email: " + request.getEmail());
+            System.out.println("Received day: " + request.getConcerts());
             return ResponseEntity.ok(Map.of("success", true, "message", "Reservation successful!"));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(Map.of("success", false, "message", e.getMessage()));

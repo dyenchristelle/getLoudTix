@@ -234,10 +234,10 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function getFormData() {
-    const name = localStorage.getItem("name") || "";
-    const email =  localStorage.getItem("email") || "";
-    console.log("Retrieved name:", name); 
-    console.log("Retrieved email:", email);
+    const name = localStorage.setItem("name");
+    const email =  localStorage.setItem("email");
+    console.log("Stored name:", name); 
+    console.log("Stored email:", email);
     
     const selectedConcerts = Array.from(reservedConcerts).map(concert => concert.name);
 
