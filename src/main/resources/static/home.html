@@ -96,29 +96,6 @@
         <button id="cancelBtn">Cancel</button>
       </div>
     </div>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const startBtn = document.getElementById("startBtn");
-        const termsPopup = document.getElementById("termsPopup");
-        const acceptBtn = document.getElementById("acceptBtn");
-        const cancelBtn = document.getElementById("cancelBtn");
-
-        // Show the Terms and Conditions popup when the "Start" button is clicked
-        startBtn.addEventListener("click", function () {
-          termsPopup.style.display = "flex";
-        });
-
-        // Redirect to index.html if the "Accept" button is clicked
-        acceptBtn.addEventListener("click", function () {
-          window.location.href = "index.html"; // Redirect to the index page
-        });
-
-        // Close the popup without accepting when the "Cancel" button is clicked
-        cancelBtn.addEventListener("click", function () {
-          termsPopup.style.display = "none"; // Close the popup
-        });
-      });
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
