@@ -1,3 +1,5 @@
+
+
 //home
 document.addEventListener("DOMContentLoaded", function () {
   const startBtn = document.getElementById("startBtn");
@@ -45,9 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// define q lang here
-let reservedConcerts = new Set();
-
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("startButton");
   let emailError = document.getElementById("emailError");
@@ -82,11 +81,16 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+const reservedConcerts = new Set();
+
 document.addEventListener("DOMContentLoaded", function () {
   // ✅ Toggle Ticket Tab
   let ticketIconElement = document.querySelector(".ticket-icon");
   let bodyElement = document.querySelector("body");
   let closeTicket = document.querySelector(".close");
+  console.log("DOM Content Loaded");
+  console.log("JavaScript file is loaded!");
+
 
   if (ticketIconElement && closeTicket) {
     closeTicket.addEventListener("click", () => {
@@ -98,8 +102,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+     // ✅ Update Cart Badge
+     function updateCartBadge() {
+        iconTicketSpan.innerText = reservedConcerts.size;
+        if (reservedConcerts.size > 0) {
+          iconTicketSpan.classList.add("visible");
+        } else {
+          iconTicketSpan.classList.remove("visible");
+        }
+      }
+
   // ✅ Reservation System
-//   let reservedConcerts = new Set();
   // let maxReservations = 10;
   let listTicketHTML = document.querySelector(".concerts-container");
   let listCartHTML = document.querySelector(".listTicket");
@@ -110,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function reserveTicket(event) {
     const button = event.target;
     const concertId = parseInt(button.dataset.concertId);
+    const concert = listTickets.find((ticket) => ticket.id === concertId);
 
     // Check if concert is already reserved
     if (reservedConcerts.has(concertId)) {
@@ -119,37 +133,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Add concert to reserved list
     reservedConcerts.add(concertId);
-    // ✅ Reservation System
-
-    // let maxReservations = 10;
-    let listTicketHTML = document.querySelector(".concerts-container");
-    let listCartHTML = document.querySelector(".listTicket"); // 🎟️ Ticket tab!
-    let iconTicketSpan = document.querySelector(".ticket-icon span");
-    let listTickets = [];
-
-    // ✅ Reserve Ticket Function
-    function reserveTicket(event) {
-      const button = event.target;
-      const concertId = parseInt(button.dataset.concertId);
-      // inadd q to
-      const concert = listTickets.find((ticket) => ticket.id === concertId);
-
-      // Update cart badge
-      updateCartBadge();
-
-      // Add to ticket tab
-      addToTicketTab(concertId);
-
-      // Mark button as reserved
-      button.classList.add("reserved");
-      button.innerText = "Reserved";
-    }
-
-    // Check reservation limit
-    // if (reservedConcerts.size >= maxReservations) {
-    //     alert("You can only reserve a maximum of 6 concerts.");
-    //     return;
-    // }
 
     // Add concert to reserved list eto pinaltan q
     reservedConcerts.add({
@@ -157,6 +140,18 @@ document.addEventListener("DOMContentLoaded", function () {
       name: concert.name,
       date: concert.date,
     });
+
+    //line 126
+          // Update cart badge
+          updateCartBadge();
+
+          // Add to ticket tab
+          addToTicketTab(concertId);
+    
+          // Mark button as reserved
+          button.classList.add("reserved");
+          button.innerText = "Reserved";
+}
 
     // ✅ Add to Ticket Tab
     function addToTicketTab(concertId) {
@@ -218,15 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // ✅ Update Cart Badge
-    function updateCartBadge() {
-      iconTicketSpan.innerText = reservedConcerts.size;
-      if (reservedConcerts.size > 0) {
-        iconTicketSpan.classList.add("visible");
-      } else {
-        iconTicketSpan.classList.remove("visible");
-      }
-    }
+ 
 
     // ✅ Add Concerts to HTML from JSON
     const addDataToHTML = () => {
@@ -255,9 +242,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // ✅ Initialize App (Fetch Data from JSON)
     const initApp = () => {
+        console.log("Initializing app...");
       fetch("http://localhost:9090/tickets.json")
-        .then((response) => response.json())
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+            console.log("Response Status:", response.status); // Log response status
+            return response.json();
+        })
         .then((data) => {
+            console.log("Fetched Data:", data);
           listTickets = data;
           addDataToHTML();
         })
@@ -265,8 +260,12 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // ✅ Start App
-    initApp();
-  }
+    try {
+        initApp();  
+     } catch (error) {
+        console.error("Error in initApp:", error);
+     }
+  
 });
 
 function getFormData() {
