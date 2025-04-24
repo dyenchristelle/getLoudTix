@@ -19,9 +19,9 @@ public class MessageService {
 
     @Transactional
     public void saveMessage(Message request) {
-        // if (messageRepository.existsByNameAndEmail(request.getName(), request.getEmail())){
-        //     throw new IllegalArgumentException("You're already reserved. Do you want to view your reservation?");
-        // }
+        if (messageRepository.existsByNameAndEmail(request.getName(), request.getEmail())){
+            throw new IllegalArgumentException("You're already reserved.");
+        }
         if ( request.getConcerts().isEmpty()) {
             throw new IllegalArgumentException("Please select at least one day.");
         }

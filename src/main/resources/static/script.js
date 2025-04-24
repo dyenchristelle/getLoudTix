@@ -8,19 +8,22 @@ document.addEventListener("DOMContentLoaded", function () {
   const cancelBtn = document.getElementById("cancelBtn");
 
   // Show the Terms and Conditions popup when the "Start" button is clicked
-  startBtn.addEventListener("click", function () {
+  if (startBtn) {
+    startBtn.addEventListener("click", function () {
     termsPopup.style.display = "flex";
   });
+  
 
   // Redirect to index.html if the "Accept" button is clicked
-  acceptBtn.addEventListener("click", function () {
-    window.location.href = "index.html"; // Redirect to the index page
+    acceptBtn.addEventListener("click", function () {
+    window.location.href = "homee.html"; // Redirect to the index page
   });
 
   // Close the popup without accepting when the "Cancel" button is clicked
-  cancelBtn.addEventListener("click", function () {
+    cancelBtn.addEventListener("click", function () {
     termsPopup.style.display = "none"; // Close the popup
   });
+  }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -75,6 +78,12 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("Invalid email!");
         return;
       }
+
+      localStorage.setItem("name", name);
+      localStorage.setItem("email", email);
+
+      console.log("Stored name:", name);
+      console.log("Stored email:", email)
 
       window.location.href = "reserve.html";
     });
@@ -268,11 +277,20 @@ document.addEventListener("DOMContentLoaded", function () {
   
 });
 
-function getFormData() {
-    const name = localStorage.setItem("name");
-    const email =  localStorage.setItem("email");
-    console.log("Stored name:", name); 
-    console.log("Stored email:", email);
+
+document.addEventListener("DOMContentLoaded", function () {
+function setFormData() {
+    const name = localStorage.getItem("name");
+    const email =  localStorage.getItem("email");
+
+    if (!name || !email) {
+      console.error("Name or Email input not found!");
+      // window.location.href = "index.html";
+      return null;
+    }
+
+    console.log("retrieved name:", name); 
+    console.log("retrieved email:", email);
     
     const selectedConcerts = Array.from(reservedConcerts).map(concert => concert.name);
 
@@ -310,7 +328,6 @@ function submitReservation(formData) {
     });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
   const checkout = document.querySelector(".checkout");
   let listCartHTML = document.querySelector(".listTicket");
   let listTickets = [];
@@ -322,17 +339,14 @@ document.addEventListener("DOMContentLoaded", function () {
       const storedName = localStorage.getItem("reservationName");
       const storedEmail = localStorage.getItem("reservationEmail");
 
-      const formData = getFormData();
+      const formData = setFormData();
       if (formData.concerts.length === 0) {
         alert("No reservation to checkout.");
         return;
       }
 
       const userConfirmed = confirm(
-        `Are you sure you want to reserve tickets for ${formData.concerts.join(
-          ", "
-        )}?`
-      );
+        `Hi ${formData.name}, \nare you sure you want to reserve tickets for ${formData.concerts.join(", ")}? \nAn email will be sent to ${formData.email}`);
       if (!userConfirmed) {
         return;
       }
