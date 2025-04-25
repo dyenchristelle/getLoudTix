@@ -2,10 +2,13 @@ package com.website.demo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import java.util.Optional;
 
 @Repository
 public interface MessageRepository extends JpaRepository<Message, String> {
-    boolean existsByNameAndEmail(String name, String email);
+    boolean existsByEmail(String email);
+    
+    Message findByEmailAndName(String email);
 
     
     // public MessageRepository() {

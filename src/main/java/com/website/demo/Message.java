@@ -14,7 +14,9 @@ public class Message {
 
     private String name;
 
-    @Convert(converter = StringListConverter.class)
+    // @Convert(converter = StringListConverter.class)
+    // @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "concerts")
     private List<String> concerts;
 
     public Message() {}
@@ -49,7 +51,7 @@ public class Message {
     public static class StringListConverter implements AttributeConverter<List<String>, String> {
         @Override
         public String convertToDatabaseColumn(List<String> list) {
-            return list != null ? String.join(",", list) : "";
+            return list != null ? String.join(", ", list) : "";
         }
 
         @Override
