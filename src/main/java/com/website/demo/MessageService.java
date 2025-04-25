@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MessageService {
@@ -19,10 +20,10 @@ public class MessageService {
 
     @Transactional
     public void saveMessage(Message request) {
-        // if (messageRepository.existsByNameAndEmail(request.getName(), request.getEmail())){
-        //     throw new IllegalArgumentException("You're already reserved. Do you want to view your reservation?");
-        // }
-        if ( request.getConcerts().isEmpty()) {
+        if (messageRepository.existsByEmail(request.getEmail())){
+            throw new IllegalArgumentException("You're already reserved.");
+        }
+        if (request.getConcerts().isEmpty()) {
             throw new IllegalArgumentException("Please select at least one day.");
         }
         try {
@@ -31,6 +32,22 @@ public class MessageService {
             System.out.println("Save successful!");
         } catch (Exception e) {
             System.err.println("Error saving message: " + e.getMessage());
+        }
+    }
+
+    @Transactional
+    public boolean deleteMessageByEmail(String email) {
+        try {
+            Message message = messageRepository.findByEmailAndName(email);
+            if (message != null) {
+                messageRepository.delete(message);
+                return true; // Successfully deleted
+            } else {
+                return false; // Reservation not found
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }
