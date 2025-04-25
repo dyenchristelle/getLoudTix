@@ -1,5 +1,3 @@
-
-
 //home
 document.addEventListener("DOMContentLoaded", function () {
   const startBtn = document.getElementById("startBtn");
@@ -91,7 +89,6 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("DOM Content Loaded");
   console.log("JavaScript file is loaded!");
 
-
   if (ticketIconElement && closeTicket) {
     closeTicket.addEventListener("click", () => {
       bodyElement.classList.toggle("showTicket");
@@ -102,15 +99,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-     // ✅ Update Cart Badge
-     function updateCartBadge() {
-        iconTicketSpan.innerText = reservedConcerts.size;
-        if (reservedConcerts.size > 0) {
-          iconTicketSpan.classList.add("visible");
-        } else {
-          iconTicketSpan.classList.remove("visible");
-        }
-      }
+  // ✅ Update Cart Badge
+  function updateCartBadge() {
+    iconTicketSpan.innerText = reservedConcerts.size;
+    if (reservedConcerts.size > 0) {
+      iconTicketSpan.classList.add("visible");
+    } else {
+      iconTicketSpan.classList.remove("visible");
+    }
+  }
 
   // ✅ Reservation System
   // let maxReservations = 10;
@@ -142,26 +139,26 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     //line 126
-          // Update cart badge
-          updateCartBadge();
+    // Update cart badge
+    updateCartBadge();
 
-          // Add to ticket tab
-          addToTicketTab(concertId);
-    
-          // Mark button as reserved
-          button.classList.add("reserved");
-          button.innerText = "Reserved";
-}
+    // Add to ticket tab
+    addToTicketTab(concertId);
 
-    // ✅ Add to Ticket Tab
-    function addToTicketTab(concertId) {
-      const concert = listTickets.find((ticket) => ticket.id === concertId);
+    // Mark button as reserved
+    button.classList.add("reserved");
+    button.innerText = "Reserved";
+  }
 
-      if (concert) {
-        let ticketItem = document.createElement("div");
-        ticketItem.classList.add("item");
-        ticketItem.dataset.id = concert.id;
-        ticketItem.innerHTML = `
+  // ✅ Add to Ticket Tab
+  function addToTicketTab(concertId) {
+    const concert = listTickets.find((ticket) => ticket.id === concertId);
+
+    if (concert) {
+      let ticketItem = document.createElement("div");
+      ticketItem.classList.add("item");
+      ticketItem.dataset.id = concert.id;
+      ticketItem.innerHTML = `
                 <div class="image">
                     <img src="${concert.image}" alt="Ticket">
                 </div>
@@ -170,111 +167,110 @@ document.addEventListener("DOMContentLoaded", function () {
                     <button class="removeTicket" data-concert-id="${concert.id}">Remove</button>
                 </div>`;
 
-        // 🎟️ Add ticket to the ticket tab
-        listCartHTML.appendChild(ticketItem);
+      // 🎟️ Add ticket to the ticket tab
+      listCartHTML.appendChild(ticketItem);
 
-        // ✅ Add event listener to remove button
-        ticketItem
-          .querySelector(".removeTicket")
-          .addEventListener("click", removeFromTicketTab);
+      // ✅ Add event listener to remove button
+      ticketItem
+        .querySelector(".removeTicket")
+        .addEventListener("click", removeFromTicketTab);
 
-        // ✅ Show ticket tab content when at least one ticket is selected
-        listCartHTML.classList.add("has-tickets");
-      }
+      // ✅ Show ticket tab content when at least one ticket is selected
+      listCartHTML.classList.add("has-tickets");
+    }
+  }
+
+  // ✅ Remove from Ticket Tab
+  function removeFromTicketTab(event) {
+    const button = event.target;
+    const concertId = parseInt(button.dataset.concertId);
+
+    reservedConcerts.delete(concertId);
+
+    // Remove from ticket tab
+    const ticketItem = button.closest(".item");
+    ticketItem.remove();
+
+    // Unmark button as reserved
+    let reserveButton = document.querySelector(
+      `.reserve-btn[data-concert-id="${concertId}"]`
+    );
+    if (reserveButton) {
+      reserveButton.classList.remove("reserved");
+      reserveButton.innerText = "Reserve";
     }
 
-    // ✅ Remove from Ticket Tab
-    function removeFromTicketTab(event) {
-      const button = event.target;
-      const concertId = parseInt(button.dataset.concertId);
+    // Update cart badge
+    updateCartBadge();
 
-      reservedConcerts.delete(concertId);
-
-      // Remove from ticket tab
-      const ticketItem = button.closest(".item");
-      ticketItem.remove();
-
-      // Unmark button as reserved
-      let reserveButton = document.querySelector(
-        `.reserve-btn[data-concert-id="${concertId}"]`
-      );
-      if (reserveButton) {
-        reserveButton.classList.remove("reserved");
-        reserveButton.innerText = "Reserve";
-      }
-
-      // Update cart badge
-      updateCartBadge();
-
-      // ✅ Hide ticket tab content if no tickets are selected
-      if (reservedConcerts.size === 0) {
-        listCartHTML.innerHTML = ""; // Clear the ticket tab content
-        listCartHTML.classList.remove("has-tickets");
-      }
+    // ✅ Hide ticket tab content if no tickets are selected
+    if (reservedConcerts.size === 0) {
+      listCartHTML.innerHTML = ""; // Clear the ticket tab content
+      listCartHTML.classList.remove("has-tickets");
     }
+  }
 
- 
-
-    // ✅ Add Concerts to HTML from JSON
-    const addDataToHTML = () => {
-      listTicketHTML.innerHTML = "";
-      if (listTickets.length > 0) {
-        listTickets.forEach((ticket) => {
-          let newTicket = document.createElement("div");
-          newTicket.classList.add("concert-card");
-          newTicket.dataset.id = ticket.id;
-          newTicket.innerHTML = `
+  // ✅ Add Concerts to HTML from JSON
+  const addDataToHTML = () => {
+    listTicketHTML.innerHTML = "";
+    if (listTickets.length > 0) {
+      listTickets.forEach((ticket) => {
+        let newTicket = document.createElement("div");
+        newTicket.classList.add("concert-card");
+        newTicket.dataset.id = ticket.id;
+        newTicket.innerHTML = `
                     <img src="${ticket.image}" alt="${ticket.name}" />
                     <div class="concert-info">
                         <h2>${ticket.name}<br>${ticket.concert}</h2>
                         <p>${ticket.date}</p>
                         <button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>
                     </div>`;
-          listTicketHTML.appendChild(newTicket);
-        });
+        listTicketHTML.appendChild(newTicket);
+      });
 
-        // ✅ Attach event listeners after adding elements to DOM
-        document.querySelectorAll(".reserve-btn").forEach((button) => {
-          button.addEventListener("click", reserveTicket);
-        });
-      }
-    };
+      // ✅ Attach event listeners after adding elements to DOM
+      document.querySelectorAll(".reserve-btn").forEach((button) => {
+        button.addEventListener("click", reserveTicket);
+      });
+    }
+  };
 
-    // ✅ Initialize App (Fetch Data from JSON)
-    const initApp = () => {
-        console.log("Initializing app...");
-      fetch("http://localhost:9090/tickets.json")
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-              }
-            console.log("Response Status:", response.status); // Log response status
-            return response.json();
-        })
-        .then((data) => {
-            console.log("Fetched Data:", data);
-          listTickets = data;
-          addDataToHTML();
-        })
-        .catch((error) => console.error("Error fetching data:", error));
-    };
+  // ✅ Initialize App (Fetch Data from JSON)
+  const initApp = () => {
+    console.log("Initializing app...");
+    fetch("http://localhost:9090/tickets.json")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        console.log("Response Status:", response.status); // Log response status
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Fetched Data:", data);
+        listTickets = data;
+        addDataToHTML();
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  };
 
-    // ✅ Start App
-    try {
-        initApp();  
-     } catch (error) {
-        console.error("Error in initApp:", error);
-     }
-  
+  // ✅ Start App
+  try {
+    initApp();
+  } catch (error) {
+    console.error("Error in initApp:", error);
+  }
 });
 
 function getFormData() {
-    const name = localStorage.setItem("name");
-    const email =  localStorage.setItem("email");
-    console.log("Stored name:", name); 
-    console.log("Stored email:", email);
-    
-    const selectedConcerts = Array.from(reservedConcerts).map(concert => concert.name);
+  const name = localStorage.setItem("name");
+  const email = localStorage.setItem("email");
+  console.log("Stored name:", name);
+  console.log("Stored email:", email);
+
+  const selectedConcerts = Array.from(reservedConcerts).map(
+    (concert) => concert.name
+  );
 
   return { name, email, concerts: selectedConcerts };
 }

@@ -200,13 +200,13 @@ nav a:hover {
   overflow: hidden;
 }
 
-.slots {
+/* .slots {
   position: absolute;
   bottom: 10px;
   right: 10px;
   margin: 0;
   font-size: 16px;
-}
+} */
 
 /* Ticket border shape */
 .concert-card::before,
