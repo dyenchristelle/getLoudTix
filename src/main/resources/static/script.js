@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (data.exists) {
           const userConfirmed = confirm(
-            `Hi ${formData.name}, \n\nAre you sure you want to delete your reservation? A confirmation email will be sent to you.`);
+            `Hi, are you sure you want to delete your reservation? A confirmation email will be sent to you.`);
           if (!userConfirmed) return;
 
           const deleteResponse = await fetch(`http://localhost:9090/api/deleteReservation?email=${encodeURIComponent(email)}`, {
