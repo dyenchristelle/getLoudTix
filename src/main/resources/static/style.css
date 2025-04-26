@@ -21,7 +21,11 @@ header {
   top: 0;
   position: sticky;
 }
-
+.concert-date {
+  color:white;      
+  font-size: small;
+  margin-top: 5px;
+}
 /* .container{
     width: 0 auto;
 
@@ -129,19 +133,21 @@ nav a:hover {
   font-weight: 300;
 }
 
-.ticketTab .btn {
+
+.ticketTab .coBtn {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  min-height: 100%;
 }
 
-.ticketTab .btn button {
+.ticketTab .coBtn button {
   background-color: #63368d;
   border: none;
   font-family: Poppins;
   font-weight: 500;
   cursor: pointer;
 }
-.ticketTab .btn .close {
+.ticketTab .coBtn .close {
   background-color: white;
   color: #63368d;
 }
@@ -200,13 +206,12 @@ nav a:hover {
   overflow: hidden;
 }
 
-/* .slots {
+.slot{
   position: absolute;
   bottom: 10px;
-  right: 10px;
   margin: 0;
   font-size: 16px;
-} */
+} 
 
 /* Ticket border shape */
 .concert-card::before,
@@ -304,9 +309,9 @@ p {
   background-color: #2b1a4b;
 }
 
-/* index */
+/* home */
 
-.index {
+.home {
   font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
@@ -343,7 +348,7 @@ p {
   margin-bottom: 15vh;
 }
 
-.indexbtn {
+.homebtn {
   display: flex;
   gap: 20px;
   justify-content: center;
@@ -393,40 +398,10 @@ p {
   color: #b39ddb;
 }
 
-/* Button styles */
-.changeButton,
-.doneButton {
-  background-color: #7c3aed;
-  border: none;
-  padding: 12px 24px;
-  color: white;
-  font-size: 16px;
-  border-radius: 20px;
-  cursor: pointer;
-  margin: 10px 5px;
-}
-
 /* Button hover effects */
 .startButton:hover,
 .viewButton:hover {
   background-color: #9d4edd;
-}
-
-/*view*/
-.reservationDetails {
-  text-align: left; /* Align content to the left */
-  padding: 10px;
-  margin: 20px;
-  width: fit-content;
-  /* border: 1px solid #ccc; */
-  border-radius: 5px;
-  /* background-color: #f9f9f9; */
-}
-
-.reservationDetails p {
-  margin: 5px 0;
-  font-size: 16px;
-  color: #e0b3ff;
 }
 
 /* FAQs */
@@ -488,8 +463,8 @@ p {
   background-color: #2b1a4b;
 }
 
-/* Home */
-.homee {
+/* index */
+.indexDetails {
   margin-right: 90px;
   margin-left: 90px;
 }

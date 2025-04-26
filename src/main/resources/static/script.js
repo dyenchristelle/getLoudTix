@@ -8,16 +8,16 @@ document.addEventListener("DOMContentLoaded", function () {
   // Show the Terms and Conditions popup when the "Start" button is clicked
   if (startBtn) {
     startBtn.addEventListener("click", function () {
-    termsPopup.style.display = "flex";
-  });
-  // Redirect to index.html if the "Accept" button is clicked
+      termsPopup.style.display = "flex";
+    });
+    // Redirect to index.html if the "Accept" button is clicked
     acceptBtn.addEventListener("click", function () {
-    window.location.href = "homee.html"; // Redirect to the index page
-  });
-  // Close the popup without accepting when the "Cancel" button is clicked
+      window.location.href = "homee.html"; // Redirect to the index page
+    });
+    // Close the popup without accepting when the "Cancel" button is clicked
     cancelBtn.addEventListener("click", function () {
-    termsPopup.style.display = "none"; // Close the popup
-  });
+      termsPopup.style.display = "none"; // Close the popup
+    });
   }
 });
 
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // start reservation button
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("startButton");
-  
+
   const form = document.getElementById("rsrvForm");
   if (!form) {
     console.error("Form not found!");
@@ -66,16 +66,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // retrieve, check if email already exists
       try {
-        const response = await fetch(`http://localhost:9090/api/checkReservation?email=${encodeURIComponent(email)}`);
+        const response = await fetch(
+          `http://localhost:9090/api/checkReservation?email=${encodeURIComponent(
+            email
+          )}`
+        );
         const data = await response.json();
 
         if (data.exists) {
           alert("You're already reserved!");
-          return; 
+          return;
         }
       } catch (error) {
         console.error("Error checking reservation:", error);
-        alert("Something went wrong while checking your reservation. Please try again.");
+        alert(
+          "Something went wrong while checking your reservation. Please try again."
+        );
         return;
       }
 
@@ -83,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
       localStorage.setItem("email", email);
 
       console.log("Stored name:", name);
-      console.log("Stored email:", email)
+      console.log("Stored email:", email);
 
       window.location.href = "reserve.html";
     });
@@ -95,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const deleteBtn = document.getElementById("viewButton");
 
   if (deleteBtn) {
-    deleteBtn.addEventListener("click", async function(event) {
+    deleteBtn.addEventListener("click", async function (event) {
       event.preventDefault();
       const name = document.getElementById("name").value.trim();
       const email = document.getElementById("email").value.trim();
@@ -106,17 +112,27 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       try {
-        const response = await fetch(`http://localhost:9090/api/checkReservation?email=${encodeURIComponent(email)}`);
+        const response = await fetch(
+          `http://localhost:9090/api/checkReservation?email=${encodeURIComponent(
+            email
+          )}`
+        );
         const data = await response.json();
 
         if (data.exists) {
           const userConfirmed = confirm(
-            `Hi, are you sure you want to delete your reservation? A confirmation email will be sent to you.`);
+            `Hi, are you sure you want to delete your reservation? A confirmation email will be sent to you.`
+          );
           if (!userConfirmed) return;
 
-          const deleteResponse = await fetch(`http://localhost:9090/api/deleteReservation?email=${encodeURIComponent(email)}`, {
-            method: "DELETE"
-          });
+          const deleteResponse = await fetch(
+            `http://localhost:9090/api/deleteReservation?email=${encodeURIComponent(
+              email
+            )}`,
+            {
+              method: "DELETE",
+            }
+          );
 
           const result = await deleteResponse.json();
           if (result.success) {
@@ -124,11 +140,13 @@ document.addEventListener("DOMContentLoaded", function () {
             window.location.href = "homee.html";
           }
         } else {
-          alert("You haven't reserve any ticket yet!")
+          alert("You haven't reserve any ticket yet!");
         }
       } catch (error) {
         console.error("Error checking reservation:", error);
-        alert("Something went wrong while checking your reservation. Please try again.");
+        alert(
+          "Something went wrong while checking your reservation. Please try again."
+        );
         return;
       }
     });
@@ -152,15 +170,15 @@ document.addEventListener("DOMContentLoaded", function () {
       bodyElement.classList.toggle("showTicket");
     });
   }
-     // ✅ Update Cart Badge
-     function updateCartBadge() {
-        iconTicketSpan.innerText = reservedConcerts.size;
-        if (reservedConcerts.size > 0) {
-          iconTicketSpan.classList.add("visible");
-        } else {
-          iconTicketSpan.classList.remove("visible");
-        }
-      }
+  // ✅ Update Cart Badge
+  function updateCartBadge() {
+    iconTicketSpan.innerText = reservedConcerts.size;
+    if (reservedConcerts.size > 0) {
+      iconTicketSpan.classList.add("visible");
+    } else {
+      iconTicketSpan.classList.remove("visible");
+    }
+  }
 
   // ✅ Reservation System
   // let maxReservations = 10;
@@ -186,19 +204,19 @@ document.addEventListener("DOMContentLoaded", function () {
     reservedConcerts.add({
       id: concert.id,
       name: concert.name,
-      date: concert.date
+      date: concert.date,
     });
-          // Update cart badge
-          updateCartBadge();
-          // Add to ticket tab
-          addToTicketTab(concertId);
-          // Mark button as reserved
-          button.classList.add("reserved");
-          button.innerText = "Reserved";
-}
-    // ✅ Add to Ticket Tab
-    function addToTicketTab(concertId) {
-      const concert = listTickets.find((ticket) => ticket.id === concertId);
+    // Update cart badge
+    updateCartBadge();
+    // Add to ticket tab
+    addToTicketTab(concertId);
+    // Mark button as reserved
+    button.classList.add("reserved");
+    button.innerText = "Reserved";
+  }
+  // ✅ Add to Ticket Tab
+  function addToTicketTab(concertId) {
+    const concert = listTickets.find((ticket) => ticket.id === concertId);
 
     if (concert) {
       let ticketItem = document.createElement("div");
@@ -212,61 +230,81 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="removebtn">
                     <button class="removeTicket" data-concert-id="${concert.id}">Remove</button>
                 </div>`;
-        // 🎟️ Add ticket to the ticket tab
-        listCartHTML.appendChild(ticketItem);
-        // ✅ Add event listener to remove button
-        ticketItem
-          .querySelector(".removeTicket")
-          .addEventListener("click", removeFromTicketTab);
-        // ✅ Show ticket tab content when at least one ticket is selected
-        listCartHTML.classList.add("has-tickets");
-      }
+      // 🎟️ Add ticket to the ticket tab
+      listCartHTML.appendChild(ticketItem);
+      // ✅ Add event listener to remove button
+      ticketItem
+        .querySelector(".removeTicket")
+        .addEventListener("click", removeFromTicketTab);
+      // ✅ Show ticket tab content when at least one ticket is selected
+      listCartHTML.classList.add("has-tickets");
     }
-    // ✅ Remove from Ticket Tab
-    function removeFromTicketTab(event) {
-      const button = event.target;
-      const concertId = parseInt(button.dataset.concertId);
-      const concertToRemove = Array.from(reservedConcerts).find((concert) => concert.id === concertId);
+  }
+  // ✅ Remove from Ticket Tab
+  function removeFromTicketTab(event) {
+    const button = event.target;
+    const concertId = parseInt(button.dataset.concertId);
+    const concertToRemove = Array.from(reservedConcerts).find(
+      (concert) => concert.id === concertId
+    );
 
-      if (concertToRemove) {
-        reservedConcerts.delete(concertToRemove);
-      }
-
-      // Remove from ticket tab
-      const ticketItem = button.closest(".item");
-      ticketItem.remove();
-
-      // Unmark button as reserved
-      let reserveButton = document.querySelector(
-        `.reserve-btn[data-concert-id="${concertId}"]`
-      );
-      if (reserveButton) {
-        reserveButton.classList.remove("reserved");
-        reserveButton.innerText = "Reserve";
-      }
-      // Update cart badge
-      updateCartBadge();
-      // ✅ Hide ticket tab content if no tickets are selected
-      if (reservedConcerts.size === 0) {
-        listCartHTML.innerHTML = ""; // Clear the ticket tab content
-        listCartHTML.classList.remove("has-tickets");
-      }
+    if (concertToRemove) {
+      reservedConcerts.delete(concertToRemove);
     }
-    // ✅ Add Concerts to HTML from JSON
-    const addDataToHTML = () => {
-      listTicketHTML.innerHTML = "";
-      if (listTickets.length > 0) {
-        listTickets.forEach((ticket) => {
-          let newTicket = document.createElement("div");
-          newTicket.classList.add("concert-card");
-          newTicket.dataset.id = ticket.id;
-          newTicket.innerHTML = `
-                    <img src="${ticket.image}" alt="${ticket.name}" />
-                    <div class="concert-info">
-                        <h2>${ticket.name}<br>${ticket.concert}</h2>
-                        <p>${ticket.date}</p>
-                        <button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>
-                    </div>`;
+
+    // Remove from ticket tab
+    const ticketItem = button.closest(".item");
+    ticketItem.remove();
+
+    // Unmark button as reserved
+    let reserveButton = document.querySelector(
+      `.reserve-btn[data-concert-id="${concertId}"]`
+    );
+    if (reserveButton) {
+      reserveButton.classList.remove("reserved");
+      reserveButton.innerText = "Reserve";
+    }
+    // Update cart badge
+    updateCartBadge();
+    // ✅ Hide ticket tab content if no tickets are selected
+    if (reservedConcerts.size === 0) {
+      listCartHTML.innerHTML = ""; // Clear the ticket tab content
+      listCartHTML.classList.remove("has-tickets");
+    }
+  }
+
+  //april 26, 2025
+  // ✅ Add Concerts to HTML from JSON
+  const addDataToHTML = () => {
+    listTicketHTML.innerHTML = "";
+    if (listTickets.length > 0) {
+      listTickets.forEach((ticket) => {
+        let newTicket = document.createElement("div");
+        newTicket.classList.add("concert-card");
+        newTicket.dataset.id = ticket.id;
+
+      const parts = ticket.details.split('\n');
+      const artist = parts[0] || "";
+      const event = parts[1] || "";
+      const date = parts[2] || "";
+
+        newTicket.innerHTML = `
+                <img src="${ticket.image}" alt="${ticket.name}" />  
+                <div class="concert-info">
+                 <h2>
+            ${artist}<br>
+            ${event}<br>
+            <span class="concert-date">${date}</span> 
+          </h2>
+           <span class="slot"> ${ticket.slotText}</span>
+          <button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>
+        </div>
+      `;
+                    // <img src="${ticket.image}" alt="${ticket.name}" />
+                    // <div class="concert-info">
+                    //     <h2>${ticket.details.replace(/\n/g, '<br>')}</h2>
+                    //     <button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>
+                    // </div>`;
         listTicketHTML.appendChild(newTicket);
       });
 
@@ -296,71 +334,78 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((error) => console.error("Error fetching data:", error));
   };
 
-    // ✅ Start App
-    try {
-        initApp();  
-     } catch (error) {
-        console.error("Error in initApp:", error);
-     }
+  // ✅ Start App
+  try {
+    initApp();
+  } catch (error) {
+    console.error("Error in initApp:", error);
+  }
 });
 //checkout button
 document.addEventListener("DOMContentLoaded", function () {
-function setFormData() {
+  function setFormData() {
     const name = localStorage.getItem("name");
-    const email =  localStorage.getItem("email");
-    const selectedConcerts = Array.from(reservedConcerts).map((concert) => concert.name);
+    const email = localStorage.getItem("email");
+    const selectedConcerts = Array.from(reservedConcerts).map(
+      (concert) => concert.name
+    );
 
-  return { name, email, concerts: selectedConcerts };
-}
+    return { name, email, concerts: selectedConcerts };
+  }
 
-function saveFormData(formData) {
-  localStorage.setItem("reservationData", JSON.stringify(formData));
-  console.log("Data saved:", formData);
-}
+  function saveFormData(formData) {
+    localStorage.setItem("reservationData", JSON.stringify(formData));
+    console.log("Data saved:", formData);
+  }
 
-function submitReservation(formData) {
-  console.log("Sending data:", formData);
+  function submitReservation(formData) {
+    console.log("Sending data:", formData);
 
-  fetch("http://localhost:9090/api/submitChoice", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Response from backend:", data);
-      if (data.success) {
-        alert("Reservation successful!");
-        localStorage.removeItem("name");
-        localStorage.removeItem("email");
-        window.location.href = "homee.html";
-      } else {
-        alert("Reservation failed. " + data.message);
-      }
+    fetch("http://localhost:9090/api/submitChoice", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
     })
-    .catch((error) => {
-      console.error("Error submitting reservation: ", error);
-      alert("An error occurred. Please try again. " + error.message);
-    });
-}
-  const checkout = document.querySelector(".checkout");
-    if (checkout) {
-      checkout.addEventListener("click", function (event) {
-        event.preventDefault();
-
-        const formData = setFormData();
-        if (formData.concerts.length === 0) {
-          alert("No reservation to checkout.");
-          return;
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Response from backend:", data);
+        if (data.success) {
+          alert("Reservation successful!");
+          localStorage.removeItem("name");
+          localStorage.removeItem("email");
+          window.location.href = "homee.html";
+        } else {
+          alert("Reservation failed. " + data.message);
         }
-
-        const userConfirmed = confirm(
-          `Hi ${formData.name}, \n\nAre you sure you want to reserve tickets for: \n\n${formData.concerts.join(",\n")}?\n\nA confirmation email will be sent to you.`);
-        if (!userConfirmed) {
-          return;
-        }
-        saveFormData(formData);
-        submitReservation(formData);
+      })
+      .catch((error) => {
+        console.error("Error submitting reservation: ", error);
+        alert("An error occurred. Please try again. " + error.message);
       });
-    }
+  }
+  const checkout = document.querySelector(".checkout");
+  if (checkout) {
+    checkout.addEventListener("click", function (event) {
+      event.preventDefault();
+
+      const formData = setFormData();
+      if (formData.concerts.length === 0) {
+        alert("No reservation to checkout.");
+        return;
+      }
+
+      const userConfirmed = confirm(
+        `Hi ${
+          formData.name
+        }, \n\nAre you sure you want to reserve tickets for: \n\n${formData.concerts.join(
+          ",\n"
+        )}?\n\nA confirmation email will be sent to you.`
+      );
+      if (!userConfirmed) {
+        return;
+      }
+      saveFormData(formData);
+      submitReservation(formData);
+    });
+  }
 });

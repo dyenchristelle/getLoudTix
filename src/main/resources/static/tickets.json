@@ -4,69 +4,89 @@
     "name": "Syd",
     "image": "posters/ariana.jpg",
     "date": "June 10, 2025",
-    "concert": "The Eras Tour"
+    "concert": "The Eras Tour",
+    "slotText" :"Available Tickets: ",
+    "details": "Syd Hartha \nThe Night \nJune 10, 2025"
   },
   {
     "id": 2,
     "name": "Hev Abi",
     "image": "posters/dhruvc.jpg",
     "date": "June 11, 2025",
-    "concert": "The Eras Tour"
+    "concert": "The Eras Tour",
+    "slotText" :"Available Tickets: ",
+    "details": "Hev Abi \nThe Night \nJune 11, 2025"
   },
   {
     "id": 3,
     "name": "Maki",
     "image": "posters/ariana.jpg",
     "date": "June 12, 2025",
-    "concert": "The Eras Tour"
+    "concert": "The Eras Tour",
+    "slotText" :"Available Tickets: ",
+    "details": "Maki \nThe Night \nJune 12, 2025"
   },
   {
     "id": 4,
     "name": "Earl Agustin",
     "image": "posters/brunomars.jpg",
     "date": "June 13, 2025",
-    "concert": "The Eras Tour"
+    "concert": "The Eras Tour",
+    "slotText" :"Available Tickets: ",
+    "details": "Earl Agustin \nThe Night \nJune 13, 2025"
   },
   {
     "id": 5,
     "name": "Al James",
     "image": "posters/bea.jpg",
     "date": "June 14, 2025",
-    "concert": "The Eras Tour"
+    "concert": "The Eras Tour",
+    "slotText" :"Available Tickets: ",
+    "details": "Al James \nThe Night \nJune 16, 2025"
   },
   {
     "id": 6,
     "name": "Kiyo",
     "image": "posters/clairo.jpg",
     "date": "June 17, 2025",
-    "concert": "The Eras Tour"
+    "concert": "The Eras Tour",
+    "slotText" :"Available Tickets: ",
+    "details": "Kiyo \nThe Night \nJune 17, 2025"
   },
   {
     "id": 7,
     "name": "The Ridleys",
     "image": "posters/clairo.jpg",
     "date": "June 18, 2025",
-    "concert": "The Eras Tour"
+    "concert": "The Eras Tour",
+    "slotText" :"Available Tickets: ",
+    "details": "The Ridleys \nThe Night \nJune 18, 2025"
   },
   {
     "id": 8,
     "name": "Hey June",
     "image": "posters/clairo.jpg",
     "date": "June 19, 2025",
-    "concert": "The Eras Tour"
+    "concert": "The Eras Tour",
+    "slotText" :"Available Tickets: ",
+    "details": "Hey June \nThe Night \nJune 19, 2025"
   },
   {
     "id": 9,
     "name": "Over October",
     "image": "posters/clairo.jpg",
     "date": "June 20, 2025",
-    "concert": "The Eras Tour"
+    "concert": "The Eras Tour",
+    "slotText" :"Available Tickets: ",
+    "details": "Over October \nThe Night \nJune 20, 2025"
   },
   {
     "id": 10,
     "name": "Cup of Joe",
     "image": "posters/clairo.jpg",
     "date": "June 21, 2025",
-    "concert": "The Eras Tour"
+    "concert": "The Eras Tour",
+    "slotText" :"Available Tickets: ",
+    "details": "Cup of Joe \nThe Night \nJune 21, 2025"
   }
 ]
