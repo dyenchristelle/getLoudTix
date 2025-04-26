@@ -10,13 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
     startBtn.addEventListener("click", function () {
     termsPopup.style.display = "flex";
   });
-  
-
   // Redirect to index.html if the "Accept" button is clicked
     acceptBtn.addEventListener("click", function () {
     window.location.href = "homee.html"; // Redirect to the index page
   });
-
   // Close the popup without accepting when the "Cancel" button is clicked
     cancelBtn.addEventListener("click", function () {
     termsPopup.style.display = "none"; // Close the popup
@@ -189,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function () {
     reservedConcerts.add({
       id: concert.id,
       name: concert.name,
-      email: concert.email
+      date: concert.date
     });
           // Update cart badge
           updateCartBadge();
@@ -202,10 +199,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // ✅ Add to Ticket Tab
     function addToTicketTab(concertId) {
       const concert = listTickets.find((ticket) => ticket.id === concertId);
-
-  // ✅ Add to Ticket Tab
-  function addToTicketTab(concertId) {
-    const concert = listTickets.find((ticket) => ticket.id === concertId);
 
     if (concert) {
       let ticketItem = document.createElement("div");
@@ -233,8 +226,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function removeFromTicketTab(event) {
       const button = event.target;
       const concertId = parseInt(button.dataset.concertId);
+      const concertToRemove = Array.from(reservedConcerts).find((concert) => concert.id === concertId);
 
-      reservedConcerts.delete(concertId);
+      if (concertToRemove) {
+        reservedConcerts.delete(concertToRemove);
+      }
 
       // Remove from ticket tab
       const ticketItem = button.closest(".item");
@@ -306,7 +302,6 @@ document.addEventListener("DOMContentLoaded", function () {
      } catch (error) {
         console.error("Error in initApp:", error);
      }
-    }
 });
 //checkout button
 document.addEventListener("DOMContentLoaded", function () {

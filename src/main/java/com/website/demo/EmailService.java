@@ -36,7 +36,7 @@ public class EmailService {
                 + "Your reservation has been confirmed. ✅\n\n"
                 + "Event Details:\n"
                 // + concertDetails.toString()
-                + concertDetails + "\n"
+                + concertDetails + "\n\n"
                 + "📍 Venue: Loud Arena, New York\n\n"
                 + "See you at the event! 💖\n\n"
                 + "Best regards,\n"
