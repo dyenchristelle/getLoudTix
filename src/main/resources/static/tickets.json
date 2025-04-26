@@ -1,72 +1,72 @@
 [
-    {
-        "id" : 1,
-        "name" : "Syd Hartha",
-        "image": "posters/taylor.jpg",
-        "date" : "June 10, 2025",
-        "concert" : "The Eras Tour"
-    },
-    {
-        "id": 2,
-        "name" : "Hev Abi",
-        "image": "posters/dhruvc.jpg",
-        "date" : "June 11, 2025",
-        "concert" : "The Eras Tour"
-    },
-    {
-        "id": 3,
-        "name": "Maki",
-        "image": "posters/ariana.jpg",
-        "date" : "June 12, 2025",
-        "concert" : "The Eras Tour"
-    },
-    {
-        "id": 4,
-        "name": "Earl Agustin",
-        "image": "posters/brunomars.jpg",
-        "date" : "June 13, 2025",
-        "concert" : "The Eras Tour"
-    },
-    {
-        "id": 5,
-        "name": "Al James",
-        "image": "posters/bea.jpg",
-        "date" : "June 14, 2025",
-        "concert" : "The Eras Tour"
-    },
-    {
-        "id": 6,
-        "name": "Kiyo",
-        "image": "posters/clairo.jpg",
-        "date" : "June 17, 2025",
-        "concert" : "The Eras Tour"
-    },
-    {
-        "id": 7,
-        "name": "The Ridleys",
-        "image": "posters/clairo.jpg",
-        "date" : "June 18, 2025",
-        "concert" : "The Eras Tour"
-    },
-    {
-        "id": 8,
-        "name": "Hey June",
-        "image": "posters/clairo.jpg",
-        "date" : "June 19, 2025",
-        "concert" : "The Eras Tour"
-    },
-    {
-        "id": 9,
-        "name": "Over October",
-        "image": "posters/clairo.jpg",
-        "date" : "June 20, 2025",
-        "concert" : "The Eras Tour"
-    },
-    {
-        "id": 10,
-        "name": "Cup of Joe",
-        "image": "posters/clairo.jpg",
-        "date" : "June 21, 2025",
-        "concert" : "The Eras Tour"
-    }
+  {
+    "id": 1,
+    "name": "Syd",
+    "image": "posters/ariana.jpg",
+    "date": "June 10, 2025",
+    "concert": "The Eras Tour"
+  },
+  {
+    "id": 2,
+    "name": "Hev Abi",
+    "image": "posters/dhruvc.jpg",
+    "date": "June 11, 2025",
+    "concert": "The Eras Tour"
+  },
+  {
+    "id": 3,
+    "name": "Maki",
+    "image": "posters/ariana.jpg",
+    "date": "June 12, 2025",
+    "concert": "The Eras Tour"
+  },
+  {
+    "id": 4,
+    "name": "Earl Agustin",
+    "image": "posters/brunomars.jpg",
+    "date": "June 13, 2025",
+    "concert": "The Eras Tour"
+  },
+  {
+    "id": 5,
+    "name": "Al James",
+    "image": "posters/bea.jpg",
+    "date": "June 14, 2025",
+    "concert": "The Eras Tour"
+  },
+  {
+    "id": 6,
+    "name": "Kiyo",
+    "image": "posters/clairo.jpg",
+    "date": "June 17, 2025",
+    "concert": "The Eras Tour"
+  },
+  {
+    "id": 7,
+    "name": "The Ridleys",
+    "image": "posters/clairo.jpg",
+    "date": "June 18, 2025",
+    "concert": "The Eras Tour"
+  },
+  {
+    "id": 8,
+    "name": "Hey June",
+    "image": "posters/clairo.jpg",
+    "date": "June 19, 2025",
+    "concert": "The Eras Tour"
+  },
+  {
+    "id": 9,
+    "name": "Over October",
+    "image": "posters/clairo.jpg",
+    "date": "June 20, 2025",
+    "concert": "The Eras Tour"
+  },
+  {
+    "id": 10,
+    "name": "Cup of Joe",
+    "image": "posters/clairo.jpg",
+    "date": "June 21, 2025",
+    "concert": "The Eras Tour"
+  }
 ]

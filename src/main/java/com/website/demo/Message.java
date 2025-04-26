@@ -14,9 +14,9 @@ public class Message {
 
     private String name;
 
-    // @Convert(converter = StringListConverter.class)
-    // @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "concerts")
+    @Convert(converter = StringListConverter.class)
+    // // @OneToMany(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "concerts")
     private List<String> concerts;
 
     public Message() {}

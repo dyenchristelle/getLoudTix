@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface MessageRepository extends JpaRepository<Message, String> {
     boolean existsByEmail(String email);
     
-    Message findByEmailAndName(String email);
+    Message findByEmail(String email);
 
     
     // public MessageRepository() {

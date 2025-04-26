@@ -60,12 +60,23 @@ public class MessageController {
     @DeleteMapping("/deleteReservation")
     public ResponseEntity<Map<String, Object>> deleteReservation(@RequestParam String email) {
         try {
-            boolean deletedMessage = messageService.deleteMessageByEmail(email);
-            if (deletedMessage) {
-                return ResponseEntity.ok(Map.of("success", true, "message", "Reservation deleted successfully"));
+            Message existingReservation = messageRepository.findByEmail(email); // Step 1: find reservation
+
+            if (existingReservation != null) {
+                String name = existingReservation.getName();
+                List<String> concerts = existingReservation.getConcerts(); 
+
+                boolean deletedMessage = messageService.deleteMessageByEmail(email);
+                if (deletedMessage) {
+                    emailService.sendDeletionConfirmation(email, name, concerts);
+                    return ResponseEntity.ok(Map.of("success", true, "message", "Reservation deleted successfully"));
+                } else {
+                    return ResponseEntity.badRequest().body(Map.of("success", false, "message", "Failed to delete the reservation"));
+                }
             } else {
                 return ResponseEntity.badRequest().body(Map.of("success", false, "message", "No reservation found with the provided email and name"));
-            }
+              }
+        
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("success", false, "message", "Internal Server Error"));

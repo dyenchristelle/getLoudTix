@@ -45,7 +45,7 @@ public class EmailService {
         mailSender.send(message);
     }
 
-    public void sendDeletionConfirmation(String to, String name) {
+    public void sendDeletionConfirmation(String to, String name, List<String> concerts) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setSubject("Reservation Cancelled - GetLoudTix");

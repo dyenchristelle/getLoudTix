@@ -1,5 +1,3 @@
-
-
 //home
 document.addEventListener("DOMContentLoaded", function () {
   const startBtn = document.getElementById("startBtn");
@@ -205,11 +203,15 @@ document.addEventListener("DOMContentLoaded", function () {
     function addToTicketTab(concertId) {
       const concert = listTickets.find((ticket) => ticket.id === concertId);
 
-      if (concert) {
-        let ticketItem = document.createElement("div");
-        ticketItem.classList.add("item");
-        ticketItem.dataset.id = concert.id;
-        ticketItem.innerHTML = `
+  // ✅ Add to Ticket Tab
+  function addToTicketTab(concertId) {
+    const concert = listTickets.find((ticket) => ticket.id === concertId);
+
+    if (concert) {
+      let ticketItem = document.createElement("div");
+      ticketItem.classList.add("item");
+      ticketItem.dataset.id = concert.id;
+      ticketItem.innerHTML = `
                 <div class="image">
                     <img src="${concert.image}" alt="Ticket">
                 </div>
@@ -269,34 +271,34 @@ document.addEventListener("DOMContentLoaded", function () {
                         <p>${ticket.date}</p>
                         <button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>
                     </div>`;
-          listTicketHTML.appendChild(newTicket);
-        });
+        listTicketHTML.appendChild(newTicket);
+      });
 
-        // ✅ Attach event listeners after adding elements to DOM
-        document.querySelectorAll(".reserve-btn").forEach((button) => {
-          button.addEventListener("click", reserveTicket);
-        });
-      }
-    };
+      // ✅ Attach event listeners after adding elements to DOM
+      document.querySelectorAll(".reserve-btn").forEach((button) => {
+        button.addEventListener("click", reserveTicket);
+      });
+    }
+  };
 
-    // ✅ Initialize App (Fetch Data from JSON)
-    const initApp = () => {
-        console.log("Initializing app...");
-      fetch("http://localhost:9090/tickets.json")
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-              }
-            console.log("Response Status:", response.status); // Log response status
-            return response.json();
-        })
-        .then((data) => {
-            console.log("Fetched Data:", data);
-          listTickets = data;
-          addDataToHTML();
-        })
-        .catch((error) => console.error("Error fetching data:", error));
-    };
+  // ✅ Initialize App (Fetch Data from JSON)
+  const initApp = () => {
+    console.log("Initializing app...");
+    fetch("http://localhost:9090/tickets.json")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        console.log("Response Status:", response.status); // Log response status
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Fetched Data:", data);
+        listTickets = data;
+        addDataToHTML();
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  };
 
     // ✅ Start App
     try {
@@ -304,21 +306,14 @@ document.addEventListener("DOMContentLoaded", function () {
      } catch (error) {
         console.error("Error in initApp:", error);
      }
+    }
 });
 //checkout button
 document.addEventListener("DOMContentLoaded", function () {
 function setFormData() {
     const name = localStorage.getItem("name");
     const email =  localStorage.getItem("email");
-
-    if (!name || !email) {
-      console.error("Name or Email input not found!");
-      return null;
-    }
-    console.log("retrieved name:", name); 
-    console.log("retrieved email:", email);
-    
-    const selectedConcerts = Array.from(reservedConcerts).map (concert => concert.name);
+    const selectedConcerts = Array.from(reservedConcerts).map((concert) => concert.name);
 
   return { name, email, concerts: selectedConcerts };
 }

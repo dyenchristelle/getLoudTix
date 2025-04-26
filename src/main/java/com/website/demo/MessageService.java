@@ -38,7 +38,7 @@ public class MessageService {
     @Transactional
     public boolean deleteMessageByEmail(String email) {
         try {
-            Message message = messageRepository.findByEmailAndName(email);
+            Message message = messageRepository.findByEmail(email);
             if (message != null) {
                 messageRepository.delete(message);
                 return true; // Successfully deleted
