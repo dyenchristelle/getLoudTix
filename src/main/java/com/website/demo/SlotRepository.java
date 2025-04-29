@@ -7,5 +7,5 @@ import java.util.List;
 
 @Repository
 public interface SlotRepository extends JpaRepository<slot, Integer> {
-    slot findById(List<Integer> concert_id);
+    slot findById(int id);
 }

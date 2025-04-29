@@ -26,21 +26,21 @@ public class MessageController {
     private final MessageService messageService;
     private final MessageRepository messageRepository;
     private final EmailService emailService;
-    private final SlotService slotService;
+    // private final SlotService slotService;
 
     @Autowired
-    public MessageController(MessageService messageService, MessageRepository messageRepository, EmailService emailService, SlotService slotService) {
+    public MessageController(MessageService messageService, MessageRepository messageRepository, EmailService emailService) {
         this.messageService = messageService;
         this.messageRepository = messageRepository;
         this.emailService = emailService;
-        this.slotService = slotService;
+        // this.slotService = slotService;
     }
     @PostMapping("/submitChoice")
     public ResponseEntity<Map<String, Object>> submitChoice(@RequestBody Message request) {
         try {
             messageService.saveMessage(request);
 
-            slotService.decrementSlot(request.getConcert_id());
+            messageService.decrementSlotAvailability(request.getConcert_id());
 
             emailService.sendConfirmationEmail(request.getEmail(), request.getName(), request.getConcerts());
 

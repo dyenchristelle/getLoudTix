@@ -11,7 +11,7 @@ import jakarta.persistence.*;
 public class slot {
     @Id
     private int id;
-    
+
     private int day1;
     private int day2;
     private int day3;
@@ -22,6 +22,8 @@ public class slot {
     private int day8;
     private int day9;
     private int day10;
+
+    private String slotText;
 
     public slot() {}
 
@@ -57,4 +59,8 @@ public class slot {
 
     public int getDay10() {return day10;}
     public void setDay10(int day10) {this.day10 = day10;}
+
+    
+    public String getSlotText() {return slotText;}
+    public void setSlotText(String slotText) {this.slotText = slotText;}
 }
