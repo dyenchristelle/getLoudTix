@@ -341,7 +341,76 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("Error in initApp:", error);
   }
 });
+
 //checkout button
+// document.addEventListener("DOMContentLoaded", function () {
+//   function setFormData() {
+//     const name = localStorage.getItem("name");
+//     const email = localStorage.getItem("email");
+//     const selectedConcerts = Array.from(reservedConcerts).map(
+//       (concert) => concert.name
+//     );
+
+//     return { name, email, concerts: selectedConcerts };
+//   }
+
+//   function saveFormData(formData) {
+//     localStorage.setItem("reservationData", JSON.stringify(formData));
+//     console.log("Data saved:", formData);
+//   }
+
+//   function submitReservation(formData) {
+//     console.log("Sending data:", formData);
+
+//     fetch("http://localhost:9090/api/submitChoice", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify(formData),
+//     })
+//       .then((response) => response.json())
+//       .then((data) => {
+//         console.log("Response from backend:", data);
+//         if (data.success) {
+//           alert("Reservation successful!");
+//           localStorage.removeItem("name");
+//           localStorage.removeItem("email");
+//           window.location.href = "homee.html";
+//         } else {
+//           alert("Reservation failed. " + data.message);
+//         }
+//       })
+//       .catch((error) => {
+//         console.error("Error submitting reservation: ", error);
+//         alert("An error occurred. Please try again. " + error.message);
+//       });
+//   }
+//   const checkout = document.querySelector(".checkout");
+//   if (checkout) {
+//     checkout.addEventListener("click", function (event) {
+//       event.preventDefault();
+
+//       const formData = setFormData();
+//       if (formData.concerts.length === 0) {
+//         alert("No reservation to checkout.");
+//         return;
+//       }
+
+//       const userConfirmed = confirm(
+//         `Hi ${
+//           formData.name
+//         }, \n\nAre you sure you want to reserve tickets for: \n\n${formData.concerts.join(
+//           ",\n"
+//         )}?\n\nA confirmation email will be sent to you.`
+//       );
+//       if (!userConfirmed) {
+//         return;
+//       }
+//       saveFormData(formData);
+//       submitReservation(formData);
+//     });
+//   }
+// });
+
 document.addEventListener("DOMContentLoaded", function () {
   function setFormData() {
     const name = localStorage.getItem("name");
@@ -370,19 +439,26 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((data) => {
         console.log("Response from backend:", data);
         if (data.success) {
-          alert("Reservation successful!");
-          localStorage.removeItem("name");
-          localStorage.removeItem("email");
-          window.location.href = "homee.html";
+          swal({
+            title: "Success!",
+            text: "Reservation successful!",
+            icon: "success",
+            button: "OK",
+          }).then(() => {
+            localStorage.removeItem("name");
+            localStorage.removeItem("email");
+            window.location.href = "homee.html";
+          });
         } else {
-          alert("Reservation failed. " + data.message);
+          swal("Reservation failed", data.message, "error");
         }
       })
       .catch((error) => {
         console.error("Error submitting reservation: ", error);
-        alert("An error occurred. Please try again. " + error.message);
+        swal("Error", "An error occurred. Please try again.\n" + error.message, "error");
       });
   }
+
   const checkout = document.querySelector(".checkout");
   if (checkout) {
     checkout.addEventListener("click", function (event) {
@@ -390,22 +466,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const formData = setFormData();
       if (formData.concerts.length === 0) {
-        alert("No reservation to checkout.");
+        swal("No Reservation", "No reservation to checkout.", "warning");
         return;
       }
 
-      const userConfirmed = confirm(
-        `Hi ${
-          formData.name
-        }, \n\nAre you sure you want to reserve tickets for: \n\n${formData.concerts.join(
-          ",\n"
-        )}?\n\nA confirmation email will be sent to you.`
-      );
-      if (!userConfirmed) {
-        return;
-      }
-      saveFormData(formData);
-      submitReservation(formData);
+      swal({
+        title: `Hi ${formData.name}`,
+        text: `Are you sure you want to reserve tickets for:\n\n${formData.concerts.join(",\n")}\n\nA confirmation email will be sent to you.`,
+        icon: "info",
+        buttons: ["Cancel", "Confirm"],
+      }).then((willReserve) => {
+        if (willReserve) {
+          saveFormData(formData);
+          submitReservation(formData);
+        }
+      });
     });
   }
 });
