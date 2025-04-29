@@ -52,29 +52,28 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault();
       const name = document.getElementById("name").value.trim();
       const email = document.getElementById("email").value.trim();
+      const errorMessage = document.getElementById("error-message");
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
       if (!name || !email) {
-        alert("Both name and email are required!");
+        errorMessage.style.display = "block";
+        errorMessage.textContent = "Both name and email are required. Please fill out those fields.";
         return;
-      }
-
-      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-      if (!emailRegex.test(email)) {
-        alert("Invalid email!");
-        return;
-      }
-
-      // retrieve, check if email already exists
+      } if (!emailRegex.test(email)) {
+          errorMessage.style.display = "block";
+          errorMessage.textContent = "Invalid email. Please provide a valid email.";
+          return;
+      } else {
+        errorMessage.style.display = "none";
+      }   
+//retrieve, check if email already exists (must be not yet existing)
       try {
-        const response = await fetch(
-          `http://localhost:9090/api/checkReservation?email=${encodeURIComponent(
-            email
-          )}`
-        );
+        const response = await fetch(`http://localhost:9090/api/checkReservation?email=${encodeURIComponent(email)}`);
         const data = await response.json();
 
         if (data.exists) {
-          alert("You're already reserved!");
+          errorMessage.style.display = "block";
+          errorMessage.textContent = "Email already exists.";
           return;
         }
       } catch (error) {
@@ -105,31 +104,31 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault();
       const name = document.getElementById("name").value.trim();
       const email = document.getElementById("email").value.trim();
+      const errorMessage = document.getElementById("error-message");
 
       if (!name || !email) {
-        alert("Both name and email are required!");
+        errorMessage.style.display = "block";
+        errorMessage.textContent = "Both name and email are required. Please fill out those fields.";
         return;
+      } else {
+        errorMessage.style.display = "none";
       }
-
+//retrieve, check if email exists (must be existing)
       try {
-        const response = await fetch(
-          `http://localhost:9090/api/checkReservation?email=${encodeURIComponent(
-            email
-          )}`
-        );
+        const response = await fetch(`http://localhost:9090/api/checkReservation?email=${encodeURIComponent(email)}`);
         const data = await response.json();
 
         if (data.exists) {
-          const userConfirmed = confirm(
-            `Hi, are you sure you want to delete your reservation? A confirmation email will be sent to you.`
-          );
-          if (!userConfirmed) return;
+          const userConfirmed = confirm(`Hi, are you sure you want to delete your reservation? A confirmation email will be sent to you.`);
+            if (userConfirmed) {
+              alert("Loading... ");
+              setTimeout(() => {
+                alert("Done!"); 
+              }, 3000); 
+            }
+            if (!userConfirmed) return;
 
-          const deleteResponse = await fetch(
-            `http://localhost:9090/api/deleteReservation?email=${encodeURIComponent(
-              email
-            )}`,
-            {
+          const deleteResponse = await fetch(`http://localhost:9090/api/deleteReservation?email=${encodeURIComponent(email)}`,{
               method: "DELETE",
             }
           );
@@ -140,7 +139,8 @@ document.addEventListener("DOMContentLoaded", function () {
             window.location.href = "homee.html";
           }
         } else {
-          alert("You haven't reserve any ticket yet!");
+          errorMessage.style.display = "block";
+          errorMessage.textContent = "Email provided does not exist. You haven't reserve yet.";
         }
       } catch (error) {
         console.error("Error checking reservation:", error);
@@ -204,7 +204,7 @@ document.addEventListener("DOMContentLoaded", function () {
     reservedConcerts.add({
       id: concert.id,
       name: concert.name,
-      date: concert.date,
+      details: concert.details,
     });
     // Update cart badge
     updateCartBadge();
@@ -233,9 +233,8 @@ document.addEventListener("DOMContentLoaded", function () {
       // 🎟️ Add ticket to the ticket tab
       listCartHTML.appendChild(ticketItem);
       // ✅ Add event listener to remove button
-      ticketItem
-        .querySelector(".removeTicket")
-        .addEventListener("click", removeFromTicketTab);
+      ticketItem.querySelector(".removeTicket")
+.addEventListener("click", removeFromTicketTab);
       // ✅ Show ticket tab content when at least one ticket is selected
       listCartHTML.classList.add("has-tickets");
     }
@@ -244,9 +243,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function removeFromTicketTab(event) {
     const button = event.target;
     const concertId = parseInt(button.dataset.concertId);
-    const concertToRemove = Array.from(reservedConcerts).find(
-      (concert) => concert.id === concertId
-    );
+    const concertToRemove = Array.from(reservedConcerts).find((concert) => concert.id === concertId);
 
     if (concertToRemove) {
       reservedConcerts.delete(concertToRemove);
@@ -346,9 +343,8 @@ document.addEventListener("DOMContentLoaded", function () {
   function setFormData() {
     const name = localStorage.getItem("name");
     const email = localStorage.getItem("email");
-    const selectedConcerts = Array.from(reservedConcerts).map(
-      (concert) => concert.name
-    );
+    const selectedConcerts = Array.from(reservedConcerts).map((concert) => 
+      ({  id: concert.id, details: concert.details,}));
 
     return { name, email, concerts: selectedConcerts };
   }
@@ -393,14 +389,15 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("No reservation to checkout.");
         return;
       }
-
       const userConfirmed = confirm(
-        `Hi ${
-          formData.name
-        }, \n\nAre you sure you want to reserve tickets for: \n\n${formData.concerts.join(
-          ",\n"
-        )}?\n\nA confirmation email will be sent to you.`
-      );
+        `Hi ${formData.name}, are you sure you want to reserve the tickets you selected?\n\nA confirmation email will be sent to you.`);
+
+      if (userConfirmed) {
+        alert("Loading... ");
+        setTimeout(() => {
+          alert("Done!"); 
+        }, 3000); 
+      }
       if (!userConfirmed) {
         return;
       }
@@ -409,3 +406,41 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+
+// function checkSlotAndDisable() {
+//   for (let i = 1; i <= 10; i++) { // assuming 10 concerts
+//     const slotText = document.getElementById("slot-" + i);
+//     const reserveButton = document.getElementById("reserve-" + i);
+    
+//     if (slotText && reserveButton) {
+//       const available = parseInt(slotText.textContent);
+
+//       if (available === 0) {
+//         reserveButton.disabled = true;
+//         reserveButton.textContent = "Sold Out";
+//         reserveButton.style.cursor = "not-allowed";
+//       }
+//     }
+//   }
+// }
+
+// // Run this once page is loaded
+// window.onload = checkSlotAndDisable;
+
+// function updateTicketDisplay(concertIds) {
+//   concertIds.forEach(id => {
+//     // You would typically fetch the updated slot info and display it
+//     // or decrement the count on the frontend directly.
+//     const slotElement = document.getElementById(`slot-${id}`);
+//     let availableTickets = parseInt(slotElement.innerText.replace("Available Tickets: ", ""));
+//     if (availableTickets > 0) {
+//       slotElement.innerText = `Available Tickets: ${availableTickets - 1}`;
+//     } else {
+//       slotElement.innerText = "Sold Out";
+//       // Disable the reservation button
+//       const reserveButton = document.getElementById(`reserve-btn-${id}`);
+//       reserveButton.disabled = true;
+//     }
+//   });
+// }

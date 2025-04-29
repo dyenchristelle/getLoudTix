@@ -26,8 +26,9 @@ public class MessageService {
         if (request.getConcerts().isEmpty()) {
             throw new IllegalArgumentException("Please select at least one day.");
         }
+        // MessageService concert = MessageRepository.findById(request.getConcert_id()).orElseThrow(() -> new IllegalArgumentException("Concert not found"));
         try {
-            Message msg = new Message(request.getName(), request.getEmail(), request.getConcerts());
+            Message msg = new Message(request.getName(), request.getEmail(), request.getConcerts(), request.getConcert_id());
             messageRepository.save(msg);
             System.out.println("Save successful!");
         } catch (Exception e) {

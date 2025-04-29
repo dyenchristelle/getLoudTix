@@ -562,3 +562,12 @@ p {
 }
 
 /* background */
+
+/* try error message */
+#error-message {
+  color: rgb(231, 226, 74);
+  /* margin-top: 5px; */
+  font-size: 12px;
+  display: none;
+  text-align: left;
+}

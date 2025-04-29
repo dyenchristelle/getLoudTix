@@ -3,7 +3,7 @@ package com.website.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+// import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.ui.Model;
+
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api")
@@ -26,21 +26,29 @@ public class MessageController {
     private final MessageService messageService;
     private final MessageRepository messageRepository;
     private final EmailService emailService;
+    private final SlotService slotService;
 
     @Autowired
-    public MessageController(MessageService messageService, MessageRepository messageRepository, EmailService emailService){
+    public MessageController(MessageService messageService, MessageRepository messageRepository, EmailService emailService, SlotService slotService) {
         this.messageService = messageService;
         this.messageRepository = messageRepository;
         this.emailService = emailService;
+        this.slotService = slotService;
     }
     @PostMapping("/submitChoice")
     public ResponseEntity<Map<String, Object>> submitChoice(@RequestBody Message request) {
         try {
             messageService.saveMessage(request);
+
+            slotService.decrementSlot(request.getConcert_id());
+
             emailService.sendConfirmationEmail(request.getEmail(), request.getName(), request.getConcerts());
+
             System.out.println("Received name: " + request.getName());
             System.out.println("Received email: " + request.getEmail());
             System.out.println("Received day: " + request.getConcerts());
+            System.out.println("Received day: " + request.getConcert_id());
+            
             return ResponseEntity.ok(Map.of("success", true, "message", "Reservation successful!"));
         } catch (IllegalArgumentException e) {
             e.printStackTrace();

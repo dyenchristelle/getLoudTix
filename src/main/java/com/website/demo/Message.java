@@ -15,16 +15,18 @@ public class Message {
     private String name;
 
     @Convert(converter = StringListConverter.class)
-    // // @OneToMany(cascade = CascadeType.ALL)
-    // @JoinColumn(name = "concerts")
     private List<String> concerts;
+
+    @Convert(converter = IntegerListConverter.class)
+    private List<Integer> concert_id;
 
     public Message() {}
 
-    public Message(String name, String email, List<String> concerts){
+    public Message(String name, String email, List<String> concerts, List<Integer> concert_id){
         this.name = name;
         this.email = email;
         this.concerts = concerts;
+        this.concert_id = concert_id;
     }
         public String getName() {
             return name;
@@ -47,16 +49,37 @@ public class Message {
             this.concerts = concerts;
         }
 
+        public List<Integer> getConcert_id() {
+            return concert_id;
+        }
+        public void setConcert_id(List<Integer> concert_id){
+            this.concert_id = concert_id;
+        }
+
     @Converter
     public static class StringListConverter implements AttributeConverter<List<String>, String> {
         @Override
         public String convertToDatabaseColumn(List<String> list) {
-            return list != null ? String.join(", ", list) : "";
+            return list != null ? String.join(", \n\n", list) : "";
         }
 
         @Override
         public List<String> convertToEntityAttribute(String data) {
-            return data != null && !data.isEmpty() ? Arrays.stream(data.split(",")).collect(Collectors.toList()) : null;
+            return data != null && !data.isEmpty() ? Arrays.stream(data.split(", \n\n")).collect(Collectors.toList()) : null;
+        }
+    }
+
+    @Converter
+    public static class IntegerListConverter implements AttributeConverter<List<Integer>, String> {
+        @Override
+        public String convertToDatabaseColumn(List<Integer> list) {
+            return (list != null && !list.isEmpty()) ? list.stream().map(String::valueOf).collect(Collectors.joining(", ")): "";
+        }
+
+        @Override
+        public List<Integer> convertToEntityAttribute(String data) {
+            return (data != null && !data.isEmpty())
+                ? Arrays.stream(data.split(", ")).map(Integer::parseInt).collect(Collectors.toList()): null;
         }
     }
 }
