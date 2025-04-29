@@ -9,6 +9,9 @@ import jakarta.persistence.*;
 @Entity 
 @Table(name = "avail_slot")
 public class slot {
+    @Id
+    private int id;
+    
     private int day1;
     private int day2;
     private int day3;
@@ -21,6 +24,9 @@ public class slot {
     private int day10;
 
     public slot() {}
+
+    public Integer getId() {return id;}
+    public void setId(Integer id) {this.id = id;}
 
     public int getDay1() {return day1;}
     public void setDay1(int day1) {this.day1 = day1;}
