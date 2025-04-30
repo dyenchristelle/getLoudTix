@@ -27,29 +27,28 @@ public class MessageService {
         if (messageRepository.existsByEmail(request.getEmail())){
             throw new IllegalArgumentException("You're already reserved.");
         }
-        if (request.getConcerts().isEmpty()) {
+        if (request.getConcert_id().isEmpty()) {
             throw new IllegalArgumentException("Please select at least one day.");
         }
 
-        slot availableSlot = slotRepository.findById(1);
-
-        slotRepository.save(availableSlot);
-        
         try {
-            Message msg = new Message(request.getName(), request.getEmail(), request.getConcerts(), request.getConcert_id());
+            decrementSlotAvailability(request.getConcert_id());
+            Message msg = new Message(request.getName(), request.getEmail(), request.getConcert_id());
             messageRepository.save(msg);
+            // slot availableSlot = slotRepository.findById(1);
+            // slotRepository.save(availableSlot);
             System.out.println("Save successful!");
         } catch (Exception e) {
             System.err.println("Error saving message: " + e.getMessage());
         }
     }
 
-
     @Transactional
     public boolean deleteMessageByEmail(String email) {
         try {
             Message message = messageRepository.findByEmail(email);
             if (message != null) {
+                incrementSlotAvailability(message.getConcert_id());
                 messageRepository.delete(message);
                 return true; // Successfully deleted
             } else {
@@ -165,6 +164,9 @@ public class MessageService {
                     break;    
                 case 6:
                     availableSlot.setDay6(availableSlot.getDay6() + 1);
+                    break;
+                case 7:
+                    availableSlot.setDay7(availableSlot.getDay7() + 1);
                     break;
                 case 8:
                     availableSlot.setDay8(availableSlot.getDay8() + 1);

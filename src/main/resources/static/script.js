@@ -201,11 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
     // reservedConcerts.add(concert.id);
-    reservedConcerts.add({
-      id: concert.id,
-      name: concert.name,
-      details: concert.details,
-    });
+    reservedConcerts.add(concert.id);
     // Update cart badge
     updateCartBadge();
     // Add to ticket tab
@@ -233,8 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // 🎟️ Add ticket to the ticket tab
       listCartHTML.appendChild(ticketItem);
       // ✅ Add event listener to remove button
-      ticketItem.querySelector(".removeTicket")
-.addEventListener("click", removeFromTicketTab);
+      ticketItem.querySelector(".removeTicket").addEventListener("click", removeFromTicketTab);
       // ✅ Show ticket tab content when at least one ticket is selected
       listCartHTML.classList.add("has-tickets");
     }
@@ -243,11 +238,9 @@ document.addEventListener("DOMContentLoaded", function () {
   function removeFromTicketTab(event) {
     const button = event.target;
     const concertId = parseInt(button.dataset.concertId);
-    const concertToRemove = Array.from(reservedConcerts).find((concert) => concert.id === concertId);
 
-    if (concertToRemove) {
-      reservedConcerts.delete(concertToRemove);
-    }
+    reservedConcerts.delete(concertId);
+    
 
     // Remove from ticket tab
     const ticketItem = button.closest(".item");
@@ -339,83 +332,15 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-//checkout button
-// document.addEventListener("DOMContentLoaded", function () {
-//   function setFormData() {
-//     const name = localStorage.getItem("name");
-//     const email = localStorage.getItem("email");
-//     const selectedConcerts = Array.from(reservedConcerts).map(
-//       (concert) => concert.name
-//     );
-
-//     return { name, email, concerts: selectedConcerts };
-//   }
-
-//   function saveFormData(formData) {
-//     localStorage.setItem("reservationData", JSON.stringify(formData));
-//     console.log("Data saved:", formData);
-//   }
-
-//   function submitReservation(formData) {
-//     console.log("Sending data:", formData);
-
-//     fetch("http://localhost:9090/api/submitChoice", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify(formData),
-//     })
-//       .then((response) => response.json())
-//       .then((data) => {
-//         console.log("Response from backend:", data);
-//         if (data.success) {
-//           alert("Reservation successful!");
-//           localStorage.removeItem("name");
-//           localStorage.removeItem("email");
-//           window.location.href = "homee.html";
-//         } else {
-//           alert("Reservation failed. " + data.message);
-//         }
-//       })
-//       .catch((error) => {
-//         console.error("Error submitting reservation: ", error);
-//         alert("An error occurred. Please try again. " + error.message);
-//       });
-//   }
-//   const checkout = document.querySelector(".checkout");
-//   if (checkout) {
-//     checkout.addEventListener("click", function (event) {
-//       event.preventDefault();
-
-//       const formData = setFormData();
-//       if (formData.concerts.length === 0) {
-//         alert("No reservation to checkout.");
-//         return;
-//       }
-
-//       const userConfirmed = confirm(
-//         `Hi ${
-//           formData.name
-//         }, \n\nAre you sure you want to reserve tickets for: \n\n${formData.concerts.join(
-//           ",\n"
-//         )}?\n\nA confirmation email will be sent to you.`
-//       );
-//       if (!userConfirmed) {
-//         return;
-//       }
-//       saveFormData(formData);
-//       submitReservation(formData);
-//     });
-//   }
-// });
-
+// checkout button
 document.addEventListener("DOMContentLoaded", function () {
   function setFormData() {
     const name = localStorage.getItem("name");
     const email = localStorage.getItem("email");
-    const selectedConcerts = Array.from(reservedConcerts).map((concert) => 
-      ({  id: concert.id, details: concert.details,}));
+    const selectedConcerts = Array.from(reservedConcerts);
 
-    return { name, email, concerts: selectedConcerts };
+    console.log("data: " + selectedConcerts);
+    return { name, email, concert_id: selectedConcerts };
   }
 
   function saveFormData(formData) {
@@ -435,86 +360,37 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((data) => {
         console.log("Response from backend:", data);
         if (data.success) {
-          swal({
-            title: "Success!",
-            text: "Reservation successful!",
-            icon: "success",
-            button: "OK",
-          }).then(() => {
-            localStorage.removeItem("name");
-            localStorage.removeItem("email");
-            window.location.href = "homee.html";
-          });
+          alert("Reservation successful!");
+          localStorage.removeItem("name");
+          localStorage.removeItem("email");
+          window.location.href = "homee.html";
         } else {
-          swal("Reservation failed", data.message, "error");
+          alert("Reservation failed. " + data.message);
         }
       })
       .catch((error) => {
         console.error("Error submitting reservation: ", error);
-        swal("Error", "An error occurred. Please try again.\n" + error.message, "error");
+        alert("An error occurred. Please try again. " + error.message);
       });
   }
-
   const checkout = document.querySelector(".checkout");
   if (checkout) {
     checkout.addEventListener("click", function (event) {
       event.preventDefault();
 
       const formData = setFormData();
-      if (formData.concerts.length === 0) {
-        swal("No Reservation", "No reservation to checkout.", "warning");
+      if (formData.concert_id.length === 0) {
+        alert("No reservation to checkout.");
         return;
       }
 
-      swal({
-        title: `Hi ${formData.name}`,
-        text: `Are you sure you want to reserve tickets for:\n\n${formData.concerts.join(",\n")}\n\nA confirmation email will be sent to you.`,
-        icon: "info",
-        buttons: ["Cancel", "Confirm"],
-      }).then((willReserve) => {
-        if (willReserve) {
-          saveFormData(formData);
-          submitReservation(formData);
-        }
-      });
+      const userConfirmed = confirm(
+        `Hi ${formData.name}, \n\nAre you sure you want to reserve the ticket(s)? A confirmation email will be sent to you.`);
+      if (!userConfirmed) {
+        return;
+      }
+      saveFormData(formData);
+      submitReservation(formData);
     });
   }
 });
-
-
-// function checkSlotAndDisable() {
-//   for (let i = 1; i <= 10; i++) { // assuming 10 concerts
-//     const slotText = document.getElementById("slot-" + i);
-//     const reserveButton = document.getElementById("reserve-" + i);
-    
-//     if (slotText && reserveButton) {
-//       const available = parseInt(slotText.textContent);
-
-//       if (available === 0) {
-//         reserveButton.disabled = true;
-//         reserveButton.textContent = "Sold Out";
-//         reserveButton.style.cursor = "not-allowed";
-//       }
-//     }
-//   }
-// }
-
-// // Run this once page is loaded
-// window.onload = checkSlotAndDisable;
-
-// function updateTicketDisplay(concertIds) {
-//   concertIds.forEach(id => {
-//     // You would typically fetch the updated slot info and display it
-//     // or decrement the count on the frontend directly.
-//     const slotElement = document.getElementById(`slot-${id}`);
-//     let availableTickets = parseInt(slotElement.innerText.replace("Available Tickets: ", ""));
-//     if (availableTickets > 0) {
-//       slotElement.innerText = `Available Tickets: ${availableTickets - 1}`;
-//     } else {
-//       slotElement.innerText = "Sold Out";
-//       // Disable the reservation button
-//       const reserveButton = document.getElementById(`reserve-btn-${id}`);
-//       reserveButton.disabled = true;
-//     }
-//   });
-// }

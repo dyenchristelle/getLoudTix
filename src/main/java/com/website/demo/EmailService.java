@@ -16,27 +16,22 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendConfirmationEmail(String to, String name, List<String> concerts) {
+    public void sendConfirmationEmail(String to, String name, List<concert> concerts) {
         SimpleMailMessage message = new SimpleMailMessage();
-        String concertDetails = String.join("\n", concerts);
-        // StringBuilder concertDetails = new StringBuilder();
+        StringBuilder concertDetails = new StringBuilder();
 
-        // for (Map<String, String> concert : concerts) {
-        //     String concertName = concert.get("name");
-        //     String concertDate = concert.get("date");
-    
-        //     concertDetails.append("🎤 Concert Name: " + concertName + "\n");
-        //     concertDetails.append("📅 Date: " + concertDate + "\n\n");
-        // }
-
+        for (concert concert : concerts) {
+            concertDetails.append("Name: ").append(concert.getName()).append("\n")
+                          .append("Title: ").append(concert.getConcert()).append("\n")
+                          .append("Date: ").append(concert.getDate()).append("\n\n");
+        }
         message.setTo(to);
         message.setSubject("🎟️ Ticket Reservation Confirmation");
         message.setText("Hello " + name + ",\n\n"
                 + "Thank you for reserving your tickets with GetLoudTix!\n"
                 + "Your reservation has been confirmed. ✅\n\n"
-                + "Event Details:\n"
-                // + concertDetails.toString()
-                + concertDetails + "\n\n"
+                + "Reservation Details:\n"
+                + concertDetails + "\n"
                 + "📍 Venue: Loud Arena, New York\n\n"
                 + "See you at the event! 💖\n\n"
                 + "Best regards,\n"
@@ -45,7 +40,7 @@ public class EmailService {
         mailSender.send(message);
     }
 
-    public void sendDeletionConfirmation(String to, String name, List<String> concerts) {
+    public void sendDeletionConfirmation(String to, String name) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setSubject("Reservation Cancelled - GetLoudTix");

@@ -23,8 +23,6 @@ public class slot {
     private int day9;
     private int day10;
 
-    private String slotText;
-
     public slot() {}
 
     public Integer getId() {return id;}
@@ -59,8 +57,4 @@ public class slot {
 
     public int getDay10() {return day10;}
     public void setDay10(int day10) {this.day10 = day10;}
-
-    
-    public String getSlotText() {return slotText;}
-    public void setSlotText(String slotText) {this.slotText = slotText;}
 }

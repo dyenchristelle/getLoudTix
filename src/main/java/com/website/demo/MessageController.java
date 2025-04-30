@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -26,13 +27,17 @@ public class MessageController {
     private final MessageService messageService;
     private final MessageRepository messageRepository;
     private final EmailService emailService;
+    private final ConcertRepository concertRepository;
+    private final ConcertService concertService;
     // private final SlotService slotService;
 
     @Autowired
-    public MessageController(MessageService messageService, MessageRepository messageRepository, EmailService emailService) {
+    public MessageController(MessageService messageService, MessageRepository messageRepository, EmailService emailService, ConcertRepository concertRepository, ConcertService concertService) {
         this.messageService = messageService;
         this.messageRepository = messageRepository;
         this.emailService = emailService;
+        this.concertRepository = concertRepository;
+        this.concertService = concertService;
         // this.slotService = slotService;
     }
     @PostMapping("/submitChoice")
@@ -42,11 +47,18 @@ public class MessageController {
 
             messageService.decrementSlotAvailability(request.getConcert_id());
 
-            emailService.sendConfirmationEmail(request.getEmail(), request.getName(), request.getConcerts());
+            List<concert> concerts = new ArrayList<>();
+            for (Integer concertId : request.getConcert_id()) {
+                concert concert = concertService.getConcertById(concertId);  
+                if (concert != null) {
+                    concerts.add(concert);
+                }
+            }
+        
+            emailService.sendConfirmationEmail(request.getEmail(), request.getName(), concerts);
 
             System.out.println("Received name: " + request.getName());
             System.out.println("Received email: " + request.getEmail());
-            System.out.println("Received day: " + request.getConcerts());
             System.out.println("Received day: " + request.getConcert_id());
             
             return ResponseEntity.ok(Map.of("success", true, "message", "Reservation successful!"));
@@ -72,11 +84,10 @@ public class MessageController {
 
             if (existingReservation != null) {
                 String name = existingReservation.getName();
-                List<String> concerts = existingReservation.getConcerts(); 
 
                 boolean deletedMessage = messageService.deleteMessageByEmail(email);
                 if (deletedMessage) {
-                    emailService.sendDeletionConfirmation(email, name, concerts);
+                    emailService.sendDeletionConfirmation(email, name);
                     return ResponseEntity.ok(Map.of("success", true, "message", "Reservation deleted successfully"));
                 } else {
                     return ResponseEntity.badRequest().body(Map.of("success", false, "message", "Failed to delete the reservation"));
