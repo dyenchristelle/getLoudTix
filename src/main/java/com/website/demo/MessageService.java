@@ -1,9 +1,7 @@
 package com.website.demo;
 
-import org.aspectj.weaver.patterns.ConcreteCflowPointcut.Slot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.website.demo.MessageRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 // import java.util.ArrayList;
@@ -24,20 +22,17 @@ public class MessageService {
 
     @Transactional
     public void saveMessage(Message request) {
-        if (messageRepository.existsByEmail(request.getEmail())){
-            throw new IllegalArgumentException("You're already reserved.");
+        if (messageRepository.existsByEmail(request.getEmail())){ // checks if email already exists
+            throw new IllegalArgumentException("Already reserved.");
         }
-        if (request.getConcert_id().isEmpty()) {
-            throw new IllegalArgumentException("Please select at least one day.");
+        if (request.getConcert_id().isEmpty()) { // checks if at leats one ticket is selected
+            throw new IllegalArgumentException("No ticket is selected.");
         }
-
         try {
-            decrementSlotAvailability(request.getConcert_id());
-            Message msg = new Message(request.getName(), request.getEmail(), request.getConcert_id());
-            messageRepository.save(msg);
-            // slot availableSlot = slotRepository.findById(1);
-            // slotRepository.save(availableSlot);
-            System.out.println("Save successful!");
+            decrementSlotAvailability(request.getConcert_id());  // this retrieves the concert_id fro decrementing the slots
+            Message msg = new Message(request.getName(), request.getEmail(), request.getConcert_id()); // this gets the parameters to be stored in db
+            messageRepository.save(msg); // save() is automatically understood as insert as provided by crudrepository interface
+            System.out.println("Save successful!"); // debugging purposes
         } catch (Exception e) {
             System.err.println("Error saving message: " + e.getMessage());
         }

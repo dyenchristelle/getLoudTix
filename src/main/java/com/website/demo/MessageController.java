@@ -3,7 +3,6 @@ package com.website.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-// import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,14 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/api")
-// @CrossOrigin(origins = "https://f52b-136-158-65-43.ngrok-free.app")
-@CrossOrigin(origins = "http://localhost:9090")
+@CrossOrigin(origins = "https://457f-136-158-65-43.ngrok-free.app")
+// @CrossOrigin(origins = "http://localhost:9090")
 public class MessageController {
     private final MessageService messageService;
     private final MessageRepository messageRepository;
@@ -40,62 +38,49 @@ public class MessageController {
         this.concertService = concertService;
         // this.slotService = slotService;
     }
-    @PostMapping("/submitChoice")
-    public ResponseEntity<Map<String, Object>> submitChoice(@RequestBody Message request) {
+    @PostMapping("/submitChoice") // http request - post means insert 
+    public ResponseEntity<Map<String, Object>> submitChoice(@RequestBody Message request) { // triggered when frontend send POST (checkout is clicked)
         try {
-            messageService.saveMessage(request);
-
-            messageService.decrementSlotAvailability(request.getConcert_id());
+            messageService.saveMessage(request); // this saves the info from the parameter like name, email, concert_id in the db
 
             List<concert> concerts = new ArrayList<>();
-            for (Integer concertId : request.getConcert_id()) {
+            for (Integer concertId : request.getConcert_id()) { // for each concert_id, the info in concert db were retrieved, it will sent to the email 
                 concert concert = concertService.getConcertById(concertId);  
                 if (concert != null) {
-                    concerts.add(concert);
+                    concerts.add(concert); // this will be added to concerts list that is in parameter in line58
                 }
             }
         
-            emailService.sendConfirmationEmail(request.getEmail(), request.getName(), concerts);
+            emailService.sendConfirmationEmail(request.getEmail(), request.getName(), concerts); // email will be sent to the user containing the parameters
 
             System.out.println("Received name: " + request.getName());
-            System.out.println("Received email: " + request.getEmail());
+            System.out.println("Received email: " + request.getEmail());      // for debugging purposes
             System.out.println("Received day: " + request.getConcert_id());
             
-            return ResponseEntity.ok(Map.of("success", true, "message", "Reservation successful!"));
-        } catch (IllegalArgumentException e) {
+            return ResponseEntity.ok(Map.of("success", true, "message", "Reservation successful!")); //if successfull, this will return to frontend
+        } catch (IllegalArgumentException e) { // error in saveMessage or decrementSlot, minsan hindi tugma ung variable names sa column names
             e.printStackTrace();
             return ResponseEntity.badRequest().body(Map.of("success", false, "message", e.getMessage()));
-        } catch (Exception e) {
+        } catch (Exception e) { // any error
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("success", false, "message", "Internal Server Error"));
         }
     }
-    @GetMapping("/checkReservation")
-    public ResponseEntity<Map<String, Boolean>> checkReservation(@RequestParam String email) {
-        boolean exists = messageRepository.existsByEmail(email);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("exists", exists);
-        return ResponseEntity.ok(response);
+    @GetMapping("/checkReservation") // http request - get means retrieve
+    public ResponseEntity<Map<String, Boolean>> checkReservation(@RequestParam String email) { // triggered when get is sent from frontend (in start - must not exist ; in delete - must exist)
+        boolean exists = messageRepository.existsByEmail(email); // this checks the email input in database
+        
+        return ResponseEntity.ok(Map.of("exists", exists));  // used to create response in json format (which springboot does)
+        // will return true: exists ; false: not exists
+        // ^^^^^ will be sent to frontend
     }
     @DeleteMapping("/deleteReservation")
     public ResponseEntity<Map<String, Object>> deleteReservation(@RequestParam String email) {
         try {
-            Message existingReservation = messageRepository.findByEmail(email); // Step 1: find reservation
-
-            if (existingReservation != null) {
-                String name = existingReservation.getName();
-
-                boolean deletedMessage = messageService.deleteMessageByEmail(email);
-                if (deletedMessage) {
-                    emailService.sendDeletionConfirmation(email, name);
-                    return ResponseEntity.ok(Map.of("success", true, "message", "Reservation deleted successfully"));
-                } else {
-                    return ResponseEntity.badRequest().body(Map.of("success", false, "message", "Failed to delete the reservation"));
-                }
-            } else {
-                return ResponseEntity.badRequest().body(Map.of("success", false, "message", "No reservation found with the provided email and name"));
-              }
-        
+            String name = messageRepository.findByEmail(email).getName(); // gets the name in the row of email to be deleted
+            messageService.deleteMessageByEmail(email); // calls deletion in service
+            emailService.sendDeletionConfirmation(email, name);
+            return ResponseEntity.ok(Map.of("success", true, "message", "Reservation deleted successfully"));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("success", false, "message", "Internal Server Error"));
