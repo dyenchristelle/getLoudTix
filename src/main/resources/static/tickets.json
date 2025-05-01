@@ -5,7 +5,7 @@
     "image": "posters/ariana.jpg",
     "date": "June 10, 2025",
     "concert": "The Eras Tour",
-    "slots" :"Limited Slots Only.",
+    "slotText" :"Limited Slots Only.",
     "details": "Syd Hartha \nThe Night \nJune 10, 2025"
   },
   {
@@ -14,7 +14,7 @@
     "image": "posters/dhruvc.jpg",
     "date": "June 11, 2025",
     "concert": "The Eras Tour",
-    "slots" :"Limited Slots Only.",
+    "slotText" :"Limited Slots Only.",
     "details": "Hev Abi \nThe Night \nJune 11, 2025"
   },
   {
@@ -23,7 +23,7 @@
     "image": "posters/ariana.jpg",
     "date": "June 12, 2025",
     "concert": "The Eras Tour",
-    "slots" : "Limited Slots Only.",
+    "slotText" : "Limited Slots Only.",
     "details": "Maki \nThe Night \nJune 12, 2025"
   },
   {
@@ -32,7 +32,7 @@
     "image": "posters/brunomars.jpg",
     "date": "June 13, 2025",
     "concert": "The Eras Tour",
-    "slots" :"Limited Slots Only.",
+    "slotText" :"Limited Slots Only.",
     "details": "Earl Agustin \nThe Night \nJune 13, 2025"
   },
   {
@@ -41,7 +41,7 @@
     "image": "posters/bea.jpg",
     "date": "June 14, 2025",
     "concert": "The Eras Tour",
-    "slots" :"Limited Slots Only.",
+    "slotText" :"Limited Slots Only.",
     "details": "Al James \nThe Night \nJune 16, 2025"
   },
   {
@@ -50,7 +50,7 @@
     "image": "posters/clairo.jpg",
     "date": "June 17, 2025",
     "concert": "The Eras Tour",
-    "slots" :"Limited Slots Only.",
+    "slotText" :"Limited Slots Only.",
     "details": "Kiyo \nThe Night \nJune 17, 2025"
   },
   {
@@ -59,7 +59,7 @@
     "image": "posters/clairo.jpg",
     "date": "June 18, 2025",
     "concert": "The Eras Tour",
-    "slots" :"Limited Slots Only.",
+    "slotText" :"Limited Slots Only.",
     "details": "The Ridleys \nThe Night \nJune 18, 2025"
   },
   {
@@ -68,7 +68,7 @@
     "image": "posters/clairo.jpg",
     "date": "June 19, 2025",
     "concert": "The Eras Tour",
-    "slots" :"Limited Slots Only.",
+    "slotText" :"Limited Slots Only.",
     "details": "Hey June \nThe Night \nJune 19, 2025"
   },
   {
@@ -77,7 +77,7 @@
     "image": "posters/clairo.jpg",
     "date": "June 20, 2025",
     "concert": "The Eras Tour",
-    "slots" :"Limited Slots Only.",
+    "slotText" :"Limited Slots Only.",
     "details": "Over October \nThe Night \nJune 20, 2025"
   },
   {
@@ -86,7 +86,7 @@
     "image": "posters/clairo.jpg",
     "date": "June 21, 2025",
     "concert": "The Eras Tour",
-    "slots" :"Limited Slots Only.",
+    "slotText" :"Limited Slots Only.",
     "details": "Cup of Joe \nThe Night \nJune 21, 2025"
   }
 ]

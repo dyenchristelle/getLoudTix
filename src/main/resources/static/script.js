@@ -286,7 +286,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ${event}<br>
             <span class="concert-date">${date}</span> 
           </h2>
-           <span class="slot"> ${ticket.slots}</span>
+           <span class="slot"> ${ticket.slotText}</span>
           <button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>
         </div>
       `;
