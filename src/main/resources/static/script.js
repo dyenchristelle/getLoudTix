@@ -349,6 +349,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function submitReservation(formData) {
+    const overlay = document.getElementById("loadingOverlay");
+    overlay.style.display = "block"; // Show loader
+
     console.log("Sending data:", formData);
 
     fetch("http://localhost:9090/api/submitChoice", {
@@ -358,6 +361,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
       .then((response) => response.json())
       .then((data) => {
+        overlay.style.display = "none"; // Hide loader
         console.log("Response from backend:", data);
         if (data.success) {
           alert("Reservation successful!");
@@ -369,10 +373,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       })
       .catch((error) => {
+        overlay.style.display = "none"; // Hide loader
         console.error("Error submitting reservation: ", error);
         alert("An error occurred. Please try again. " + error.message);
       });
   }
+
   const checkout = document.querySelector(".checkout");
   if (checkout) {
     checkout.addEventListener("click", function (event) {
@@ -385,10 +391,16 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       const userConfirmed = confirm(
-        `Hi ${formData.name}, \n\nAre you sure you want to reserve the ticket(s)? A confirmation email will be sent to you.`);
-      if (!userConfirmed) {
-        return;
-      }
+        `Hi ${formData.name}, \n\nAre you sure you want to reserve the ticket(s)? A confirmation email will be sent to you.`
+      );
+
+      if (!userConfirmed) return;
+
+      // Show loading overlay
+      const overlay = document.getElementById("loadingOverlay");
+      overlay.style.display = "block";
+
+      // Proceed with saving and submitting
       saveFormData(formData);
       submitReservation(formData);
     });
