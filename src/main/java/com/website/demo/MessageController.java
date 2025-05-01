@@ -25,18 +25,14 @@ public class MessageController {
     private final MessageService messageService;
     private final MessageRepository messageRepository;
     private final EmailService emailService;
-    private final ConcertRepository concertRepository;
     private final ConcertService concertService;
-    // private final SlotService slotService;
 
     @Autowired
-    public MessageController(MessageService messageService, MessageRepository messageRepository, EmailService emailService, ConcertRepository concertRepository, ConcertService concertService) {
+    public MessageController(MessageService messageService, MessageRepository messageRepository, EmailService emailService, ConcertService concertService) {
         this.messageService = messageService;
         this.messageRepository = messageRepository;
         this.emailService = emailService;
-        this.concertRepository = concertRepository;
         this.concertService = concertService;
-        // this.slotService = slotService;
     }
     @PostMapping("/submitChoice") // http request - post means insert 
     public ResponseEntity<Map<String, Object>> submitChoice(@RequestBody Message request) { // triggered when frontend send POST (checkout is clicked)

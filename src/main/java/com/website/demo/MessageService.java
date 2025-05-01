@@ -43,8 +43,8 @@ public class MessageService {
         try {
             Message message = messageRepository.findByEmail(email);
             if (message != null) {
-                incrementSlotAvailability(message.getConcert_id());
-                messageRepository.delete(message);
+                incrementSlotAvailability(message.getConcert_id()); // increment slot of the concert_id stored
+                messageRepository.delete(message); // delete() is automatically understood to delete as provided by crudrepository interface
                 return true; // Successfully deleted
             } else {
                 return false; // Reservation not found
@@ -58,8 +58,8 @@ public class MessageService {
 
 //decrement
     public void decrementSlotAvailability(List<Integer> concert_id) {
-        slot availableSlot = slotRepository.findById(1);
-        for (Integer concertId : concert_id) {
+        slot availableSlot = slotRepository.findById(1); // 
+        for (Integer concertId : concert_id) { // for each concert_id stored, 
             switch (concertId) {
                 case 1:
                     if (availableSlot.getDay1() > 0) {
