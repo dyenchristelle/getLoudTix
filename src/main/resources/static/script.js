@@ -334,6 +334,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // checkout button
 document.addEventListener("DOMContentLoaded", function () {
+  const initApp = () => {
+    console.log("Initializing app...");
+    fetch("http://localhost:9090/tickets.json")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        console.log("Response Status:", response.status); // Log response status
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Fetched Data:", data);
+        listTickets = data;
+        addDataToHTML();
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  };
+
+  // ✅ Start App
+  try {
+    initApp();
+  } catch (error) {
+    console.error("Error in initApp:", error);
+  }
+
   function setFormData() {
     const name = localStorage.getItem("name");
     const email = localStorage.getItem("email");
@@ -350,10 +375,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function submitReservation(formData) {
     const overlay = document.getElementById("loadingOverlay");
-    overlay.style.display = "block"; // Show loader
-
+    overlay.style.display = "block"; // Show loader when starting request
+  
     console.log("Sending data:", formData);
-
+  
     fetch("http://localhost:9090/api/submitChoice", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -361,23 +386,31 @@ document.addEventListener("DOMContentLoaded", function () {
     })
       .then((response) => response.json())
       .then((data) => {
-        overlay.style.display = "none"; // Hide loader
+        overlay.style.display = "none"; // Request to hide loader
         console.log("Response from backend:", data);
+  
         if (data.success) {
-          alert("Reservation successful!");
-          localStorage.removeItem("name");
-          localStorage.removeItem("email");
-          window.location.href = "homee.html";
+          setTimeout(() => {
+            alert("Reservation successful!");
+            localStorage.removeItem("name");
+            localStorage.removeItem("email");
+            window.location.href = "index.html"; // Redirect after success
+          }, 100); // Let UI update before blocking alert
         } else {
-          alert("Reservation failed. " + data.message);
+          setTimeout(() => {
+            alert("Reservation failed. " + data.message);
+          }, 100); // Let UI update before blocking alert
         }
       })
       .catch((error) => {
-        overlay.style.display = "none"; // Hide loader
-        console.error("Error submitting reservation: ", error);
-        alert("An error occurred. Please try again. " + error.message);
+        overlay.style.display = "none"; // Hide loader if request fails
+        console.error("Error occurred:", error);
+        setTimeout(() => {
+          alert("An error occurred while submitting your reservation.");
+        }, 100); // Delay alert slightly
       });
   }
+  
 
   const checkout = document.querySelector(".checkout");
   if (checkout) {
@@ -393,14 +426,10 @@ document.addEventListener("DOMContentLoaded", function () {
       const userConfirmed = confirm(
         `Hi ${formData.name}, \n\nAre you sure you want to reserve the ticket(s)? A confirmation email will be sent to you.`
       );
+      if (!userConfirmed) {
+        return;
+      }
 
-      if (!userConfirmed) return;
-
-      // Show loading overlay
-      const overlay = document.getElementById("loadingOverlay");
-      overlay.style.display = "block";
-
-      // Proceed with saving and submitting
       saveFormData(formData);
       submitReservation(formData);
     });
