@@ -7,7 +7,7 @@ package com.website.demo;
 import jakarta.persistence.*;
 
 @Entity 
-@Table(name = "avail_slot")
+@Table(name = "avail_slot") // for slot 
 public class slot {
     @Id
     private int id;

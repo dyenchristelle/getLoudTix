@@ -78,9 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       } catch (error) {
         console.error("Error checking reservation:", error);
-        alert(
-          "Something went wrong while checking your reservation. Please try again."
-        );
+        alert("Something went wrong while checking your reservation. Please try again.");
         return;
       }
 
@@ -384,9 +382,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      const userConfirmed = confirm(
-        `Hi ${formData.name}, \n\nAre you sure you want to reserve the ticket(s)? A confirmation email will be sent to you.`
-      );
+      const userConfirmed = confirm(`Hi ${formData.name}, \n\nAre you sure you want to reserve the ticket(s)? A confirmation email will be sent to you.`);
 
       if (!userConfirmed) return;
 
