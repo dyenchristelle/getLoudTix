@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "https://457f-136-158-65-43.ngrok-free.app")
+@CrossOrigin(origins = "https://bfc7-2405-8d40-4085-5148-819-56c8-6763-137d.ngrok-free.app")
 // @CrossOrigin(origins = "http://localhost:9090")
 public class MessageController {
     private final MessageService messageService;

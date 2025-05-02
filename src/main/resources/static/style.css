@@ -26,11 +26,13 @@ header {
   font-size: small;
   margin-top: 5px;
 }
+
 /* .container{
     width: 0 auto;
 
     transition: transform .5s;
 } */
+ 
 body.showTicket .ticketTab {
   top: 0;
   right: 0;

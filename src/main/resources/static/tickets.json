@@ -4,89 +4,89 @@
     "name": "Syd",
     "image": "posters/Syd.jpg",
     "date": "June 10, 2025",
-    "concert": "The Eras Tour",
+    "concert": "Tila Tala",
     "slotText" :"Limited Slots Only.",
-    "details": "Syd Hartha \nThe Night \nJune 10, 2025"
+    "details": "Syd Hartha \nTila Tala \nJune 10, 2025"
   },
   {
     "id": 2,
     "name": "Hev Abi",
-    "image": "posters/dhruvc.jpg",
+    "image": "posters/Hev Abi.jpg",
     "date": "June 11, 2025",
-    "concert": "The Eras Tour",
+    "concert": "Most Wanted",
     "slotText" :"Limited Slots Only.",
-    "details": "Hev Abi \nThe Night \nJune 11, 2025"
+    "details": "Hev Abi \nMost Wanted \nJune 11, 2025"
   },
   {
     "id": 3,
     "name": "Maki",
-    "image": "posters/ariana.jpg",
+    "image": "posters/Maki.jpg",
     "date": "June 12, 2025",
-    "concert": "The Eras Tour",
+    "concert": "Dilaw",
     "slotText" : "Limited Slots Only.",
-    "details": "Maki \nThe Night \nJune 12, 2025"
+    "details": "Maki \nDilaw \nJune 12, 2025"
   },
   {
     "id": 4,
     "name": "Earl Agustin",
-    "image": "posters/brunomars.jpg",
+    "image": "posters/Earl.jpg",
     "date": "June 13, 2025",
-    "concert": "The Eras Tour",
+    "concert": "Dalangin",
     "slotText" :"Limited Slots Only.",
-    "details": "Earl Agustin \nThe Night \nJune 13, 2025"
+    "details": "Earl Agustin \nDalangin \nJune 13, 2025"
   },
   {
     "id": 5,
     "name": "Al James",
-    "image": "posters/bea.jpg",
+    "image": "posters/AlJames.jpg",
     "date": "June 14, 2025",
-    "concert": "The Eras Tour",
+    "concert": "PSG",
     "slotText" :"Limited Slots Only.",
-    "details": "Al James \nThe Night \nJune 16, 2025"
+    "details": "Al James \nPSG \nJune 14, 2025"
   },
   {
     "id": 6,
     "name": "Kiyo",
-    "image": "posters/clairo.jpg",
-    "date": "June 17, 2025",
-    "concert": "The Eras Tour",
+    "image": "posters/Kiyo.jpg",
+    "date": "June 15, 2025",
+    "concert": "Ikaw Lang",
     "slotText" :"Limited Slots Only.",
-    "details": "Kiyo \nThe Night \nJune 17, 2025"
+    "details": "Kiyo \nIkaw Lang \nJune 15, 2025"
   },
   {
     "id": 7,
     "name": "The Ridleys",
-    "image": "posters/clairo.jpg",
-    "date": "June 18, 2025",
-    "concert": "The Eras Tour",
+    "image": "posters/Ridleys.jpg",
+    "date": "June 16, 2025",
+    "concert": "Be With You",
     "slotText" :"Limited Slots Only.",
-    "details": "The Ridleys \nThe Night \nJune 18, 2025"
+    "details": "The Ridleys \nBe With You \nJune 16, 2025"
   },
   {
     "id": 8,
-    "name": "Hey June",
-    "image": "posters/clairo.jpg",
-    "date": "June 19, 2025",
-    "concert": "The Eras Tour",
+    "name": "Hey June!",
+    "image": "posters/HeyJune.jpg",
+    "date": "June 17, 2025",
+    "concert": "Panahon",
     "slotText" :"Limited Slots Only.",
-    "details": "Hey June \nThe Night \nJune 19, 2025"
+    "details": "Hey June \nPanahon \nJune 17, 2025"
   },
   {
     "id": 9,
-    "name": "Over October",
-    "image": "posters/clairo.jpg",
-    "date": "June 20, 2025",
-    "concert": "The Eras Tour",
+    "name": "SUD",
+    "image": "posters/SUD.jpg",
+    "date": "June 18, 2025",
+    "concert": "Dumaloy",
     "slotText" :"Limited Slots Only.",
-    "details": "Over October \nThe Night \nJune 20, 2025"
+    "details": "SUD \nThe Night \nJune 18, 2025"
   },
   {
     "id": 10,
     "name": "Cup of Joe",
-    "image": "posters/clairo.jpg",
-    "date": "June 21, 2025",
-    "concert": "The Eras Tour",
+    "image": "posters/CupofJoe.jpg",
+    "date": "June 19, 2025",
+    "concert": "Patutunguhan",
     "slotText" :"Limited Slots Only.",
-    "details": "Cup of Joe \nThe Night \nJune 21, 2025"
+    "details": "Cup of Joe \nPatutunguhan \nJune 19, 2025"
   }
 ]

@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }   
 //retrieve, check if email already exists (must be not yet existing)
       try {
-        const response = await fetch(`https://457f-136-158-65-43.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
+        const response = await fetch(`https://bfc7-2405-8d40-4085-5148-819-56c8-6763-137d.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
         const data = await response.json();
 
         if (data.exists) {
@@ -113,14 +113,14 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 //retrieve, check if email exists (must be existing)
       try {
-        const response = await fetch(`https://457f-136-158-65-43.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
+        const response = await fetch(`https://bfc7-2405-8d40-4085-5148-819-56c8-6763-137d.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
         const data = await response.json();
 
         if (data.exists) {
           const userConfirmed = confirm(`Hi, are you sure you want to delete your reservation? A confirmation email will be sent to you.`);
             if (!userConfirmed) return;
 
-          const deleteResponse = await fetch(`https://457f-136-158-65-43.ngrok-free.app/api/deleteReservation?email=${encodeURIComponent(email)}`,{
+          const deleteResponse = await fetch(`https://bfc7-2405-8d40-4085-5148-819-56c8-6763-137d.ngrok-free.app/api/deleteReservation?email=${encodeURIComponent(email)}`,{
               method: "DELETE",
             }
           );
@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ✅ Initialize App (Fetch Data from JSON)
   const initApp = () => {
     console.log("Initializing app...");
-    fetch("https://457f-136-158-65-43.ngrok-free.app/tickets.json")
+    fetch("https://bfc7-2405-8d40-4085-5148-819-56c8-6763-137d.ngrok-free.app/tickets.json")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -342,34 +342,42 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function submitReservation(formData) {
     const overlay = document.getElementById("loadingOverlay");
-    overlay.style.display = "block"; // Show loader
-
+    overlay.style.display = "block"; // Show loader when starting request
+  
     console.log("Sending data:", formData);
-
-    fetch("https://457f-136-158-65-43.ngrok-free.app/api/submitChoice", {
+  
+    fetch("https://bfc7-2405-8d40-4085-5148-819-56c8-6763-137d.ngrok-free.app/api/submitChoice", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     })
       .then((response) => response.json())
       .then((data) => {
-        overlay.style.display = "none"; // Hide loader
+        overlay.style.display = "none"; // Request to hide loader
         console.log("Response from backend:", data);
+  
         if (data.success) {
-          alert("Reservation successful!");
-          localStorage.removeItem("name");
-          localStorage.removeItem("email");
-          window.location.href = "homee.html";
+          setTimeout(() => {
+            alert("Reservation successful!");
+            localStorage.removeItem("name");
+            localStorage.removeItem("email");
+            window.location.href = "index.html"; // Redirect after success
+          }, 100); // Let UI update before blocking alert
         } else {
-          alert("Reservation failed. " + data.message);
+          setTimeout(() => {
+            alert("Reservation failed. " + data.message);
+          }, 100); // Let UI update before blocking alert
         }
       })
       .catch((error) => {
-        overlay.style.display = "none"; // Hide loader
-        console.error("Error submitting reservation: ", error);
-        alert("An error occurred. Please try again. " + error.message);
+        overlay.style.display = "none"; // Hide loader if request fails
+        console.error("Error occurred:", error);
+        setTimeout(() => {
+          alert("An error occurred while submitting your reservation.");
+        }, 100); // Delay alert slightly
       });
   }
+  
 
   const checkout = document.querySelector(".checkout");
   if (checkout) {
