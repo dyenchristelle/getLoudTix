@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }   
 //retrieve, check if email already exists (must be not yet existing)
       try {
-        const response = await fetch(` https://9f08-216-247-87-208.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
+        const response = await fetch(`https://5073-2405-8d40-4085-5148-40d5-c99d-1dd3-ec25.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
         const data = await response.json();
 
         if (data.exists) {
@@ -115,14 +115,14 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 //retrieve, check if email exists (must be existing)
       try {
-        const response = await fetch(` https://9f08-216-247-87-208.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
+        const response = await fetch(`https://5073-2405-8d40-4085-5148-40d5-c99d-1dd3-ec25.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
         const data = await response.json();
 
         if (data.exists) {
           const userConfirmed = confirm(`Hi, are you sure you want to delete your reservation? A confirmation email will be sent to you.`);
             if (!userConfirmed) return;
 
-          const deleteResponse = await fetch(` https://9f08-216-247-87-208.ngrok-free.app/api/deleteReservation?email=${encodeURIComponent(email)}`,{
+          const deleteResponse = await fetch(`https://5073-2405-8d40-4085-5148-40d5-c99d-1dd3-ec25.ngrok-free.app/api/deleteReservation?email=${encodeURIComponent(email)}`,{
               method: "DELETE",
             }
           );
@@ -190,13 +190,20 @@ document.addEventListener("DOMContentLoaded", function () {
     // const concertDate = button.dataset.concertDate;
     const concert = listTickets.find((ticket) => ticket.id === concertId);
 
+    if (concert.slots <= 0) {
+      alert("Sorry, this concert is sold out.");
+      return;
+    }
+
     // Check if concert is already reserved
     if (reservedConcerts.has(concertId)) {
       alert("You have already reserved this concert!");
       return;
     }
+
     // reservedConcerts.add(concert.id);
     reservedConcerts.add(concert.id);
+
     // Update cart badge
     updateCartBadge();
     // Add to ticket tab
@@ -204,7 +211,18 @@ document.addEventListener("DOMContentLoaded", function () {
     // Mark button as reserved
     button.classList.add("reserved");
     button.innerText = "Reserved";
+
+    concert.slots--;
+
+    const concertCard = document.querySelector(`.concert-card[data-id="${concertId}"]`);
+  if (concertCard) {
+    const slotTextElement = concertCard.querySelector(".slot");
+    if (slotTextElement) {
+      slotTextElement.textContent = `Slots available: ${concert.slots}`;
+    }
   }
+  }
+
   // ✅ Add to Ticket Tab
   function addToTicketTab(concertId) {
     const concert = listTickets.find((ticket) => ticket.id === concertId);
@@ -273,18 +291,21 @@ document.addEventListener("DOMContentLoaded", function () {
       const event = parts[1] || "";
       const date = parts[2] || "";
 
-        newTicket.innerHTML = `
-                <img src="${ticket.image}" alt="${ticket.name}" />  
-                <div class="concert-info">
-                 <h2>
-            ${artist}<br>
-            ${event}<br>
-            <span class="concert-date">${date}</span> 
-          </h2>
-           <span class="slot"> ${ticket.slotText}</span>
-          <button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>
-        </div>
-      `;
+      newTicket.innerHTML = `
+  <img src="${ticket.image}" alt="${ticket.name}" />  
+  <div class="concert-info">
+    <h2>
+      ${artist}<br>
+      ${event}<br>
+      <span class="concert-date">${date}</span> 
+    </h2>
+    <span class="slot">Slots available: ${ticket.slots}</span>
+    ${ticket.slots <= 0 
+      ? '<button class="sold-out-btn" disabled>Sold Out</button>' 
+      : `<button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>`}
+  </div>
+`;
+    
                     // <img src="${ticket.image}" alt="${ticket.name}" />
                     // <div class="concert-info">
                     //     <h2>${ticket.details.replace(/\n/g, '<br>')}</h2>
@@ -303,7 +324,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ✅ Initialize App (Fetch Data from JSON)
   const initApp = () => {
     console.log("Initializing app...");
-    fetch(" https://9f08-216-247-87-208.ngrok-free.app/tickets.json")
+    fetch("https://5073-2405-8d40-4085-5148-40d5-c99d-1dd3-ec25.ngrok-free.app/tickets.json")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -331,7 +352,7 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const initApp = () => {
     console.log("Initializing app...");
-    fetch(" https://9f08-216-247-87-208.ngrok-free.app/tickets.json")
+    fetch(" https://5073-2405-8d40-4085-5148-40d5-c99d-1dd3-ec25.ngrok-free.app/tickets.json")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -374,7 +395,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
     console.log("Sending data:", formData);
   
-    fetch(" https://9f08-216-247-87-208.ngrok-free.app/api/submitChoice", {
+    fetch(" https://5073-2405-8d40-4085-5148-40d5-c99d-1dd3-ec25.ngrok-free.app/api/submitChoice", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),

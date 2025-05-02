@@ -6,6 +6,7 @@
     "date": "June 10, 2025",
     "concert": "Tila Tala",
     "slotText" :"Limited Slots Only.",
+    "slots" : "2",
     "details": "Syd Hartha \nTila Tala \nJune 10, 2025"
   },
   {
@@ -15,6 +16,7 @@
     "date": "June 11, 2025",
     "concert": "Most Wanted",
     "slotText" :"Limited Slots Only.",
+    "slots" : "2",
     "details": "Hev Abi \nMost Wanted \nJune 11, 2025"
   },
   {
@@ -24,6 +26,7 @@
     "date": "June 12, 2025",
     "concert": "Dilaw",
     "slotText" : "Limited Slots Only.",
+    "slots" : "1",
     "details": "Maki \nDilaw \nJune 12, 2025"
   },
   {
@@ -33,6 +36,7 @@
     "date": "June 13, 2025",
     "concert": "Dalangin",
     "slotText" :"Limited Slots Only.",
+    "slots": 0,
     "details": "Earl Agustin \nDalangin \nJune 13, 2025"
   },
   {
@@ -42,6 +46,7 @@
     "date": "June 14, 2025",
     "concert": "PSG",
     "slotText" :"Limited Slots Only.",
+    "slots": 0,
     "details": "Al James \nPSG \nJune 14, 2025"
   },
   {
@@ -51,6 +56,7 @@
     "date": "June 15, 2025",
     "concert": "Ikaw Lang",
     "slotText" :"Limited Slots Only.",
+    "slots": 0,
     "details": "Kiyo \nIkaw Lang \nJune 15, 2025"
   },
   {
@@ -60,6 +66,7 @@
     "date": "June 16, 2025",
     "concert": "Be With You",
     "slotText" :"Limited Slots Only.",
+    "slots": 0,
     "details": "The Ridleys \nBe With You \nJune 16, 2025"
   },
   {
@@ -69,6 +76,7 @@
     "date": "June 17, 2025",
     "concert": "Panahon",
     "slotText" :"Limited Slots Only.",
+    "slots": 0,
     "details": "Hey June \nPanahon \nJune 17, 2025"
   },
   {
@@ -78,6 +86,7 @@
     "date": "June 18, 2025",
     "concert": "Dumaloy",
     "slotText" :"Limited Slots Only.",
+    "slots": 0,
     "details": "SUD \nThe Night \nJune 18, 2025"
   },
   {
@@ -87,6 +96,7 @@
     "date": "June 19, 2025",
     "concert": "Patutunguhan",
     "slotText" :"Limited Slots Only.",
+    "slots": 0,
     "details": "Cup of Joe \nPatutunguhan \nJune 19, 2025"
   }
 ]
