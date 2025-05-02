@@ -46,7 +46,7 @@ public class MessageController {
                     concerts.add(concert); // this will be added to concerts list that is in parameter in line58
                 }
             }
-        
+            // concertService.getAvailableSlotById(concerts);
             emailService.sendConfirmationEmail(request.getEmail(), request.getName(), concerts); // email will be sent to the user containing the parameters
 
             System.out.println("Received name: " + request.getName());

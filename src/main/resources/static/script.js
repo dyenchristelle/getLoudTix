@@ -162,6 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
       bodyElement.classList.toggle("showTicket");
     });
   }
+  
   // ✅ Update Cart Badge
   function updateCartBadge() {
     iconTicketSpan.innerText = reservedConcerts.size;

@@ -6,5 +6,7 @@ import java.util.List;
 public interface ConcertRepository extends CrudRepository<concert, Integer> {
     concert findById(int id);
 
+    // concert getConcertById()
+
     List<concert> findAll();
 }
