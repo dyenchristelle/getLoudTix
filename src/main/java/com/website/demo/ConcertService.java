@@ -2,23 +2,18 @@ package com.website.demo;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import jakarta.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class ConcertService {
-   private Map<Integer, concert> concertMap = new HashMap<>();
    private final List<concert> concerts;
    private ConcertRepository concertRepository;
 
@@ -41,7 +36,9 @@ public class ConcertService {
         return mapper.readValue(inputStream, new TypeReference<List<concert>>() {});
     }
     public List<concert> getAllConcerts() {
-        return concertRepository.findAll();
+        List<concert> concerts = new ArrayList<>();
+    concertRepository.findAll().forEach(concerts::add);
+    return concerts;
     }
 
     public concert getConcertById(int concertId) {

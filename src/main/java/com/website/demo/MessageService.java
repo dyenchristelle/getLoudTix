@@ -1,9 +1,7 @@
 package com.website.demo;
 
-import org.aspectj.weaver.patterns.ConcreteCflowPointcut.Slot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.website.demo.MessageRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 // import java.util.ArrayList;
@@ -24,20 +22,17 @@ public class MessageService {
 
     @Transactional
     public void saveMessage(Message request) {
-        if (messageRepository.existsByEmail(request.getEmail())){
-            throw new IllegalArgumentException("You're already reserved.");
+        if (messageRepository.existsByEmail(request.getEmail())){ // checks if email already exists
+            throw new IllegalArgumentException("Already reserved.");
         }
-        if (request.getConcert_id().isEmpty()) {
-            throw new IllegalArgumentException("Please select at least one day.");
+        if (request.getConcert_id().isEmpty()) { // checks if at leats one ticket is selected
+            throw new IllegalArgumentException("No ticket is selected.");
         }
-
         try {
-            decrementSlotAvailability(request.getConcert_id());
-            Message msg = new Message(request.getName(), request.getEmail(), request.getConcert_id());
-            messageRepository.save(msg);
-            // slot availableSlot = slotRepository.findById(1);
-            // slotRepository.save(availableSlot);
-            System.out.println("Save successful!");
+            decrementSlotAvailability(request.getConcert_id());  // this retrieves the concert_id fro decrementing the slots
+            Message msg = new Message(request.getName(), request.getEmail(), request.getConcert_id()); // this gets the parameters to be stored in db
+            messageRepository.save(msg); // save() is automatically understood as insert as provided by crudrepository interface
+            System.out.println("Save successful!"); // debugging purposes
         } catch (Exception e) {
             System.err.println("Error saving message: " + e.getMessage());
         }
@@ -48,8 +43,8 @@ public class MessageService {
         try {
             Message message = messageRepository.findByEmail(email);
             if (message != null) {
-                incrementSlotAvailability(message.getConcert_id());
-                messageRepository.delete(message);
+                incrementSlotAvailability(message.getConcert_id()); // increment slot of the concert_id stored
+                messageRepository.delete(message); // delete() is automatically understood to delete as provided by crudrepository interface
                 return true; // Successfully deleted
             } else {
                 return false; // Reservation not found
@@ -63,8 +58,8 @@ public class MessageService {
 
 //decrement
     public void decrementSlotAvailability(List<Integer> concert_id) {
-        slot availableSlot = slotRepository.findById(1);
-        for (Integer concertId : concert_id) {
+        slot availableSlot = slotRepository.findById(1); // 
+        for (Integer concertId : concert_id) { // for each concert_id stored, 
             switch (concertId) {
                 case 1:
                     if (availableSlot.getDay1() > 0) {
