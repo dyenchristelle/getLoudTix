@@ -188,13 +188,20 @@ document.addEventListener("DOMContentLoaded", function () {
     // const concertDate = button.dataset.concertDate;
     const concert = listTickets.find((ticket) => ticket.id === concertId);
 
+    if (concert.slots <= 0) {
+      alert("Sorry, this concert is sold out.");
+      return;
+    }
+
     // Check if concert is already reserved
     if (reservedConcerts.has(concertId)) {
       alert("You have already reserved this concert!");
       return;
     }
+
     // reservedConcerts.add(concert.id);
     reservedConcerts.add(concert.id);
+
     // Update cart badge
     updateCartBadge();
     // Add to ticket tab
@@ -202,7 +209,18 @@ document.addEventListener("DOMContentLoaded", function () {
     // Mark button as reserved
     button.classList.add("reserved");
     button.innerText = "Reserved";
+
+    concert.slots--;
+
+    const concertCard = document.querySelector(`.concert-card[data-id="${concertId}"]`);
+  if (concertCard) {
+    const slotTextElement = concertCard.querySelector(".slot");
+    if (slotTextElement) {
+      slotTextElement.textContent = `Slots available: ${concert.slots}`;
+    }
   }
+  }
+
   // ✅ Add to Ticket Tab
   function addToTicketTab(concertId) {
     const concert = listTickets.find((ticket) => ticket.id === concertId);
@@ -271,18 +289,21 @@ document.addEventListener("DOMContentLoaded", function () {
       const event = parts[1] || "";
       const date = parts[2] || "";
 
-        newTicket.innerHTML = `
-                <img src="${ticket.image}" alt="${ticket.name}" />  
-                <div class="concert-info">
-                 <h2>
-            ${artist}<br>
-            ${event}<br>
-            <span class="concert-date">${date}</span> 
-          </h2>
-           <span class="slot"> ${ticket.slotText}</span>
-          <button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>
-        </div>
-      `;
+      newTicket.innerHTML = `
+  <img src="${ticket.image}" alt="${ticket.name}" />  
+  <div class="concert-info">
+    <h2>
+      ${artist}<br>
+      ${event}<br>
+      <span class="concert-date">${date}</span> 
+    </h2>
+    <span class="slot">Slots available: ${ticket.slots}</span>
+    ${ticket.slots <= 0 
+      ? '<button class="sold-out-btn" disabled>Sold Out</button>' 
+      : `<button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>`}
+  </div>
+`;
+    
                     // <img src="${ticket.image}" alt="${ticket.name}" />
                     // <div class="concert-info">
                     //     <h2>${ticket.details.replace(/\n/g, '<br>')}</h2>
