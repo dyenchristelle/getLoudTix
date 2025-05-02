@@ -589,8 +589,9 @@ p {
 
 /* try error message */
 #error-message {
-  color: rgb(231, 226, 74);
-  /* margin-top: 5px; */
+  color: #d0abe7;
+  /* margin-top: 0; */
+  margin-bottom: 3px;
   font-size: 12px;
   display: none;
   text-align: left;
