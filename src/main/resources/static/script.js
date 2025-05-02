@@ -155,16 +155,15 @@ document.addEventListener("DOMContentLoaded", function () {
   let closeTicket = document.querySelector(".close");
   console.log("JavaScript file is loaded!");
 
-  // if (ticketIconElement && closeTicket) {
-  //   closeTicket.addEventListener("click", () => {
-  //     bodyElement.classList.toggle("showTicket");
-  //   });
+  if (ticketIconElement && closeTicket) {
+    closeTicket.addEventListener("click", () => {
+      bodyElement.classList.toggle("showTicket");
+    });
 
-  //   ticketIconElement.addEventListener("click", () => {
-  //     bodyElement.classList.toggle("showTicket");
-  //   });
-  // }
-
+    ticketIconElement.addEventListener("click", () => {
+      bodyElement.classList.toggle("showTicket");
+    });
+  }
   
   // ✅ Update Cart Badge
   function updateCartBadge() {
