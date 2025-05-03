@@ -13,26 +13,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "https://bfc7-2405-8d40-4085-5148-819-56c8-6763-137d.ngrok-free.app")
+@CrossOrigin(origins = "https://b104-136-158-65-43.ngrok-free.app")
 // @CrossOrigin(origins = "http://localhost:9090")
 public class MessageController {
     private final MessageService messageService;
     private final MessageRepository messageRepository;
     private final EmailService emailService;
     private final ConcertService concertService;
+    private final SlotRepository slotRepository;
 
     @Autowired
-    public MessageController(MessageService messageService, MessageRepository messageRepository, EmailService emailService, ConcertService concertService) {
+    public MessageController(MessageService messageService, MessageRepository messageRepository, EmailService emailService, ConcertService concertService, SlotRepository slotRepository) {
         this.messageService = messageService;
         this.messageRepository = messageRepository;
         this.emailService = emailService;
         this.concertService = concertService;
+        this.slotRepository = slotRepository;
     }
     @PostMapping("/submitChoice") // http request - post means insert 
     public ResponseEntity<Map<String, Object>> submitChoice(@RequestBody Message request) { // triggered when frontend send POST (checkout is clicked)
@@ -46,7 +50,6 @@ public class MessageController {
                     concerts.add(concert); // this will be added to concerts list that is in parameter in line58
                 }
             }
-            // concertService.getAvailableSlotById(concerts);
             emailService.sendConfirmationEmail(request.getEmail(), request.getName(), concerts); // email will be sent to the user containing the parameters
 
             System.out.println("Received name: " + request.getName());
@@ -60,6 +63,28 @@ public class MessageController {
         } catch (Exception e) { // any error
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("success", false, "message", "Internal Server Error"));
+        }
+    }
+    @GetMapping("/slots")
+    public ResponseEntity<Map<String, Integer>> getSlotAvailability() {
+        slot slotData = slotRepository.findById(1);
+        if (slotData != null) {
+            Map<String, Integer> dayKeys = new HashMap<>();
+            
+            dayKeys.put("day1", slotData.getDay1());
+            dayKeys.put("day2", slotData.getDay2());
+            dayKeys.put("day3", slotData.getDay3());
+            dayKeys.put("day4", slotData.getDay4());
+            dayKeys.put("day5", slotData.getDay5());
+            dayKeys.put("day6", slotData.getDay6());
+            dayKeys.put("day7", slotData.getDay7());
+            dayKeys.put("day8", slotData.getDay8());
+            dayKeys.put("day9", slotData.getDay9());
+            dayKeys.put("day10", slotData.getDay10());
+            
+            return ResponseEntity.ok(dayKeys);  // Return the slot data as JSON
+        } else {
+            return ResponseEntity.notFound().build();  // Return 404 if slot doesn't exist
         }
     }
     @GetMapping("/checkReservation") // http request - get means retrieve

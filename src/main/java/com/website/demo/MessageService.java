@@ -1,5 +1,6 @@
 package com.website.demo;
 
+import org.aspectj.weaver.patterns.ConcreteCflowPointcut.Slot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,7 +30,7 @@ public class MessageService {
             throw new IllegalArgumentException("No ticket is selected.");
         }
         try {
-            decrementSlotAvailability(request.getConcert_id());  // this retrieves the concert_id fro decrementing the slots
+            updateSlotAvailability(request.getConcert_id(), true);  // this retrieves the concert_id fro decrementing the slots
             Message msg = new Message(request.getName(), request.getEmail(), request.getConcert_id()); // this gets the parameters to be stored in db
             messageRepository.save(msg); // save() is automatically understood as insert as provided by crudrepository interface
             System.out.println("Save successful!"); // debugging purposes
@@ -43,7 +44,7 @@ public class MessageService {
         try {
             Message message = messageRepository.findByEmail(email);
             if (message != null) {
-                incrementSlotAvailability(message.getConcert_id()); // increment slot of the concert_id stored
+                updateSlotAvailability(message.getConcert_id(), false); // increment slot of the concert_id stored
                 messageRepository.delete(message); // delete() is automatically understood to delete as provided by crudrepository interface
                 return true; // Successfully deleted
             } else {
@@ -54,128 +55,107 @@ public class MessageService {
             return false;
         }
     }
-
-
-//decrement
-    public void decrementSlotAvailability(List<Integer> concert_id) {
-        slot availableSlot = slotRepository.findById(1); // 
-        for (Integer concertId : concert_id) { // for each concert_id stored, 
-            switch (concertId) {
-                case 1:
-                    if (availableSlot.getDay1() > 0) {
-                        availableSlot.setDay1(availableSlot.getDay1() - 1);
-                    } else {
-                        throw new IllegalStateException("No available slots for Day 1.");
-                    }
-                    break;
-                case 2:
-                    if (availableSlot.getDay2() > 0) {
-                        availableSlot.setDay2(availableSlot.getDay2() - 1);
-                    } else {
-                        throw new IllegalStateException("No available slots for Day 2.");
-                    }
-                    break;
-                case 3:
-                    if (availableSlot.getDay3() > 0) {
-                        availableSlot.setDay3(availableSlot.getDay3() - 1);
-                    } else {
-                        throw new IllegalStateException("No available slots for Day 3.");
-                    }
-                    break;
-                case 4:
-                    if (availableSlot.getDay4() > 0) {
-                        availableSlot.setDay4(availableSlot.getDay4() - 1);
-                    } else {
-                        throw new IllegalStateException("No available slots for Day 4.");
-                    }
-                    break;
-                case 5:
-                    if (availableSlot.getDay5() > 0) {
-                        availableSlot.setDay5(availableSlot.getDay5() - 1);
-                    } else {
-                        throw new IllegalStateException("No available slots for Day 5.");
-                    }
-                    break;
-                case 6:
-                    if (availableSlot.getDay6() > 0) {
-                        availableSlot.setDay6(availableSlot.getDay6() - 1);
-                    } else {
-                        throw new IllegalStateException("No available slots for Day 6.");
-                    }
-                    break;
-                case 7:
-                    if (availableSlot.getDay7() > 0) {
-                        availableSlot.setDay7(availableSlot.getDay7() - 1);
-                    } else {
-                        throw new IllegalStateException("No available slots for Day 7.");
-                    }
-                    break;
-                case 8:
-                    if (availableSlot.getDay8() > 0) {
-                        availableSlot.setDay8(availableSlot.getDay8() - 1);
-                    } else {
-                        throw new IllegalStateException("No available slots for Day 8.");
-                    }
-                    break;
-                case 9:
-                    if (availableSlot.getDay9() > 0) {
-                        availableSlot.setDay9(availableSlot.getDay9() - 1);
-                    } else {
-                        throw new IllegalStateException("No available slots for Day 9.");
-                    }
-                    break;
-                case 10:
-                    if (availableSlot.getDay10() > 0) {
-                        availableSlot.setDay10(availableSlot.getDay10() - 1);
-                    } else {
-                        throw new IllegalStateException("No available slots for Day 10.");
-                    }
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid concert ID: " + concertId);
-                }
-            }
-        }
-// increment 
-    public void incrementSlotAvailability(List<Integer> concertIds) {
+//decrement and increment
+        public slot updateSlotAvailability(List<Integer> concert_id, boolean isDecrement) {
         slot availableSlot = slotRepository.findById(1);
 
-        for (Integer concertId : concertIds) {
+        for (Integer concertId : concert_id) {
             switch (concertId) {
-                case 1:
-                    availableSlot.setDay1(availableSlot.getDay1() + 1);
-                    break;
-                case 2:
-                    availableSlot.setDay2(availableSlot.getDay2() + 1);
-                    break;
-                case 3:
-                    availableSlot.setDay3(availableSlot.getDay3() + 1);
-                    break;
-                case 4:
-                    availableSlot.setDay4(availableSlot.getDay4() + 1);
-                    break;
-                case 5:
-                    availableSlot.setDay5(availableSlot.getDay5() + 1);
-                    break;    
-                case 6:
-                    availableSlot.setDay6(availableSlot.getDay6() + 1);
-                    break;
-                case 7:
-                    availableSlot.setDay7(availableSlot.getDay7() + 1);
-                    break;
-                case 8:
-                    availableSlot.setDay8(availableSlot.getDay8() + 1);
-                    break;    
-                case 9:
-                    availableSlot.setDay9(availableSlot.getDay9() + 1);
-                    break;
-                case 10:
-                    availableSlot.setDay10(availableSlot.getDay10() + 1);
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid concertId: " + concertId);
+                case 1 -> {
+                    int current = availableSlot.getDay1();
+                    if (isDecrement) {
+                        if (current > 0) availableSlot.setDay1(current - 1);
+                        else throw new IllegalStateException("No available slots for Day 1.");
+                    } else {
+                        availableSlot.setDay1(current + 1);
+                    }
+                }
+                case 2 -> {
+                    int current = availableSlot.getDay2();
+                    if (isDecrement) {
+                        if (current > 0) availableSlot.setDay2(current - 1);
+                        else throw new IllegalStateException("No available slots for Day 2.");
+                    } else {
+                        availableSlot.setDay2(current + 1);
+                    }
+                }
+                case 3 -> {
+                    int current = availableSlot.getDay3();
+                    if (isDecrement) {
+                        if (current > 0) availableSlot.setDay3(current - 1);
+                        else throw new IllegalStateException("No available slots for Day 3.");
+                    } else {
+                        availableSlot.setDay3(current + 1);
+                    }
+                }
+                case 4 -> {
+                    int current = availableSlot.getDay4();
+                    if (isDecrement) {
+                        if (current > 0) availableSlot.setDay4(current - 1);
+                        else throw new IllegalStateException("No available slots for Day 4.");
+                    } else {
+                        availableSlot.setDay4(current + 1);
+                    }
+                }
+                case 5 -> {
+                    int current = availableSlot.getDay5();
+                    if (isDecrement) {
+                        if (current > 0) availableSlot.setDay5(current - 1);
+                        else throw new IllegalStateException("No available slots for Day 5.");
+                    } else {
+                        availableSlot.setDay5(current + 1);
+                    }
+                }
+                case 6 -> {
+                    int current = availableSlot.getDay6();
+                    if (isDecrement) {
+                        if (current > 0) availableSlot.setDay6(current - 1);
+                        else throw new IllegalStateException("No available slots for Day 6.");
+                    } else {
+                        availableSlot.setDay6(current + 1);
+                    }
+                }
+                case 7 -> {
+                    int current = availableSlot.getDay7();
+                    if (isDecrement) {
+                        if (current > 0) availableSlot.setDay7(current - 1);
+                        else throw new IllegalStateException("No available slots for Day 7.");
+                    } else {
+                        availableSlot.setDay7(current + 1);
+                    }
+                }
+                case 8 -> {
+                    int current = availableSlot.getDay8();
+                    if (isDecrement) {
+                        if (current > 0) availableSlot.setDay8(current - 1);
+                        else throw new IllegalStateException("No available slots for Day 8.");
+                    } else {
+                        availableSlot.setDay8(current + 1);
+                    }
+                }
+                case 9 -> {
+                    int current = availableSlot.getDay9();
+                    if (isDecrement) {
+                        if (current > 0) availableSlot.setDay9(current - 1);
+                        else throw new IllegalStateException("No available slots for Day 9.");
+                    } else {
+                        availableSlot.setDay9(current + 1);
+                    }
+                }
+                case 10 -> {
+                    int current = availableSlot.getDay10();
+                    if (isDecrement) {
+                        if (current > 0) availableSlot.setDay10(current - 1);
+                        else throw new IllegalStateException("No available slots for Day 10.");
+                    } else {
+                        availableSlot.setDay10(current + 1);
+                    }
+                }
+                default -> throw new IllegalArgumentException("Invalid concert ID: " + concertId);
             }
         }
+
         slotRepository.save(availableSlot);
+        return availableSlot;
     }
 }

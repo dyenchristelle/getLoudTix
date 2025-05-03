@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }   
 //retrieve, check if email already exists (must be not yet existing)
       try {
-        const response = await fetch(`https://bfc7-2405-8d40-4085-5148-819-56c8-6763-137d.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
+        const response = await fetch(`https://b104-136-158-65-43.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
         const data = await response.json();
 
         if (data.exists) {
@@ -113,14 +113,14 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 //retrieve, check if email exists (must be existing)
       try {
-        const response = await fetch(`https://bfc7-2405-8d40-4085-5148-819-56c8-6763-137d.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
+        const response = await fetch(`https://b104-136-158-65-43.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
         const data = await response.json();
 
         if (data.exists) {
           const userConfirmed = confirm(`Hi, are you sure you want to delete your reservation? A confirmation email will be sent to you.`);
             if (!userConfirmed) return;
 
-          const deleteResponse = await fetch(`https://bfc7-2405-8d40-4085-5148-819-56c8-6763-137d.ngrok-free.app/api/deleteReservation?email=${encodeURIComponent(email)}`,{
+          const deleteResponse = await fetch(`https://b104-136-158-65-43.ngrok-free.app/api/deleteReservation?email=${encodeURIComponent(email)}`,{
               method: "DELETE",
             }
           );
@@ -210,15 +210,17 @@ document.addEventListener("DOMContentLoaded", function () {
     button.classList.add("reserved");
     button.innerText = "Reserved";
 
-    concert.slots--;
+    updateSlotDisplay();
 
-    const concertCard = document.querySelector(`.concert-card[data-id="${concertId}"]`);
-  if (concertCard) {
-    const slotTextElement = concertCard.querySelector(".slot");
-    if (slotTextElement) {
-      slotTextElement.textContent = `Slots available: ${concert.slots}`;
-    }
-  }
+  //   concert.slots--;
+
+  //   const concertCard = document.querySelector(`.concert-card[data-id="${concertId}"]`);
+  // if (concertCard) {
+  //   const slotTextElement = concertCard.querySelector(".slot");
+  //   if (slotTextElement) {
+  //     slotTextElement.textContent = `Slots available: ${concert.slots}`;
+  //   }
+  // }
   }
 
   // ✅ Add to Ticket Tab
@@ -319,10 +321,36 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
+  function updateSlotDisplay() {
+    fetch('https://b104-136-158-65-43.ngrok-free.app/api/slots') // will fetch the avail_slot table
+      .then(response => response.json())
+      .then(slotData => {  // function
+        for (let i = 1; i <= 10; i++) { //from day1 to day10
+          const slot = slotData[`day${i}`]; //inaaccess yung value ni slot, nagiiterate
+    
+          const concertCard = document.querySelector(`.concert-card[data-id="${i}"]`); //selects the html element that represents the concert card for current day
+          
+          if (concertCard) {
+            const slotElement = concertCard.querySelector('.slot');
+            const reserveButton = concertCard.querySelector('.reserve-btn');
+            
+            if (slotElement) {
+              slotElement.textContent = `Slots available: ${slot}`; // ung nauupdate na slot, dinidisplay dito
+            }
+    
+            if (reserveButton) { //eto s button
+              reserveButton.disabled = slot === 0;
+              reserveButton.textContent = slot === 0 ? "Sold Out" : "Reserve";
+            }
+          }
+        }
+      })
+      .catch(error => console.error("Error fetching slot data:", error));
+  }  
   // ✅ Initialize App (Fetch Data from JSON)
   const initApp = () => {
     console.log("Initializing app...");
-    fetch("https://bfc7-2405-8d40-4085-5148-819-56c8-6763-137d.ngrok-free.app/tickets.json")
+    fetch("https://b104-136-158-65-43.ngrok-free.app/tickets.json")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -334,6 +362,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Fetched Data:", data);
         listTickets = data;
         addDataToHTML();
+        updateSlotDisplay();
       })
       .catch((error) => console.error("Error fetching data:", error));
   };
@@ -368,7 +397,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
     console.log("Sending data:", formData);
   
-    fetch("https://bfc7-2405-8d40-4085-5148-819-56c8-6763-137d.ngrok-free.app/api/submitChoice", {
+    fetch("https://b104-136-158-65-43.ngrok-free.app/api/submitChoice", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
