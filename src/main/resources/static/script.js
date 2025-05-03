@@ -188,10 +188,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // const concertDate = button.dataset.concertDate;
     const concert = listTickets.find((ticket) => ticket.id === concertId);
 
-    if (concert.slots <= 0) {
-      alert("Sorry, this concert is sold out.");
-      return;
-    }
+    // if (concert.slots <= 0) {
+    //   alert("Sorry, this concert is sold out.");
+    //   return;
+    // }
 
     // Check if concert is already reserved
     if (reservedConcerts.has(concertId)) {
@@ -291,20 +291,20 @@ document.addEventListener("DOMContentLoaded", function () {
       const event = parts[1] || "";
       const date = parts[2] || "";
 
-      newTicket.innerHTML = `
-  <img src="${ticket.image}" alt="${ticket.name}" />  
-  <div class="concert-info">
-    <h2>
-      ${artist}<br>
-      ${event}<br>
-      <span class="concert-date">${date}</span> 
-    </h2>
-    <span class="slot">Slots available: ${ticket.slots}</span>
-    ${ticket.slots <= 0 
-      ? '<button class="sold-out-btn" disabled>Sold Out</button>' 
-      : `<button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>`}
-  </div>
-`;
+      newTicket.innerHTML+= `
+      <div class="concert-card" data-id="${ticket.id}">
+        <img src="${ticket.image}" alt="${ticket.name}" />
+        <div class="concert-info">
+          <h2>
+            ${artist}<br>
+            ${event}<br>
+            <span class="concert-date">${date}</span> 
+          </h2>
+          <span class="slot">Loading slots...</span>
+          <button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>
+        </div>
+      </div>
+    `;
     
                     // <img src="${ticket.image}" alt="${ticket.name}" />
                     // <div class="concert-info">
@@ -326,8 +326,8 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(response => response.json())
       .then(slotData => {  // function
         for (let i = 1; i <= 10; i++) { //from day1 to day10
-          const slot = slotData[`day${i}`]; //inaaccess yung value ni slot, nagiiterate
-    
+          const slot = parseInt(slotData[`day${i}`], 10); //inaaccess yung value ni slot, nagiiterate
+          console.log(`Slot for day${i}:`, slot);
           const concertCard = document.querySelector(`.concert-card[data-id="${i}"]`); //selects the html element that represents the concert card for current day
           
           if (concertCard) {
@@ -340,7 +340,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
             if (reserveButton) { //eto s button
               reserveButton.disabled = slot === 0;
-              reserveButton.textContent = slot === 0 ? "Sold Out" : "Reserve";
+              reserveButton.textContent = slot === 0 ? "Unavailable" : "Reserve";
             }
           }
         }
@@ -449,7 +449,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const overlay = document.getElementById("loadingOverlay");
       overlay.style.display = "block";
 
-      // Proceed with saving and submitting
+      // updateSlotDisplay();
       saveFormData(formData);
       submitReservation(formData);
     });

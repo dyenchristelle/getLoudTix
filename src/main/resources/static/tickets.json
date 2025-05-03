@@ -6,7 +6,7 @@
     "date": "June 10, 2025",
     "concert": "Tila Tala",
     "slotText" :"Limited Slots Only.",
-    "slots" : "2",
+    "slots" : 2,
     "details": "Syd Hartha \nTila Tala \nJune 10, 2025"
   },
   {
@@ -16,7 +16,7 @@
     "date": "June 11, 2025",
     "concert": "Most Wanted",
     "slotText" :"Limited Slots Only.",
-    "slots" : "2",
+    "slots" : 2,
     "details": "Hev Abi \nMost Wanted \nJune 11, 2025"
   },
   {
@@ -26,7 +26,7 @@
     "date": "June 12, 2025",
     "concert": "Dilaw",
     "slotText" : "Limited Slots Only.",
-    "slots" : "1",
+    "slots" : 1,
     "details": "Maki \nDilaw \nJune 12, 2025"
   },
   {
