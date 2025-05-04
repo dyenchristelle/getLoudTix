@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }   
 //retrieve, check if email already exists (must be not yet existing)
       try {
-        const response = await fetch(`https://b104-136-158-65-43.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
+        const response = await fetch(`https://b22a-136-158-66-185.ngrok-free.app//api/checkReservation?email=${encodeURIComponent(email)}`);
         const data = await response.json();
 
         if (data.exists) {
@@ -113,14 +113,14 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 //retrieve, check if email exists (must be existing)
       try {
-        const response = await fetch(`https://b104-136-158-65-43.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
+        const response = await fetch(`https://b22a-136-158-66-185.ngrok-free.app//api/checkReservation?email=${encodeURIComponent(email)}`);
         const data = await response.json();
 
         if (data.exists) {
           const userConfirmed = confirm(`Hi, are you sure you want to delete your reservation? A confirmation email will be sent to you.`);
             if (!userConfirmed) return;
 
-          const deleteResponse = await fetch(`https://b104-136-158-65-43.ngrok-free.app/api/deleteReservation?email=${encodeURIComponent(email)}`,{
+          const deleteResponse = await fetch(`https://b22a-136-158-66-185.ngrok-free.app//api/deleteReservation?email=${encodeURIComponent(email)}`,{
               method: "DELETE",
             }
           );
@@ -301,7 +301,7 @@ document.addEventListener("DOMContentLoaded", function () {
     </h2>
     <span class="slot">Slots available: ${ticket.slots}</span>
     ${ticket.slots <= 0 
-      ? '<button class="sold-out-btn" disabled>Sold Out</button>' 
+      ? '<button class="sold-out-btn" disabled>Out of Stock</button>' 
       : `<button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>`}
   </div>
 `;
@@ -322,7 +322,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   function updateSlotDisplay() {
-    fetch('https://b104-136-158-65-43.ngrok-free.app/api/slots') // will fetch the avail_slot table
+    fetch('https://b22a-136-158-66-185.ngrok-free.app//api/slots') // will fetch the avail_slot table
       .then(response => response.json())
       .then(slotData => {  // function
         for (let i = 1; i <= 10; i++) { //from day1 to day10
@@ -338,10 +338,18 @@ document.addEventListener("DOMContentLoaded", function () {
               slotElement.textContent = `Slots available: ${slot}`; // ung nauupdate na slot, dinidisplay dito
             }
     
-            if (reserveButton) { //eto s button
-              reserveButton.disabled = slot === 0;
-              reserveButton.textContent = slot === 0 ? "Sold Out" : "Reserve";
-            }
+            if (reserveButton) {
+  if (reservedConcerts.has(i)) {
+    reserveButton.disabled = true;
+    reserveButton.textContent = "Reserved";
+    reserveButton.classList.add("reserved");
+  } else {
+    reserveButton.disabled = slot === 0;
+    reserveButton.textContent = slot === 0 ? "Out of Stock" : "Reserve";
+    reserveButton.classList.remove("reserved");
+  }
+}
+
           }
         }
       })
@@ -350,7 +358,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ✅ Initialize App (Fetch Data from JSON)
   const initApp = () => {
     console.log("Initializing app...");
-    fetch("https://b104-136-158-65-43.ngrok-free.app/tickets.json")
+    fetch("https://b22a-136-158-66-185.ngrok-free.app/tickets.json")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -397,7 +405,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
     console.log("Sending data:", formData);
   
-    fetch("https://b104-136-158-65-43.ngrok-free.app/api/submitChoice", {
+    fetch("https://b22a-136-158-66-185.ngrok-free.app/api/submitChoice", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
