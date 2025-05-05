@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     // Redirect to index.html if the "Accept" button is clicked
     acceptBtn.addEventListener("click", function () {
-      window.location.href = "homee.html"; // Redirect to the index page
+      window.location.href = "registration.html"; // Redirect to the index page
     });
     // Close the popup without accepting when the "Cancel" button is clicked
     cancelBtn.addEventListener("click", function () {
@@ -61,14 +61,14 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       } if (!emailRegex.test(email)) {
           errorMessage.style.display = "block";
-          errorMessage.textContent = "Invalid email. Please provide a valid email.";
+          errorMessage.textContent = "Invalid email format. Please try again.";
           return;
       } else {
         errorMessage.style.display = "none";
       }   
 //retrieve, check if email already exists (must be not yet existing)
       try {
-        const response = await fetch(`https://b104-136-158-65-43.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
+        const response = await fetch(`https://e0f4-136-158-65-43.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
         const data = await response.json();
 
         if (data.exists) {
@@ -113,14 +113,14 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 //retrieve, check if email exists (must be existing)
       try {
-        const response = await fetch(`https://b104-136-158-65-43.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
+        const response = await fetch(`https://e0f4-136-158-65-43.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
         const data = await response.json();
 
         if (data.exists) {
           const userConfirmed = confirm(`Hi, are you sure you want to delete your reservation? A confirmation email will be sent to you.`);
             if (!userConfirmed) return;
 
-          const deleteResponse = await fetch(`https://b104-136-158-65-43.ngrok-free.app/api/deleteReservation?email=${encodeURIComponent(email)}`,{
+          const deleteResponse = await fetch(`https://e0f4-136-158-65-43.ngrok-free.app/api/deleteReservation?email=${encodeURIComponent(email)}`,{
               method: "DELETE",
             }
           );
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const result = await deleteResponse.json();
           if (result.success) {
             alert("Your reservation has been deleted successfully.");
-            window.location.href = "homee.html";
+            window.location.href = "registration.html";
           }
         } else {
           errorMessage.style.display = "block";
@@ -187,11 +187,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // const concertName = button.dataset.concertName;
     // const concertDate = button.dataset.concertDate;
     const concert = listTickets.find((ticket) => ticket.id === concertId);
-
-    // if (concert.slots <= 0) {
-    //   alert("Sorry, this concert is sold out.");
-    //   return;
-    // }
 
     // Check if concert is already reserved
     if (reservedConcerts.has(concertId)) {
@@ -291,20 +286,18 @@ document.addEventListener("DOMContentLoaded", function () {
       const event = parts[1] || "";
       const date = parts[2] || "";
 
-      newTicket.innerHTML+= `
-      <div class="concert-card" data-id="${ticket.id}">
-        <img src="${ticket.image}" alt="${ticket.name}" />
-        <div class="concert-info">
-          <h2>
-            ${artist}<br>
-            ${event}<br>
-            <span class="concert-date">${date}</span> 
-          </h2>
-          <span class="slot">Loading slots...</span>
-          <button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>
-        </div>
-      </div>
-    `;
+      newTicket.innerHTML = `
+  <img src="${ticket.image}" alt="${ticket.name}" />  
+  <div class="concert-info">
+    <h2>
+      ${artist}<br>
+      ${event}<br>
+      <span class="concert-date">${date}</span> 
+    </h2>
+    <span class="slot">Slots available:</span>
+    <button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>
+  </div>
+`;
     
                     // <img src="${ticket.image}" alt="${ticket.name}" />
                     // <div class="concert-info">
@@ -322,7 +315,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   function updateSlotDisplay() {
-    fetch('https://b104-136-158-65-43.ngrok-free.app/api/slots') // will fetch the avail_slot table
+    fetch('https://e0f4-136-158-65-43.ngrok-free.app/api/slots') // will fetch the avail_slot table
       .then(response => response.json())
       .then(slotData => {  // function
         for (let i = 1; i <= 10; i++) { //from day1 to day10
@@ -338,10 +331,22 @@ document.addEventListener("DOMContentLoaded", function () {
               slotElement.textContent = `Slots available: ${slot}`; // ung nauupdate na slot, dinidisplay dito
             }
     
-            if (reserveButton) { //eto s button
-              reserveButton.disabled = slot === 0;
-              reserveButton.textContent = slot === 0 ? "Unavailable" : "Reserve";
-            }
+            if (reserveButton) {
+              if (reservedConcerts.has(i)) {
+                reserveButton.disabled = true;
+                reserveButton.textContent = "Reserved";
+              } else if (slot === 0) {
+                reserveButton.disabled = true;
+                reserveButton.textContent = "Out of Stock";
+                reserveButton.className = "sold-out-btn";
+              } else {
+                reserveButton.disabled = false;
+                reserveButton.textContent = "Reserve";
+                reserveButton.className = "reserve-btn";
+              }
+              
+}
+
           }
         }
       })
@@ -350,7 +355,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ✅ Initialize App (Fetch Data from JSON)
   const initApp = () => {
     console.log("Initializing app...");
-    fetch("https://b104-136-158-65-43.ngrok-free.app/tickets.json")
+    fetch("https://e0f4-136-158-65-43.ngrok-free.app/tickets.json")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -397,7 +402,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
     console.log("Sending data:", formData);
   
-    fetch("https://b104-136-158-65-43.ngrok-free.app/api/submitChoice", {
+    fetch("https://e0f4-136-158-65-43.ngrok-free.app/api/submitChoice", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),

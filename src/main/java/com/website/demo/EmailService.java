@@ -28,7 +28,7 @@ public class EmailService {
                 + "Your reservation has been confirmed. ✅\n\n"
                 + "Reservation Details:\n"
                 + concertDetails + "\n"
-                + "📍 Venue: Loud Arena, New York\n\n"
+                + "📍 Venue: Music Museum, New York, Cubao\n\n"
                 + "See you at the event! 💖\n\n"
                 + "Best regards,\n"
                 + "Dyen & Tin 💕");
@@ -43,7 +43,7 @@ public class EmailService {
         message.setText("Hello " + name + ",\n\n"
                 + "Your reservation has been successfully deleted from GetLoudTix.\n"
                 + "We're sorry to see you go, but we hope to see you again soon! 🎟️\n\n"
-                + "If you wish to change your reservation, just login and reserve again.\n\n"
+                + "If you wish to change your reservation, just register and reserve again.\n\n"
                 + "Best wishes,\n"
                 + "Dyen & Tin 💕");
 
