@@ -61,14 +61,14 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       } if (!emailRegex.test(email)) {
           errorMessage.style.display = "block";
-          errorMessage.textContent = "Invalid email. Please provide a valid email.";
+          errorMessage.textContent = "Invalid email format. Please try again.";
           return;
       } else {
         errorMessage.style.display = "none";
       }   
 //retrieve, check if email already exists (must be not yet existing)
       try {
-        const response = await fetch(`https://b22a-136-158-66-185.ngrok-free.app//api/checkReservation?email=${encodeURIComponent(email)}`);
+        const response = await fetch(`https://553d-203-177-99-202.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
         const data = await response.json();
 
         if (data.exists) {
@@ -113,14 +113,14 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 //retrieve, check if email exists (must be existing)
       try {
-        const response = await fetch(`https://b22a-136-158-66-185.ngrok-free.app//api/checkReservation?email=${encodeURIComponent(email)}`);
+        const response = await fetch(`https://553d-203-177-99-202.ngrok-free.app/api/checkReservation?email=${encodeURIComponent(email)}`);
         const data = await response.json();
 
         if (data.exists) {
           const userConfirmed = confirm(`Hi, are you sure you want to delete your reservation? A confirmation email will be sent to you.`);
             if (!userConfirmed) return;
 
-          const deleteResponse = await fetch(`https://b22a-136-158-66-185.ngrok-free.app//api/deleteReservation?email=${encodeURIComponent(email)}`,{
+          const deleteResponse = await fetch(`https://553d-203-177-99-202.ngrok-free.app/api/deleteReservation?email=${encodeURIComponent(email)}`,{
               method: "DELETE",
             }
           );
@@ -187,11 +187,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // const concertName = button.dataset.concertName;
     // const concertDate = button.dataset.concertDate;
     const concert = listTickets.find((ticket) => ticket.id === concertId);
-
-    if (concert.slots <= 0) {
-      alert("Sorry, this concert is sold out.");
-      return;
-    }
 
     // Check if concert is already reserved
     if (reservedConcerts.has(concertId)) {
@@ -299,10 +294,8 @@ document.addEventListener("DOMContentLoaded", function () {
       ${event}<br>
       <span class="concert-date">${date}</span> 
     </h2>
-    <span class="slot">Slots available: ${ticket.slots}</span>
-    ${ticket.slots <= 0 
-      ? '<button class="sold-out-btn" disabled>Out of Stock</button>' 
-      : `<button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>`}
+    <span class="slot">Slots available:</span>
+    <button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>
   </div>
 `;
     
@@ -322,7 +315,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   function updateSlotDisplay() {
-    fetch('https://b22a-136-158-66-185.ngrok-free.app//api/slots') // will fetch the avail_slot table
+    fetch('https://553d-203-177-99-202.ngrok-free.app/api/slots') // will fetch the avail_slot table
       .then(response => response.json())
       .then(slotData => {  // function
         for (let i = 1; i <= 10; i++) { //from day1 to day10
@@ -339,15 +332,19 @@ document.addEventListener("DOMContentLoaded", function () {
             }
     
             if (reserveButton) {
-  if (reservedConcerts.has(i)) {
-    reserveButton.disabled = true;
-    reserveButton.textContent = "Reserved";
-    reserveButton.classList.add("reserved");
-  } else {
-    reserveButton.disabled = slot === 0;
-    reserveButton.textContent = slot === 0 ? "Out of Stock" : "Reserve";
-    reserveButton.classList.remove("reserved");
-  }
+              if (reservedConcerts.has(i)) {
+                reserveButton.disabled = true;
+                reserveButton.textContent = "Reserved";
+              } else if (slot === 0) {
+                reserveButton.disabled = true;
+                reserveButton.textContent = "Out of Stock";
+                reserveButton.className = "sold-out-btn";
+              } else {
+                reserveButton.disabled = false;
+                reserveButton.textContent = "Reserve";
+                reserveButton.className = "reserve-btn";
+              }
+              
 }
 
           }
@@ -358,7 +355,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // ✅ Initialize App (Fetch Data from JSON)
   const initApp = () => {
     console.log("Initializing app...");
-    fetch("https://b22a-136-158-66-185.ngrok-free.app/tickets.json")
+    fetch("https://553d-203-177-99-202.ngrok-free.app/tickets.json")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -405,7 +402,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
     console.log("Sending data:", formData);
   
-    fetch("https://b22a-136-158-66-185.ngrok-free.app/api/submitChoice", {
+    fetch("https://553d-203-177-99-202.ngrok-free.app/api/submitChoice", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),

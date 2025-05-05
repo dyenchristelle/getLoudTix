@@ -26,12 +26,6 @@ header {
   font-size: small;
   margin-top: 5px;
 }
-
-/* .container{
-    width: 0 auto;
-
-    transition: transform .5s;
-} */
  
 body.showTicket .ticketTab {
   top: 0;
@@ -334,6 +328,15 @@ p {
 /* home */
 
 .home {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('posters/background.jpg');
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              
+              height: 100vh;
+              margin: 0;
+
   font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
@@ -488,6 +491,17 @@ p {
 }
 
 /* index */
+.index {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('posters/Posts.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
 .indexDetails {
   margin-right: 90px;
   margin-left: 90px;
@@ -496,6 +510,10 @@ p {
 .mission,
 .vision {
   margin-bottom: 30px;
+}
+
+.vision{
+  margin-bottom: 180px;
 }
 
 /* Main Title */
@@ -512,9 +530,17 @@ h2 {
 
 /* Body Text */
 p {
-  font-size: 18px; /* Was 16px or 14px in some parts */
+  font-size: 17px; /* Was 16px or 14px in some parts */
   line-height: 1.6;
   text-align: justify;
+}
+
+.contact {
+  justify-content: center;
+  gap: 5px;
+  bottom: 0;
+  text-align: left;
+  margin-left: 90px;
 }
 
 /* Get Started Button */
@@ -596,6 +622,7 @@ p {
   display: none;
   text-align: left;
 }
+
 .loadingOverlay {
   display: none;
   position: fixed;
