@@ -21,6 +21,144 @@ header {
   top: 0;
   position: sticky;
 }
+
+.GetLoudTix{
+  width: 190px;
+  height: 40px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* index */
+
+/* index */
+.index {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('posters/Posts.jpg');
+ 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+.indexDetails {
+  margin-right: 90px;
+  margin-left: 90px;
+}
+.getLoudTixhome,
+.mission,
+.vision {
+  margin-bottom: 30px;
+}
+
+.vision{
+  margin-bottom: 180px;
+}
+
+/* Main Title */
+.getLoudTixhome h1 {
+  font-size: 36px; /* Was 28px */
+  margin-bottom: 15px;
+}
+
+/* Section Titles */
+h2 {
+  font-size: 26px; /* Was 22px */
+  margin-bottom: 12px;
+}
+
+/* Body Text */
+p {
+  font-size: 17px; /* Was 16px or 14px in some parts */
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.contact {
+  justify-content: center;
+  gap: 5px;
+  bottom: 0;
+  text-align: left;
+  margin-left: 90px;
+}
+
+/* Get Started Button */
+.getStartButton-container {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.getStartButtonhome {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #9b4dff;
+  color: #fff;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Popup Terms */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: #2b0e4d;
+  color: #ffffff;
+  padding: 25px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+}
+
+.popup-content h2,
+.popup-content h3 {
+  color: #c76fff;
+  margin-bottom: 10px;
+}
+
+.popup-content p {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.popup-content button {
+  padding: 10px 20px;
+  margin: 10px 5px 0 0;
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  background-color: #9b4dff;
+  color: white;
+}
+
+.popup-content button:hover {
+  background-color: #b46dff;
+}
+
 .concert-date {
   color:white;      
   font-size: small;
@@ -33,9 +171,7 @@ body.showTicket .ticketTab {
   bottom: 0;
 }
 
-/* body.showTicket .container{
-    transform: translateX(-250px);
-} */
+/* reserve.html */
 
 .ticket-icon {
   position: relative;
@@ -44,6 +180,7 @@ body.showTicket .ticketTab {
   color: #e0b3ff;
   cursor: pointer;
 }
+
 header .ticket-icon span {
   display: flex;
   width: 30px;
@@ -61,15 +198,6 @@ header .ticket-icon span {
   display: flex;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-}
-
-.logo-img {
-  width: 60px;
-  margin-right: 10px;
-}
 svg {
   width: 30px;
 }
@@ -95,12 +223,6 @@ nav a {
 nav a:hover {
   text-decoration: underline;
 }
-
-/* .ticket-icon {
-    font-size: 28px;
-    color: #e0b3ff;
-    margin-left: 20px;
-} */
 
 .ticketTab {
   width: 400px;
@@ -252,377 +374,6 @@ nav a:hover {
   border-radius: 0 10px 10px 0;
 }
 
-/* Concert image */
-.concert-img {
-  width: 180px;
-  height: 100%;
-  object-fit: cover;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-}
-
-/* Concert info section */
-.concert-info {
-  padding: 20px;
-  text-align: left;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-h2 {
-  font-size: 20px;
-  margin: 0;
-  color: #e0b3ff;
-}
-
-.sub-title {
-  font-size: 14px;
-  color: #d1c4e9;
-}
-
-p {
-  font-size: 14px;
-  color: #d1c4e9;
-  margin: 10px 0 15px;
-}
-
-/* Reserve button styles */
-.reserve-btn {
-  background-color: #7c3aed;
-  border: none;
-  padding: 10px 20px;
-  color: white;
-  font-size: 14px;
-  border-radius: 20px;
-  cursor: pointer;
-  align-self: flex-start;
-}
-
-.reserve-btn.reserved {
-  background-color: #686363; /* Light gray */
-  cursor: not-allowed;
-  pointer-events: none; /* Disable click events */
-  color: white;
-}
-
-.reserve-btn:hover {
-  background-color: #9d4edd;
-}
-
-/* Scrollbar styles */
-.concerts-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.concerts-container::-webkit-scrollbar-thumb {
-  background-color: #7c3aed;
-  border-radius: 10px;
-}
-
-.concerts-container::-webkit-scrollbar-track {
-  background-color: #2b1a4b;
-}
-
-/* home */
-
-.home {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-              url('posters/background.jpg');
-              background-size: cover;
-              background-repeat: no-repeat;
-              background-position: center;
-              
-              height: 100vh;
-              margin: 0;
-
-  font-family: "Poppins", sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  font-family: Arial, sans-serif;
-  background-color: #1a1131;
-  color: white;
-  overflow: hidden;
-}
-
-.container,
-.sign-in-container {
-  width: 100vw; /* Full width */
-  height: 100vh; /* Full height of viewport */
-  display: flex;
-  justify-content: center; /* Horizontally center */
-  align-items: center;
-  margin: 0;
-  padding: 0;
-}
-
-/* Centered box styling */
-
-.center-box {
-  background-color: #2b1a4b;
-  border: 3px solid #63368d;
-  border-radius: 20px;
-  padding: 50px;
-  width: 400px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  margin: 0 auto; /* Horizontal centering */
-  margin-bottom: 15vh;
-}
-
-.homebtn {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-}
-
-.startButton,
-.viewButton {
-  background-color: #7c3aed;
-  border: none;
-  padding: 12px 24px;
-  color: white;
-  font-size: 16px;
-  border-radius: 20px;
-  cursor: pointer;
-  margin: 10px 5px;
-}
-
-.h1label {
-  text-align: center;
- margin: 0;
- padding: 0;
-}
-
-/* Input field styles */
-.nameindex,
-.emailindex {
-  width: 94%;
-  padding: 10px;
-  margin-bottom: 20px;
-  background-color: #1a1131;
-  border: 2px solid #63368d;
-  border-radius: 8px;
-  color: #e0b3ff;
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.3s;
-  margin-top: 15px;
-}
-
-/* Focus effect */
-.nameindex:focus,
-.emailindex:focus {
-  border-color: #9d4edd;
-}
-
-/* Placeholder styles */
-.nameindex::placeholder,
-.emailindex::placeholder {
-  color: #b39ddb;
-}
-
-/* Button hover effects */
-.startButton:hover,
-.viewButton:hover {
-  background-color: #9d4edd;
-}
-
-/* FAQs */
-/* FAQs Section Styles */
-.Faqs {
-  background-color: #2b1a4b;
-  padding: 20px;
-  border-radius: 12px;
-  border: 3px solid #63368d;
-  width: 70%;
-  margin: 20px auto;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  font-family: "Poppins", sans-serif;
-  color: #e0b3ff;
-}
-
-/* FAQ Container */
-.con {
-  background-color: #1a1131;
-  padding: 20px;
-  border-radius: 8px;
-  border: 2px solid #63368d;
-}
-
-/* FAQ Text Styles */
-.con p {
-  line-height: 1.8;
-  color: #d1c4e9;
-  margin: 0 0 15px;
-  font-size: 15px; /* Base font size increased for better readability */
-  text-align: left;
-}
-
-/* FAQ Numbers & Bold Headings */
-.con p span {
-  font-weight: 700;
-  color: #9d4edd;
-  font-size: 18px; /* Larger font size for FAQ titles */
-}
-
-/* Space Between Each FAQ */
-.con p:nth-child(n + 2) {
-  margin-top: 15px;
-  padding-top: 10px;
-  border-top: 1px solid #4f3285;
-}
-
-/* Scrollbar Styling */
-.Faqs::-webkit-scrollbar {
-  width: 8px;
-}
-
-.Faqs::-webkit-scrollbar-thumb {
-  background-color: #7c3aed;
-  border-radius: 10px;
-}
-
-.Faqs::-webkit-scrollbar-track {
-  background-color: #2b1a4b;
-}
-
-/* index */
-.index {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-              url('posters/Posts.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-.indexDetails {
-  margin-right: 90px;
-  margin-left: 90px;
-}
-.getLoudTixhome,
-.mission,
-.vision {
-  margin-bottom: 30px;
-}
-
-.vision{
-  margin-bottom: 180px;
-}
-
-/* Main Title */
-.getLoudTixhome h1 {
-  font-size: 36px; /* Was 28px */
-  margin-bottom: 15px;
-}
-
-/* Section Titles */
-h2 {
-  font-size: 26px; /* Was 22px */
-  margin-bottom: 12px;
-}
-
-/* Body Text */
-p {
-  font-size: 17px; /* Was 16px or 14px in some parts */
-  line-height: 1.6;
-  text-align: justify;
-}
-
-.contact {
-  justify-content: center;
-  gap: 5px;
-  bottom: 0;
-  text-align: left;
-  margin-left: 90px;
-}
-
-/* Get Started Button */
-.startButton-container {
-  text-align: right;
-  margin-top: 20px;
-}
-
-.startButtonhome {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background-color: #9b4dff;
-  color: #fff;
-  padding: 12px 24px;
-  font-size: 16px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-/* Terms Popup */
-.popup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.popup-content {
-  background-color: #2b0e4d;
-  color: #ffffff;
-  padding: 25px;
-  border-radius: 8px;
-  max-width: 600px;
-  width: 90%;
-}
-
-.popup-content h2,
-.popup-content h3 {
-  color: #c76fff;
-  margin-bottom: 10px;
-}
-
-.popup-content p {
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-
-.popup-content button {
-  padding: 10px 20px;
-  margin: 10px 5px 0 0;
-  font-size: 14px;
-  border: none;
-  cursor: pointer;
-  border-radius: 20px;
-  background-color: #9b4dff;
-  color: white;
-}
-
-.popup-content button:hover {
-  background-color: #b46dff;
-}
-
-/* background */
-
-/* try error message */
-#error-message {
-  color: #d0abe7;
-  margin-top: 110;
-  margin-bottom: 3px;
-  font-size: 12px;
-  display: none;
-  text-align: left;
-}
-
 .loadingOverlay {
   display: none;
   position: fixed;
@@ -659,3 +410,249 @@ p {
   animation: spin 1s linear infinite;
   margin: 10px auto;
 }
+
+/* Concert image */
+.concert-img {
+  width: 180px;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+/* Concert info section */
+.concert-info {
+  padding: 20px;
+  text-align: left;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h2 {
+  font-size: 20px;
+  margin: 0;
+  color: #e0b3ff;
+}
+
+/* .sub-title {
+  font-size: 14px;
+  color: #d1c4e9;
+} */
+
+p {
+  font-size: 14px;
+  color: #d1c4e9;
+  margin: 10px 0 15px;
+}
+
+/* Reserve button styles */
+.reserve-btn {
+  background-color: #7c3aed;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  font-size: 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.reserve-btn.reserved {
+  background-color: #686363; /* Light gray */
+  cursor: not-allowed;
+  pointer-events: none; /* Disable click events */
+  color: white;
+}
+
+.reserve-btn:hover {
+  background-color: #9d4edd;
+}
+
+/* Scrollbar styles */
+/* .concerts-container::-webkit-scrollbar {
+  width: 8px;
+} */
+
+/* .concerts-container::-webkit-scrollbar-thumb {
+  background-color: #7c3aed;
+  border-radius: 10px;
+} */
+
+/* .concerts-container::-webkit-scrollbar-track {
+  background-color: #2b1a4b;
+} */
+
+
+/* registration.html */
+.home {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('Logoo/background.jpg');
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              
+              height: 100vh;
+              margin: 0;
+
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #1a1131;
+  color: white;
+  overflow: hidden;
+}
+
+.container,
+.sign-in-container {
+  width: 100vw; /* Full width */
+  height: 100vh; /* Full height of viewport */
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+
+.center-box {
+  background-color: #2b1a4b;
+  border: 3px solid #63368d;
+  border-radius: 20px;
+  padding: 50px;
+  width: 400px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  margin: 0 auto; /* Horizontal centering */
+  margin-bottom: 15vh;
+}
+
+.homebtn {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.startButton,
+.viewButton {
+  background-color: #7c3aed;
+  border: none;
+  padding: 12px 24px;
+  color: white;
+  font-size: 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 10px 5px;
+}
+
+.center-box h1 {
+  text-align: center;
+ margin: 0;
+ padding: 0;
+ margin-bottom: 30px;
+}
+
+.nameindex,
+.emailindex {
+  width: 94%;
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #1a1131;
+  border: 2px solid #63368d;
+  border-radius: 8px;
+  color: #e0b3ff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+  margin-top: 15px;
+}
+
+.nameindex:focus,
+.emailindex:focus {
+  border-color: #9d4edd;
+}
+
+.nameindex::placeholder,
+.emailindex::placeholder {
+  color: #b39ddb;
+}
+
+/* Button hover effects */
+.startButton:hover,
+.viewButton:hover {
+  background-color: #9d4edd;
+}
+
+/* try error message */
+#error-message {
+  color: #d0abe7;
+  margin-top: 110;
+  margin-bottom: 3px;
+  font-size: 12px;
+  display: none;
+  text-align: left;
+}
+
+/* FAQs.htm; */
+
+.Faqs {
+  background-color: #2b1a4b;
+  padding: 20px;
+  border-radius: 12px;
+  border: 3px solid #63368d;
+  width: 70%;
+  margin: 20px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-family: "Poppins", sans-serif;
+  color: #e0b3ff;
+}
+
+/* FAQ Container */
+.con {
+  background-color: #1a1131;
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid #63368d;
+}
+
+.con p {
+  line-height: 1.8;
+  color: #d1c4e9;
+  margin: 0 0 15px;
+  font-size: 15px; /* Base font size increased for better readability */
+  text-align: left;
+}
+
+/* FAQ Numbers & Bold Headings */
+.con p span {
+  font-weight: 700;
+  color: #9d4edd;
+  font-size: 18px; /* Larger font size for FAQ titles */
+}
+
+/* Space Between Each FAQ */
+.con p:nth-child(n + 2) {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #4f3285;
+}
+
+/* Scrollbar Styling */
+.Faqs::-webkit-scrollbar {
+  width: 8px;
+}
+
+.Faqs::-webkit-scrollbar-thumb {
+  background-color: #7c3aed;
+  border-radius: 10px;
+}
+
+.Faqs::-webkit-scrollbar-track {
+  background-color: #2b1a4b;
+}
+
+
