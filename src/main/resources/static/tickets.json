@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Syd",
-    "image": "posters/Syd.jpg",
+    "image": "posters/Sydd.jpg",
     "date": "June 10, 2025",
     "concert": "Tila Tala",
     "slotText" :"Limited Slots Only.",
@@ -64,20 +64,20 @@
     "name": "The Ridleys",
     "image": "posters/Ridleys.jpg",
     "date": "June 16, 2025",
-    "concert": "Be With You",
+    "concert": "All These and More",
     "slotText" :"Limited Slots Only.",
     "slots": 0,
-    "details": "The Ridleys \nBe With You \nJune 16, 2025"
+    "details": "The Ridleys \nAll These and More \nJune 16, 2025"
   },
   {
     "id": 8,
     "name": "Hey June!",
-    "image": "posters/HeyJune.jpg",
+    "image": "posters/Hey June.jpg",
     "date": "June 17, 2025",
     "concert": "Panahon",
     "slotText" :"Limited Slots Only.",
     "slots": 0,
-    "details": "Hey June \nPanahon \nJune 17, 2025"
+    "details": "Hey June! \nPanahon \nJune 17, 2025"
   },
   {
     "id": 9,
@@ -87,16 +87,16 @@
     "concert": "Dumaloy",
     "slotText" :"Limited Slots Only.",
     "slots": 0,
-    "details": "SUD \nThe Night \nJune 18, 2025"
+    "details": "SUD \nDumaloy \nJune 18, 2025"
   },
   {
     "id": 10,
     "name": "Cup of Joe",
     "image": "posters/CupofJoe.jpg",
     "date": "June 19, 2025",
-    "concert": "Patutunguhan",
+    "concert": "Silakbo",
     "slotText" :"Limited Slots Only.",
     "slots": 0,
-    "details": "Cup of Joe \nPatutunguhan \nJune 19, 2025"
+    "details": "Cup of Joe \nSilakbo \nJune 19, 2025"
   }
 ]
