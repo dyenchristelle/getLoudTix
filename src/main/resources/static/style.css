@@ -36,20 +36,63 @@ header {
 }
 
 /* index */
-
-/* index */
-.index {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-              url('posters/Posts.jpg');
- 
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
+.VandS h1{
+  font-size: 50px;
+  margin-top: 150px;
+  margin-left: 20px;
 }
+.VandS{
+  margin-top: 350px;
+
+}
+
+.aboutpic{
+  width: 100%;   /* You can adjust this */
+  height: 660px;
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+.seat{
+  width: 100%;
+  display: block;
+  height: 550px;
+}
+
+/* Get Started Button */
+
+/* .getStartButton-container {
+  text-align: center;
+  margin-top: 20px;
+  justify-content: center;
+} */
+
+.getStartButtonhome {
+  bottom: 30px;
+  background-color: #9b4dff;
+  color: #fff;
+  padding: 12px 24px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: #9b4dff;
+  color: white;
+  padding: 10px 20px;
+  z-index: 90000;
+}
+
+/* about */
+ .about {
+  background:  url('posters/Seatplan.png');
+  background-color: #1a1131;
+  background-size: 590px 720px;
+  background-repeat: no-repeat;
+  background-position: right 0 top 100px;
+  margin: 0;
+  padding: 0;
+}
+
 .indexDetails {
   margin-right: 90px;
   margin-left: 90px;
@@ -88,27 +131,10 @@ p {
   gap: 5px;
   bottom: 0;
   text-align: left;
-  margin-left: 90px;
+  /* margin-left: 90px; */
 }
 
-/* Get Started Button */
-.getStartButton-container {
-  text-align: right;
-  margin-top: 20px;
-}
 
-.getStartButtonhome {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background-color: #9b4dff;
-  color: #fff;
-  padding: 12px 24px;
-  font-size: 16px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
 
 /* Popup Terms */
 .popup {
