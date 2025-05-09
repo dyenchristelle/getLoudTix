@@ -1,4 +1,4 @@
-//home
+//index and some instructions
 document.addEventListener("DOMContentLoaded", function () {
   const startBtn = document.getElementById("startBtn");
   const termsPopup = document.getElementById("termsPopup");
@@ -10,13 +10,11 @@ document.addEventListener("DOMContentLoaded", function () {
     startBtn.addEventListener("click", function () {
       termsPopup.style.display = "flex";
     });
-    // Redirect to registration.html if the "Accept" button is clicked
     acceptBtn.addEventListener("click", function () {
-      window.location.href = "registration.html"; // Redirect to the registration page
+      window.location.href = "registration.html"; 
     });
-    // Close the popup without accepting when the "Cancel" button is clicked
     cancelBtn.addEventListener("click", function () {
-      termsPopup.style.display = "none"; // Close the popup
+      termsPopup.style.display = "none"; 
     });
   }
 });
@@ -36,7 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
-// start reservation button
+
+//Start Registration button
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("startButton");
 
@@ -65,10 +64,11 @@ document.addEventListener("DOMContentLoaded", function () {
           return;
       } else {
         errorMessage.style.display = "none";
-      }   
+      }  
+      
 //retrieve, check if email already exists (must be not yet existing)
       try {
-        const response = await fetch(`https://webster-violence-grow-illustrated.trycloudflare.com/api/checkReservation?email=${encodeURIComponent(email)}`);
+        const response = await fetch(`https://casinos-omissions-llp-k.trycloudflare.com/api/checkReservation?email=${encodeURIComponent(email)}`);
         const data = await response.json();
 
         if (data.exists) {
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-//delete reservation
+//Delete reservation
 document.addEventListener("DOMContentLoaded", function () {
   const deleteBtn = document.getElementById("viewButton");
 
@@ -111,16 +111,17 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         errorMessage.style.display = "none";
       }
+
 //retrieve, check if email exists (must be existing)
       try {
-        const response = await fetch(`https://webster-violence-grow-illustrated.trycloudflare.com/api/checkReservation?email=${encodeURIComponent(email)}`);
+        const response = await fetch(`https://casinos-omissions-llp-k.trycloudflare.com/api/checkReservation?email=${encodeURIComponent(email)}`);
         const data = await response.json();
 
         if (data.exists) {
           const userConfirmed = confirm(`Hi, are you sure you want to delete your reservation? A confirmation email will be sent to you.`);
             if (!userConfirmed) return;
 
-          const deleteResponse = await fetch(`https://webster-violence-grow-illustrated.trycloudflare.com/api/deleteReservation?email=${encodeURIComponent(email)}`,{
+          const deleteResponse = await fetch(`https://casinos-omissions-llp-k.trycloudflare.com/api/deleteReservation?email=${encodeURIComponent(email)}`,{
               method: "DELETE",
             }
           );
@@ -148,11 +149,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const reservedConcerts = new Set();
 document.addEventListener("DOMContentLoaded", function () {
-  // ✅ Toggle Ticket Tab
+  //Ticket Tab
   let ticketIconElement = document.querySelector(".ticket-icon");
   let bodyElement = document.querySelector("body");
   let closeTicket = document.querySelector(".close");
-  console.log("JavaScript file is loaded!");
 
   if (ticketIconElement && closeTicket) {
     closeTicket.addEventListener("click", () => {
@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
   
-  // ✅ Update Cart Badge
+  //Update Ticket Badge
   function updateCartBadge() {
     iconTicketSpan.innerText = reservedConcerts.size;
     if (reservedConcerts.size > 0) {
@@ -174,28 +174,19 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // ✅ Reservation System
+  // Reservation System
   // let maxReservations = 10;
   let listTicketHTML = document.querySelector(".concerts-container");
   let listCartHTML = document.querySelector(".listTicket");
   let iconTicketSpan = document.querySelector(".ticket-icon span");
   let listTickets = [];
 
-  // ✅ Reserve Ticket Function
+  //Reserve Ticket Function
   function reserveTicket(event) {
     const button = event.target;
     const concertId = parseInt(button.dataset.concertId);
-    // const concertName = button.dataset.concertName;
-    // const concertDate = button.dataset.concertDate;
     const concert = listTickets.find((ticket) => ticket.id === concertId);
 
-    // Check if concert is already reserved
-    if (reservedConcerts.has(concertId)) {
-      alert("You have already reserved this concert!");
-      return;
-    }
-
-    // reservedConcerts.add(concert.id);
     reservedConcerts.add(concert.id);
 
     // Update cart badge
@@ -207,21 +198,11 @@ document.addEventListener("DOMContentLoaded", function () {
     button.innerText = "Reserved";
 
     updateSlotDisplay();
-
-  //   concert.slots--;
-
-  //   const concertCard = document.querySelector(`.concert-card[data-id="${concertId}"]`);
-  // if (concertCard) {
-  //   const slotTextElement = concertCard.querySelector(".slot");
-  //   if (slotTextElement) {
-  //     slotTextElement.textContent = `Slots available: ${concert.slots}`;
-  //   }
-  // }
   }
 
-  // ✅ Add to Ticket Tab
+  //Add to Concert to Ticket Tab
   function addToTicketTab(concertId) {
-    const concert = listTickets.find((ticket) => ticket.id === concertId);
+  const concert = listTickets.find((ticket) => ticket.id === concertId);
 
     if (concert) {
       let ticketItem = document.createElement("div");
@@ -235,23 +216,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="removebtn">
                     <button class="removeTicket" data-concert-id="${concert.id}">Remove</button>
                 </div>`;
-      // 🎟️ Add ticket to the ticket tab
+      //Add ticket to the ticket tab
       listCartHTML.appendChild(ticketItem);
-      // ✅ Add event listener to remove button
       ticketItem.querySelector(".removeTicket").addEventListener("click", removeFromTicketTab);
-      // ✅ Show ticket tab content when at least one ticket is selected
-      listCartHTML.classList.add("has-tickets");
     }
   }
-  // ✅ Remove from Ticket Tab
+
+  //Remove Concert from Ticket Tab
   function removeFromTicketTab(event) {
     const button = event.target;
     const concertId = parseInt(button.dataset.concertId);
 
     reservedConcerts.delete(concertId);
     
-
-    // Remove from ticket tab
     const ticketItem = button.closest(".item");
     ticketItem.remove();
 
@@ -263,17 +240,10 @@ document.addEventListener("DOMContentLoaded", function () {
       reserveButton.classList.remove("reserved");
       reserveButton.innerText = "Reserve";
     }
-    // Update cart badge
     updateCartBadge();
-    // ✅ Hide ticket tab content if no tickets are selected
-    if (reservedConcerts.size === 0) {
-      listCartHTML.innerHTML = ""; // Clear the ticket tab content
-      listCartHTML.classList.remove("has-tickets");
-    }
   }
 
-  //april 26, 2025
-  // ✅ Add Concerts to HTML from JSON
+  //Add Concerts to HTML from JSON
   const addDataToHTML = () => {
     listTicketHTML.innerHTML = "";
     if (listTickets.length > 0) {
@@ -299,16 +269,9 @@ document.addEventListener("DOMContentLoaded", function () {
     <button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>
   </div>
 `;
-    
-                    // <img src="${ticket.image}" alt="${ticket.name}" />
-                    // <div class="concert-info">
-                    //     <h2>${ticket.details.replace(/\n/g, '<br>')}</h2>
-                    //     <button class="reserve-btn" data-concert-id="${ticket.id}">Reserve</button>
-                    // </div>`;
         listTicketHTML.appendChild(newTicket);
       });
 
-      // ✅ Attach event listeners after adding elements to DOM
       document.querySelectorAll(".reserve-btn").forEach((button) => {
         button.addEventListener("click", reserveTicket);
       });
@@ -316,7 +279,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   function updateSlotDisplay() {
-    fetch('https://webster-violence-grow-illustrated.trycloudflare.com/api/slots') // will fetch the avail_slot table
+    fetch('https://casinos-omissions-llp-k.trycloudflare.com/api/slots') // will fetch the avail_slot table
       .then(response => response.json())
       .then(slotData => {  // function
         for (let i = 1; i <= 10; i++) { //from day1 to day10
@@ -353,10 +316,11 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .catch(error => console.error("Error fetching slot data:", error));
   }  
-  // ✅ Initialize App (Fetch Data from JSON)
+
+
   const initApp = () => {
     console.log("Initializing app...");
-    fetch("https://webster-violence-grow-illustrated.trycloudflare.com/tickets.json")
+    fetch("https://casinos-omissions-llp-k.trycloudflare.com/tickets.json")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -373,7 +337,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch((error) => console.error("Error fetching data:", error));
   };
 
-  // ✅ Start App
+ 
   try {
     initApp();
   } catch (error) {
@@ -381,7 +345,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// checkout button
+// Checkout/Submit button
 document.addEventListener("DOMContentLoaded", function () {
   function setFormData() {
     const name = localStorage.getItem("name");
@@ -399,18 +363,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function submitReservation(formData) {
     const overlay = document.getElementById("loadingOverlay");
-    overlay.style.display = "block"; // Show loader when starting request
+    overlay.style.display = "block";
   
     console.log("Sending data:", formData);
   
-    fetch("https://webster-violence-grow-illustrated.trycloudflare.com/api/submitChoice", {
+    fetch("https://casinos-omissions-llp-k.trycloudflare.com/api/submitChoice", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     })
       .then((response) => response.json())
       .then((data) => {
-        overlay.style.display = "none"; // Request to hide loader
+        overlay.style.display = "none"; 
         console.log("Response from backend:", data);
   
         if (data.success) {
@@ -418,20 +382,20 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Reservation successful!");
             localStorage.removeItem("name");
             localStorage.removeItem("email");
-            window.location.href = "index.html"; // Redirect after success
-          }, 100); // Let UI update before blocking alert
+            window.location.href = "index.html";
+          }, 100); 
         } else {
           setTimeout(() => {
             alert("Reservation failed. " + data.message);
-          }, 100); // Let UI update before blocking alert
+          }, 100); 
         }
       })
       .catch((error) => {
-        overlay.style.display = "none"; // Hide loader if request fails
+        overlay.style.display = "none"; 
         console.error("Error occurred:", error);
         setTimeout(() => {
           alert("An error occurred while submitting your reservation.");
-        }, 100); // Delay alert slightly
+        }, 100); 
       });
   }
   
@@ -451,11 +415,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!userConfirmed) return;
 
-      // Show loading overlay
       const overlay = document.getElementById("loadingOverlay");
       overlay.style.display = "block";
 
-      // updateSlotDisplay();
       saveFormData(formData);
       submitReservation(formData);
     });

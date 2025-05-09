@@ -10,7 +10,7 @@ body {
   color: white;
 }
 
-/* Header styles */
+
 header {
   display: flex;
   justify-content: space-between;
@@ -47,7 +47,7 @@ header {
 }
 
 .aboutpic{
-  width: 100%;   /* You can adjust this */
+  width: 100%;  
   height: 660px;
   display: block;
   margin: 0 auto 20px auto;
@@ -58,14 +58,6 @@ header {
  flex-direction: column;
  align-items: center;
 }
-
-/* Get Started Button */
-
-/* .getStartButton-container {
-  text-align: center;
-  margin-top: 20px;
-  justify-content: center;
-} */
 
 .getStartButtonhome {
   bottom: 30px;
@@ -82,7 +74,7 @@ header {
   z-index: 90000;
 }
 
-/* about */
+/* About.html */
  .about {
   background:  url('posters/Seatplan.png');
   background-color: #1a1131;
@@ -99,7 +91,7 @@ header {
   height: 550px;
 }
 
-.indexDetails {
+.aboutDetails {
   margin-right: 90px;
   margin-left: 90px;
 }
@@ -113,21 +105,20 @@ header {
   margin-bottom: 180px;
 }
 
-/* Main Title */
 .getLoudTixhome h1 {
-  font-size: 36px; /* Was 28px */
+  font-size: 36px;
   margin-bottom: 15px;
 }
 
-/* Section Titles */
+
 h2 {
-  font-size: 26px; /* Was 22px */
+  font-size: 26px;
   margin-bottom: 12px;
 }
 
-/* Body Text */
+
 p {
-  font-size: 17px; /* Was 16px or 14px in some parts */
+  font-size: 17px; 
   line-height: 1.6;
   text-align: justify;
 }
@@ -137,9 +128,119 @@ p {
   gap: 5px;
   bottom: 0;
   text-align: left;
-  /* margin-left: 90px; */
 }
 
+
+
+/* registration.html */
+.home {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('Logoo/background.jpg');
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              
+              height: 100vh;
+              margin: 0;
+
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #1a1131;
+  color: white;
+  overflow: hidden;
+}
+
+.container,
+.sign-in-container {
+  width: 100vw; 
+  height: 100vh; 
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+
+.center-box {
+  background-color: #2b1a4b;
+  border: 3px solid #63368d;
+  border-radius: 20px;
+  padding: 50px;
+  width: 400px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  margin: 0 auto; /* Horizontal centering */
+  margin-bottom: 15vh;
+}
+
+.homebtn {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.startButton,
+.viewButton {
+  background-color: #7c3aed;
+  border: none;
+  padding: 12px 24px;
+  color: white;
+  font-size: 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 10px 5px;
+}
+
+.center-box h1 {
+  text-align: center;
+ margin: 0;
+ padding: 0;
+ margin-bottom: 30px;
+}
+
+.nameindex,
+.emailindex {
+  width: 94%;
+  padding: 10px;
+  margin-bottom: 20px;
+  background-color: #1a1131;
+  border: 2px solid #63368d;
+  border-radius: 8px;
+  color: #e0b3ff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+  margin-top: 15px;
+}
+
+.nameindex:focus,
+.emailindex:focus {
+  border-color: #9d4edd;
+}
+
+.nameindex::placeholder,
+.emailindex::placeholder {
+  color: #b39ddb;
+}
+
+.startButton:hover,
+.viewButton:hover {
+  background-color: #9d4edd;
+}
+
+.error-message {
+  color: #d0abe7;
+  margin-top: 110;
+  margin-bottom: 3px;
+  font-size: 12px;
+  display: none;
+  text-align: left;
+}
 
 
 /* Popup Terms */
@@ -203,8 +304,8 @@ body.showTicket .ticketTab {
   bottom: 0;
 }
 
-/* reserve.html */
 
+/* Reserve.html */
 .ticket-icon {
   position: relative;
   margin-left: 20px;
@@ -241,8 +342,8 @@ h1 {
 
 nav {
   display: flex;
-  align-items: center; /* Aligns items vertically */
-  justify-content: flex-start; /* Ensures left alignment for links */
+  align-items: center; 
+  justify-content: flex-start; 
   gap: 20px;
 }
 nav a {
@@ -340,11 +441,8 @@ nav a:hover {
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   padding: 20px 40px;
-  /* max-height: 80vh;
-    overflow-y: auto; */
 }
 
-/* Concert ticket card styles */
 .concert-card {
   display: flex;
   background-color: #2b1a4b;
@@ -362,7 +460,6 @@ nav a:hover {
   cursor: not-allowed;
   opacity: 0.6;
 }
-
 
 .slot{
   position: absolute;
@@ -382,8 +479,6 @@ nav a:hover {
   cursor: not-allowed;
 }
 
-
-/* Ticket border shape */
 .concert-card::before,
 .concert-card::after {
   content: "";
@@ -406,7 +501,6 @@ nav a:hover {
   border-radius: 0 10px 10px 0;
 }
 
-.deleteLoading,
 .loadingOverlay {
   display: none;
   position: fixed;
@@ -418,7 +512,6 @@ nav a:hover {
   z-index: 1000;
 }
 
-.deleteLoading .delete-Loading,
 .loadingOverlay .loading-content {
   position: absolute;
   top: 50%;
@@ -445,16 +538,7 @@ nav a:hover {
   margin: 10px auto;
 }
 
-/* Concert image */
-.concert-img {
-  width: 180px;
-  height: 100%;
-  object-fit: cover;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-}
 
-/* Concert info section */
 .concert-info {
   padding: 20px;
   text-align: left;
@@ -470,18 +554,12 @@ h2 {
   color: #e0b3ff;
 }
 
-/* .sub-title {
-  font-size: 14px;
-  color: #d1c4e9;
-} */
-
 p {
   font-size: 14px;
   color: #d1c4e9;
   margin: 10px 0 15px;
 }
 
-/* Reserve button styles */
 .reserve-btn {
   background-color: #7c3aed;
   border: none;
@@ -494,9 +572,9 @@ p {
 }
 
 .reserve-btn.reserved {
-  background-color: #686363; /* Light gray */
+  background-color: #686363; 
   cursor: not-allowed;
-  pointer-events: none; /* Disable click events */
+  pointer-events: none; 
   color: white;
 }
 
@@ -504,134 +582,9 @@ p {
   background-color: #9d4edd;
 }
 
-/* Scrollbar styles */
-/* .concerts-container::-webkit-scrollbar {
-  width: 8px;
-} */
-
-/* .concerts-container::-webkit-scrollbar-thumb {
-  background-color: #7c3aed;
-  border-radius: 10px;
-} */
-
-/* .concerts-container::-webkit-scrollbar-track {
-  background-color: #2b1a4b;
-} */
 
 
-/* registration.html */
-.home {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-              url('Logoo/background.jpg');
-              background-size: cover;
-              background-repeat: no-repeat;
-              background-position: center;
-              
-              height: 100vh;
-              margin: 0;
-
-  font-family: "Poppins", sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  font-family: Arial, sans-serif;
-  background-color: #1a1131;
-  color: white;
-  overflow: hidden;
-}
-
-.container,
-.sign-in-container {
-  width: 100vw; /* Full width */
-  height: 100vh; /* Full height of viewport */
-  display: flex;
-  justify-content: center; /* Horizontally center */
-  align-items: center;
-  margin: 0;
-  padding: 0;
-}
-
-
-.center-box {
-  background-color: #2b1a4b;
-  border: 3px solid #63368d;
-  border-radius: 20px;
-  padding: 50px;
-  width: 400px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  margin: 0 auto; /* Horizontal centering */
-  margin-bottom: 15vh;
-}
-
-.homebtn {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-}
-
-.startButton,
-.viewButton {
-  background-color: #7c3aed;
-  border: none;
-  padding: 12px 24px;
-  color: white;
-  font-size: 16px;
-  border-radius: 20px;
-  cursor: pointer;
-  margin: 10px 5px;
-}
-
-.center-box h1 {
-  text-align: center;
- margin: 0;
- padding: 0;
- margin-bottom: 30px;
-}
-
-.nameindex,
-.emailindex {
-  width: 94%;
-  padding: 10px;
-  margin-bottom: 20px;
-  background-color: #1a1131;
-  border: 2px solid #63368d;
-  border-radius: 8px;
-  color: #e0b3ff;
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.3s;
-  margin-top: 15px;
-}
-
-.nameindex:focus,
-.emailindex:focus {
-  border-color: #9d4edd;
-}
-
-.nameindex::placeholder,
-.emailindex::placeholder {
-  color: #b39ddb;
-}
-
-/* Button hover effects */
-.startButton:hover,
-.viewButton:hover {
-  background-color: #9d4edd;
-}
-
-/* try error message */
-#error-message {
-  color: #d0abe7;
-  margin-top: 110;
-  margin-bottom: 3px;
-  font-size: 12px;
-  display: none;
-  text-align: left;
-}
-
-/* Instructions */
+/* Instructions and FAQs*/
 .how{
   text-align: center;
   font-weight: 1000;
@@ -666,7 +619,7 @@ p {
   line-height: 1.8;
   color: #d1c4e9;
   margin: 0 0 15px;
-  font-size: 15px; /* Base font size increased for better readability */
+  font-size: 15px; 
   text-align: left;
 }
 
@@ -674,7 +627,7 @@ p {
 .Inscon p span {
   font-weight: 700;
   color: #9d4edd;
-  font-size: 25px; /* Larger font size for FAQ titles */
+  font-size: 25px;
 }
 
 .Inscon .indent {
@@ -682,70 +635,13 @@ p {
   margin-left: 19px;
 }
 
-/* Space Between Each FAQ */
 .Inscon p:nth-child(n + 2) {
   margin-top: 15px;
   padding-top: 10px;
   border-top: 1px solid #4f3285;
 }
 
-/* FAQs.htm; */
-
-/* .Faqs {
-  background-color: #2b1a4b;
-  padding: 20px;
-  border-radius: 12px;
-  border: 3px solid #63368d;
-  width: 70%;
-  margin: 20px auto;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  font-family: "Poppins", sans-serif;
-  color: #e0b3ff;
-} */
 
 
-/* FAQ Container */
-/* .con {
-  background-color: #1a1131;
-  padding: 20px;
-  border-radius: 8px;
-  border: 2px solid #63368d;
-}
-
-.con p {
-  line-height: 1.8;
-  color: #d1c4e9;
-  margin: 0 0 15px;
-  font-size: 15px;
-  text-align: left;
-} */
-
-/* FAQ Numbers & Bold Headings */
-/* .con p span {
-  font-weight: 700;
-  color: #9d4edd;
-  font-size: 25px; 
-} */
-
-/* Space Between Each FAQ */
-/* .con p:nth-child(n + 2) {
-  margin-top: 15px;
-  padding-top: 10px;
-  border-top: 1px solid #4f3285;
-} */
-
-/* 
-.Faqs::-webkit-scrollbar {
-  width: 8px;
-}
-
-.Faqs::-webkit-scrollbar-thumb {
-  background-color: #7c3aed;
-  border-radius: 10px;
-}
-
-.Faqs::-webkit-scrollbar-track {
-  background-color: #2b1a4b;
-} */
 
 

@@ -21,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "https://webster-violence-grow-illustrated.trycloudflare.com")
+@CrossOrigin(origins = "https://casinos-omissions-llp-k.trycloudflare.com")
 // @CrossOrigin(origins = "http://localhost:9090")
 public class MessageController {
     private final MessageService messageService;
