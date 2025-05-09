@@ -53,10 +53,10 @@ header {
   margin: 0 auto 20px auto;
 }
 
-.seat{
-  width: 100%;
-  display: block;
-  height: 550px;
+.imgIndex{
+ display: flex;
+ flex-direction: column;
+ align-items: center;
 }
 
 /* Get Started Button */
@@ -91,6 +91,12 @@ header {
   background-position: right 0 top 100px;
   margin: 0;
   padding: 0;
+}
+
+.seat{
+  width: 100%;
+  display: block;
+  height: 550px;
 }
 
 .indexDetails {
@@ -400,6 +406,7 @@ nav a:hover {
   border-radius: 0 10px 10px 0;
 }
 
+.deleteLoading,
 .loadingOverlay {
   display: none;
   position: fixed;
@@ -411,6 +418,7 @@ nav a:hover {
   z-index: 1000;
 }
 
+.deleteLoading .delete-Loading,
 .loadingOverlay .loading-content {
   position: absolute;
   top: 50%;
@@ -623,6 +631,59 @@ p {
   text-align: left;
 }
 
+/* Instructions */
+.how{
+  text-align: center;
+  font-weight: 1000;
+  color: #9d4edd;
+  font-size: 35px; /* Larger font size for FAQ titles */
+  margin-top: 80px;
+}
+.Ins{
+  background-color: #2b1a4b;
+  padding: 20px;
+  border-radius: 12px;
+  border: 3px solid #63368d;
+  width: 70%;
+  margin: 20px auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-family: "Poppins", sans-serif;
+  color: #e0b3ff;
+}
+
+.Inscon{
+  background-color: #1a1131;
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid #63368d;
+}
+
+.Inscon p {
+  line-height: 1.8;
+  color: #d1c4e9;
+  margin: 0 0 15px;
+  font-size: 15px; /* Base font size increased for better readability */
+  text-align: left;
+}
+
+.Inscon p span {
+  font-weight: 700;
+  color: #9d4edd;
+  font-size: 25px; /* Larger font size for FAQ titles */
+}
+
+.Inscon .indent {
+  all:unset;
+  margin-left: 19px;
+}
+
+/* Space Between Each FAQ */
+.Inscon p:nth-child(n + 2) {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #4f3285;
+}
+
 /* FAQs.htm; */
 
 .Faqs {
@@ -636,6 +697,7 @@ p {
   font-family: "Poppins", sans-serif;
   color: #e0b3ff;
 }
+
 
 /* FAQ Container */
 .con {
@@ -657,7 +719,7 @@ p {
 .con p span {
   font-weight: 700;
   color: #9d4edd;
-  font-size: 18px; /* Larger font size for FAQ titles */
+  font-size: 25px; /* Larger font size for FAQ titles */
 }
 
 /* Space Between Each FAQ */
@@ -667,7 +729,7 @@ p {
   border-top: 1px solid #4f3285;
 }
 
-/* Scrollbar Styling */
+/* 
 .Faqs::-webkit-scrollbar {
   width: 8px;
 }
@@ -679,6 +741,6 @@ p {
 
 .Faqs::-webkit-scrollbar-track {
   background-color: #2b1a4b;
-}
+} */
 
 
