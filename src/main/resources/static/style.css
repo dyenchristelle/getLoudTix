@@ -639,6 +639,8 @@ p {
   font-size: 35px; /* Larger font size for FAQ titles */
   margin-top: 80px;
 }
+
+.Faqs,
 .Ins{
   background-color: #2b1a4b;
   padding: 20px;
@@ -651,6 +653,7 @@ p {
   color: #e0b3ff;
 }
 
+.con,
 .Inscon{
   background-color: #1a1131;
   padding: 20px;
@@ -658,6 +661,7 @@ p {
   border: 2px solid #63368d;
 }
 
+.Faqs p,
 .Inscon p {
   line-height: 1.8;
   color: #d1c4e9;
@@ -666,6 +670,7 @@ p {
   text-align: left;
 }
 
+.con p span,
 .Inscon p span {
   font-weight: 700;
   color: #9d4edd;
@@ -686,7 +691,7 @@ p {
 
 /* FAQs.htm; */
 
-.Faqs {
+/* .Faqs {
   background-color: #2b1a4b;
   padding: 20px;
   border-radius: 12px;
@@ -696,11 +701,11 @@ p {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   font-family: "Poppins", sans-serif;
   color: #e0b3ff;
-}
+} */
 
 
 /* FAQ Container */
-.con {
+/* .con {
   background-color: #1a1131;
   padding: 20px;
   border-radius: 8px;
@@ -711,23 +716,23 @@ p {
   line-height: 1.8;
   color: #d1c4e9;
   margin: 0 0 15px;
-  font-size: 15px; /* Base font size increased for better readability */
+  font-size: 15px;
   text-align: left;
-}
+} */
 
 /* FAQ Numbers & Bold Headings */
-.con p span {
+/* .con p span {
   font-weight: 700;
   color: #9d4edd;
-  font-size: 25px; /* Larger font size for FAQ titles */
-}
+  font-size: 25px; 
+} */
 
 /* Space Between Each FAQ */
-.con p:nth-child(n + 2) {
+/* .con p:nth-child(n + 2) {
   margin-top: 15px;
   padding-top: 10px;
   border-top: 1px solid #4f3285;
-}
+} */
 
 /* 
 .Faqs::-webkit-scrollbar {
